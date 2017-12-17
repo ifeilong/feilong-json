@@ -29,11 +29,11 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.feilong.core.UncheckedIOException;
 import com.feilong.core.bean.BeanUtil;
 import com.feilong.core.entity.HttpMethodTestType;
+import com.feilong.json.AbstractJsonTest;
 import com.feilong.json.jackson2.JacksonUtil;
+import com.feilong.json.jsonlib.JsonUtil;
 import com.feilong.store.member.Person;
 import com.feilong.store.member.User;
-import com.feilong.tools.AbstractJsonTest;
-import com.feilong.tools.jsonlib.JsonUtil;
 
 /**
  * The Class JacksonUtilTest.
