@@ -24,13 +24,23 @@ import net.sf.json.processors.JsonValueProcessor;
 import net.sf.json.processors.PropertyNameProcessor;
 
 /**
- * 
+ * The Class JsonConfigBuilder.
+ *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.10.3
  */
 final class JsonConfigBuilder{
 
-    static JsonConfig build(Object obj,JavaToJsonConfig javaToJsonConfig){
+    /**
+     * Builds the.
+     *
+     * @param obj
+     *            the obj
+     * @param javaToJsonConfig
+     *            the java to json config
+     * @return the json config
+     */
+    static JsonConfig build(@SuppressWarnings("unused") Object obj,JavaToJsonConfig javaToJsonConfig){
         if (null == javaToJsonConfig){
             return null;
         }
@@ -61,8 +71,12 @@ final class JsonConfigBuilder{
     }
 
     /**
+     * Register json value processor.
+     *
      * @param useJavaToJsonConfig
+     *            the use java to json config
      * @param jsonConfig
+     *            the json config
      */
     private static void registerJsonValueProcessor(JavaToJsonConfig useJavaToJsonConfig,JsonConfig jsonConfig){
         Map<String, JsonValueProcessor> propertyNameAndJsonValueProcessorMap = useJavaToJsonConfig
@@ -75,10 +89,12 @@ final class JsonConfigBuilder{
     }
 
     /**
-     * property name处理器
-     * 
+     * property name处理器.
+     *
      * @param useJavaToJsonConfig
+     *            the use java to json config
      * @param jsonConfig
+     *            the json config
      */
     private static void registerJsonPropertyNameProcessor(JavaToJsonConfig useJavaToJsonConfig,JsonConfig jsonConfig){
         //property name处理器
