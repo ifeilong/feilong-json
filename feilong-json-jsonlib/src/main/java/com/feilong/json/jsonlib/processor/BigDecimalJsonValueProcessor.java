@@ -15,13 +15,12 @@
  */
 package com.feilong.json.jsonlib.processor;
 
+import static com.feilong.core.NumberPattern.TWO_DECIMAL_POINTS;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 
 import java.math.BigDecimal;
 
 import com.feilong.core.lang.NumberUtil;
-
-import static com.feilong.core.NumberPattern.TWO_DECIMAL_POINTS;
 
 import net.sf.json.JsonConfig;
 import net.sf.json.processors.JsonValueProcessor;
@@ -117,6 +116,7 @@ public class BigDecimalJsonValueProcessor extends AbstractJsonValueProcessor{
      */
     private String                         numberPattern    = TWO_DECIMAL_POINTS;
 
+    //---------------------------------------------------------------
     /**
      * The Constructor.
      */

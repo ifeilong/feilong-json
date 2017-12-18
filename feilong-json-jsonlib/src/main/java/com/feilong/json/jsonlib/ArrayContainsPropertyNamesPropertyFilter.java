@@ -28,6 +28,8 @@ class ArrayContainsPropertyNamesPropertyFilter implements PropertyFilter{
     /** The property names. */
     private final String[] propertyNames;
 
+    //---------------------------------------------------------------
+
     /**
      * The Constructor.
      *

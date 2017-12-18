@@ -125,6 +125,8 @@ public class JsonToJavaConfig{
      */
     private JavaIdentifierTransformer javaIdentifierTransformer;
 
+    //---------------------------------------------------------------
+
     /**
      * Instantiates a new json to java config.
      */
@@ -170,6 +172,8 @@ public class JsonToJavaConfig{
         this.rootClass = rootClass;
         this.classMap = classMap;
     }
+
+    //---------------------------------------------------------------
 
     /**
      * java标识符号转换器.
@@ -377,6 +381,8 @@ public class JsonToJavaConfig{
     public void setClassMap(Map<String, Class<?>> classMap){
         this.classMap = classMap;
     }
+
+    //---------------------------------------------------------------
 
     /*
      * (non-Javadoc)

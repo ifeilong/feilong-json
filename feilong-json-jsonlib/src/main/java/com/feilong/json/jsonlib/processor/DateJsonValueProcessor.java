@@ -15,11 +15,11 @@
  */
 package com.feilong.json.jsonlib.processor;
 
+import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
+
 import java.util.Date;
 
 import com.feilong.core.date.DateUtil;
-
-import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
 
 import net.sf.json.JsonConfig;
 import net.sf.json.processors.JsonValueProcessor;
@@ -134,6 +134,8 @@ public class DateJsonValueProcessor extends AbstractJsonValueProcessor{
 
     /** The date pattern. */
     private String                         datePattern      = COMMON_DATE_AND_TIME;
+
+    //---------------------------------------------------------------
 
     /**
      * The Constructor.

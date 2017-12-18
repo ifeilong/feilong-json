@@ -159,7 +159,8 @@ public class JavaToJsonConfig{
      *     Map{@code <Class<?>, PropertyNameProcessor>} targetClassAndPropertyNameProcessorMap = newHashMap(1);
      *     targetClassAndPropertyNameProcessorMap.put(CrmAddpointCommand.class, CapitalizePropertyNameProcessor.INSTANCE);
      * 
-     *     <span style="color:red">javaToJsonConfig.setJsonTargetClassAndPropertyNameProcessorMap(targetClassAndPropertyNameProcessorMap);</span>
+     *     <span style=
+    "color:red">javaToJsonConfig.setJsonTargetClassAndPropertyNameProcessorMap(targetClassAndPropertyNameProcessorMap);</span>
      * 
      *     LOGGER.debug(JsonUtil.format(crmAddpointCommand, javaToJsonConfig));
      * }
@@ -183,7 +184,7 @@ public class JavaToJsonConfig{
      */
     private Map<Class<?>, PropertyNameProcessor> jsonTargetClassAndPropertyNameProcessorMap;
 
-    //***************************************************************************
+    //---------------------------------------------------------------
 
     /**
      * The Constructor.
@@ -214,7 +215,7 @@ public class JavaToJsonConfig{
         this.includes = includes;
     }
 
-    //***************************************************************************
+    //---------------------------------------------------------------
 
     /**
      * 获得 排除属性名称的数组.
@@ -427,7 +428,8 @@ public class JavaToJsonConfig{
      *     Map{@code <Class<?>, PropertyNameProcessor>} targetClassAndPropertyNameProcessorMap = newHashMap(1);
      *     targetClassAndPropertyNameProcessorMap.put(CrmAddpointCommand.class, CapitalizePropertyNameProcessor.INSTANCE);
      * 
-     *     <span style="color:red">javaToJsonConfig.setJsonTargetClassAndPropertyNameProcessorMap(targetClassAndPropertyNameProcessorMap);</span>
+     *     <span style=
+    "color:red">javaToJsonConfig.setJsonTargetClassAndPropertyNameProcessorMap(targetClassAndPropertyNameProcessorMap);</span>
      * 
      *     LOGGER.debug(JsonUtil.format(crmAddpointCommand, javaToJsonConfig));
      * }
@@ -536,7 +538,8 @@ public class JavaToJsonConfig{
      *     Map{@code <Class<?>, PropertyNameProcessor>} targetClassAndPropertyNameProcessorMap = newHashMap(1);
      *     targetClassAndPropertyNameProcessorMap.put(CrmAddpointCommand.class, CapitalizePropertyNameProcessor.INSTANCE);
      * 
-     *     <span style="color:red">javaToJsonConfig.setJsonTargetClassAndPropertyNameProcessorMap(targetClassAndPropertyNameProcessorMap);</span>
+     *     <span style=
+    "color:red">javaToJsonConfig.setJsonTargetClassAndPropertyNameProcessorMap(targetClassAndPropertyNameProcessorMap);</span>
      * 
      *     LOGGER.debug(JsonUtil.format(crmAddpointCommand, javaToJsonConfig));
      * }

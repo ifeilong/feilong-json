@@ -104,6 +104,7 @@ public class UncapitalizeJavaIdentifierTransformer extends JavaIdentifierTransfo
     /** 首字母小写 transformer 'MemberNo' {@code =>} 'memberNo'. */
     public static final JavaIdentifierTransformer UNCAPITALIZE = new UncapitalizeJavaIdentifierTransformer();
 
+    //---------------------------------------------------------------
     /*
      * (non-Javadoc)
      * 

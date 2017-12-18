@@ -49,7 +49,8 @@ public final class JavaToJsonConfigBuilder{
                         javaBean);
         return isNullOrEmpty(propertyNameAndJsonValueProcessorMap) ? null : new JavaToJsonConfig(propertyNameAndJsonValueProcessorMap);
     }
-    //***********************************************************************************
+
+    //---------------------------------------------------------------
 
     /**
      * Builds the sensitive words property name and json value processor map.

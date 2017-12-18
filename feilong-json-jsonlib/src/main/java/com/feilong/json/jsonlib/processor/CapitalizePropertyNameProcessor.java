@@ -37,7 +37,7 @@ public class CapitalizePropertyNameProcessor implements PropertyNameProcessor{
     private CapitalizePropertyNameProcessor(){
     }
 
-    //**********************************************************************************************************
+    //---------------------------------------------------------------
 
     /*
      * (non-Javadoc)

@@ -39,15 +39,14 @@ final class JsonConfigBuilder{
 
         JsonConfig jsonConfig = JsonHelper.buildDefaultJavaToJsonConfig();
 
-        //****************************************************************************************
+        //---------------------------------------------------------------
 
         registerJsonPropertyNameProcessor(javaToJsonConfig, jsonConfig);
 
-        //****************************************************************************************
         //value处理器
         registerJsonValueProcessor(javaToJsonConfig, jsonConfig);
 
-        //****************************************************************************************
+        //---------------------------------------------------------------
 
         //排除
         if (isNotNullOrEmpty(javaToJsonConfig.getExcludes())){

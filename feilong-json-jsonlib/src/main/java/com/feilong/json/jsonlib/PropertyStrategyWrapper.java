@@ -42,6 +42,8 @@ class PropertyStrategyWrapper extends PropertySetStrategy{
     /** The original. */
     private final PropertySetStrategy propertySetStrategy;
 
+    //---------------------------------------------------------------
+
     /**
      * Instantiates a new property strategy wrapper.
      * 
@@ -51,6 +53,8 @@ class PropertyStrategyWrapper extends PropertySetStrategy{
     public PropertyStrategyWrapper(PropertySetStrategy propertySetStrategy){
         this.propertySetStrategy = propertySetStrategy;
     }
+
+    //---------------------------------------------------------------
 
     /*
      * (non-Javadoc)

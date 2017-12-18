@@ -46,6 +46,8 @@ abstract class AbstractJsonValueProcessor implements JsonValueProcessor{
         return processValue(value, jsonConfig);
     }
 
+    //---------------------------------------------------------------
+
     /**
      * 属性值处理器.
      *

@@ -57,10 +57,12 @@ final class JsonHelper{
     /** The Constant DEFAULT_JAVA_TO_JSON_CONFIG. */
     private static final JsonConfig DEFAULT_JAVA_TO_JSON_CONFIG    = buildDefaultJavaToJsonConfig();
 
-    //***********************************************************************************
+    //---------------------------------------------------------------
+
     /** The Constant SENSITIVE_WORDS_PROPERTY_NAMES. */
     private static final String[]   SENSITIVE_WORDS_PROPERTY_NAMES = { "password", "key" };
-    //***********************************************************************************
+
+    //---------------------------------------------------------------
 
     /** Don't let anyone instantiate this class. */
     private JsonHelper(){
@@ -193,7 +195,7 @@ final class JsonHelper{
     }
     // [end]
 
-    //********************************************************************************************
+    //---------------------------------------------------------------
 
     /**
      * 将 <code>obj</code>转成 {@link JSONArray}.

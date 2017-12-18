@@ -76,6 +76,8 @@ public class SensitiveWordsJsonValueProcessor extends AbstractJsonValueProcessor
     /** The default sensitive words. */
     private static String                  DEFAULT_SENSITIVE_WORDS = "******";
 
+    //---------------------------------------------------------------
+
     /*
      * (non-Javadoc)
      * 
