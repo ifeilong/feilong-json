@@ -15,6 +15,8 @@
  */
 package com.feilong.json;
 
+import static com.feilong.core.util.MapUtil.newHashMap;
+
 import java.util.Map;
 
 import org.junit.Test;
@@ -24,8 +26,6 @@ import org.slf4j.LoggerFactory;
 import com.feilong.json.jsonlib.JavaToJsonConfig;
 import com.feilong.json.jsonlib.JsonUtil;
 import com.feilong.json.jsonlib.processor.CapitalizePropertyNameProcessor;
-
-import static com.feilong.core.util.MapUtil.newHashMap;
 
 import net.sf.json.processors.PropertyNameProcessor;
 
@@ -50,7 +50,7 @@ public class JsonTest{
         crmAddpointCommand.setOpenId("feilong888888ky");
         crmAddpointCommand.setOrderCode("fl123456");
 
-        //****************************************************************************************
+        //---------------------------------------------------------------
 
         JavaToJsonConfig jsonFormatConfig = new JavaToJsonConfig();
 
@@ -59,7 +59,7 @@ public class JsonTest{
 
         jsonFormatConfig.setJsonTargetClassAndPropertyNameProcessorMap(targetClassAndPropertyNameProcessorMap);
 
-        //****************************************************************************************
+        //---------------------------------------------------------------
 
         LOGGER.debug(JsonUtil.format(crmAddpointCommand, jsonFormatConfig));
     }

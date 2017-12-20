@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.entity;
+package com.feilong.json;
 
 import com.feilong.core.lang.EnumUtil;
 
@@ -32,7 +32,7 @@ public enum HttpMethodTestType{
     /** post方式. */
     POST("post");
 
-    // *********************************************************************
+    //---------------------------------------------------------------
 
     /** The method. */
     private String method;

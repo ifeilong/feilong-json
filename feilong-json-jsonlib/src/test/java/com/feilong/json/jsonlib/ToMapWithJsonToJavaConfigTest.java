@@ -29,8 +29,6 @@ import java.util.Map;
 
 import org.junit.Test;
 
-import com.feilong.json.jsonlib.JsonToJavaConfig;
-import com.feilong.json.jsonlib.JsonUtil;
 import com.feilong.json.jsonlib.entity.MyBean;
 import com.feilong.store.member.Person;
 
@@ -59,9 +57,11 @@ public class ToMapWithJsonToJavaConfigTest{
         String json = "{'data1':{'name':'get'},'data2':{'name':'set'}}";
         Map<String, Person> map = JsonUtil.toMap(json, new JsonToJavaConfig(Person.class));
 
-        assertThat(map, allOf(//
-                        hasEntry(is("data1"), hasProperty("name", is("get"))),
-                        hasEntry(is("data2"), hasProperty("name", is("set")))));
+        assertThat(
+                        map,
+                        allOf(//
+                                        hasEntry(is("data1"), hasProperty("name", is("get"))),
+                                        hasEntry(is("data2"), hasProperty("name", is("set")))));
     }
 
     /**
@@ -73,9 +73,11 @@ public class ToMapWithJsonToJavaConfigTest{
         JSONObject json2 = JSONObject.fromObject("{'name':'set'}");
 
         Map<String, JSONObject> map = JsonUtil.toMap("{'data1':{'name':'get'},'data2':{'name':'set'}}", null);
-        assertThat(map, allOf(//
-                        hasEntry("data1", json1),
-                        hasEntry("data2", json2)));
+        assertThat(
+                        map,
+                        allOf(//
+                                        hasEntry("data1", json1),
+                                        hasEntry("data2", json2)));
     }
 
     /**
@@ -99,8 +101,7 @@ public class ToMapWithJsonToJavaConfigTest{
         assertThat(object, hasProperty("name", is("get")));
     }
 
-    //*********************************************
-    //*********************************************
+    //---------------------------------------------------------------
 
     /**
      * Test to map null json.

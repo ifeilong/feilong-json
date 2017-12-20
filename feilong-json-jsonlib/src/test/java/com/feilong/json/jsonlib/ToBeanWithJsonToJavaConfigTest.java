@@ -30,8 +30,6 @@ import java.util.Map;
 import org.junit.Test;
 
 import com.feilong.json.AbstractJsonTest;
-import com.feilong.json.jsonlib.JsonToJavaConfig;
-import com.feilong.json.jsonlib.JsonUtil;
 import com.feilong.json.jsonlib.entity.CrmMemberInfoCommand;
 import com.feilong.json.jsonlib.entity.MyBean;
 import com.feilong.store.member.Person;
@@ -55,15 +53,17 @@ public class ToBeanWithJsonToJavaConfigTest extends AbstractJsonTest{
 
         CrmMemberInfoCommand crmMemberInfoCommand = JsonUtil.toBean(json, new JsonToJavaConfig(CrmMemberInfoCommand.class, UNCAPITALIZE));
 
-        assertThat(crmMemberInfoCommand, allOf(//
-                        hasProperty("memberNo", is("11105000009")),
-                        hasProperty("name", is(nullValue())),
-                        hasProperty("gender", is("")),
-                        hasProperty("phone", is("15036334567")),
-                        hasProperty("email", is(nullValue())),
-                        hasProperty("birthday", is(""))
-        //        
-        ));
+        assertThat(
+                        crmMemberInfoCommand,
+                        allOf(//
+                                        hasProperty("memberNo", is("11105000009")),
+                                        hasProperty("name", is(nullValue())),
+                                        hasProperty("gender", is("")),
+                                        hasProperty("phone", is("15036334567")),
+                                        hasProperty("email", is(nullValue())),
+                                        hasProperty("birthday", is(""))
+                        //        
+                        ));
     }
 
     /**
@@ -76,18 +76,20 @@ public class ToBeanWithJsonToJavaConfigTest extends AbstractJsonTest{
         CrmMemberInfoCommand crmMemberInfoCommand = JsonUtil
                         .toBean(json, new JsonToJavaConfig(CrmMemberInfoCommand.class, JavaIdentifierTransformer.CAMEL_CASE));
 
-        assertThat(crmMemberInfoCommand, allOf(//
-                        hasProperty("memberNo", is("11105000009")),
-                        hasProperty("name", is(nullValue())),
-                        hasProperty("gender", is("")),
-                        hasProperty("phone", is("15036334567")),
-                        hasProperty("email", is(nullValue())),
-                        hasProperty("birthday", is(""))
-        //        
-        ));
+        assertThat(
+                        crmMemberInfoCommand,
+                        allOf(//
+                                        hasProperty("memberNo", is("11105000009")),
+                                        hasProperty("name", is(nullValue())),
+                                        hasProperty("gender", is("")),
+                                        hasProperty("phone", is("15036334567")),
+                                        hasProperty("email", is(nullValue())),
+                                        hasProperty("birthday", is(""))
+                        //        
+                        ));
     }
 
-    //************************************************************************************
+    //---------------------------------------------------------------
 
     /**
      * Test to bean.
@@ -120,8 +122,7 @@ public class ToBeanWithJsonToJavaConfigTest extends AbstractJsonTest{
     //        LOGGER.debug(JsonUtil.format(user));
     //    }
 
-    //*******************************************************************************************
-
+    //---------------------------------------------------------------
     /**
      * Test to bean null json.
      */

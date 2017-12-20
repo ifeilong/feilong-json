@@ -32,8 +32,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.bean.PropertyUtil;
-import com.feilong.core.entity.HttpMethodTestType;
 import com.feilong.json.AbstractJsonTest;
+import com.feilong.json.HttpMethodTestType;
 import com.feilong.json.jsonlib.JsonHelper;
 import com.feilong.json.jsonlib.JsonUtil;
 import com.feilong.json.jsonlib.entity.MyBean;

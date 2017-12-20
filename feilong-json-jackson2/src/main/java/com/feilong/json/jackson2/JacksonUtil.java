@@ -89,7 +89,8 @@ public class JacksonUtil{
         OBJECT_MAPPER.configure(com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_SINGLE_QUOTES, true);
     }
 
-    //**************************************************************************************
+    //---------------------------------------------------------------
+
     /**
      * To json.
      *
@@ -108,7 +109,7 @@ public class JacksonUtil{
         }
     }
 
-    //*****************************************************************************************
+    //---------------------------------------------------------------
 
     public static <T> T toBean(String json,Class<T> klass){
         try{
