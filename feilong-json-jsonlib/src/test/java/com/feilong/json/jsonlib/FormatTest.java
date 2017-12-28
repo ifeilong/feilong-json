@@ -15,11 +15,16 @@
  */
 package com.feilong.json.jsonlib;
 
+import static com.feilong.core.bean.ConvertUtil.toArray;
+import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
+import static com.feilong.core.bean.ConvertUtil.toList;
+import static com.feilong.core.bean.ConvertUtil.toMap;
+import static com.feilong.core.bean.ConvertUtil.toSet;
+import static com.feilong.core.util.CollectionsUtil.newArrayList;
+import static com.feilong.core.util.MapUtil.newHashMap;
 import static org.junit.Assert.assertEquals;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -34,19 +39,11 @@ import org.slf4j.LoggerFactory;
 import com.feilong.core.bean.PropertyUtil;
 import com.feilong.json.AbstractJsonTest;
 import com.feilong.json.HttpMethodTestType;
-import com.feilong.json.jsonlib.JsonHelper;
-import com.feilong.json.jsonlib.JsonUtil;
 import com.feilong.json.jsonlib.entity.MyBean;
 import com.feilong.store.member.Person;
 import com.feilong.store.member.User;
 import com.feilong.store.member.UserInfo;
 import com.feilong.store.system.Menu;
-
-import static com.feilong.core.bean.ConvertUtil.toArray;
-import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
-import static com.feilong.core.bean.ConvertUtil.toList;
-import static com.feilong.core.bean.ConvertUtil.toMap;
-import static com.feilong.core.bean.ConvertUtil.toSet;
 
 import net.sf.json.JSON;
 import net.sf.json.JSONArray;
@@ -266,9 +263,9 @@ public class FormatTest extends AbstractJsonTest{
      */
     @Test
     public void name1(){
-        Map<String, Object> map = new HashMap<>();
+        Map<String, Object> map = newHashMap();
 
-        Map<String, Object> map1 = new HashMap<>();
+        Map<String, Object> map1 = newHashMap();
 
         String[] aStrings = { "aaaa", "bbbb" };
         map1.put("b", aStrings);
@@ -290,7 +287,7 @@ public class FormatTest extends AbstractJsonTest{
         ps.setDateAttr(new Date());
         ps.setName("get");
         MyBean myBean = new MyBean();
-        List<Object> list = new ArrayList<>();
+        List<Object> list = newArrayList();
         list.add(ps);
 
         myBean.setData(list);
@@ -306,7 +303,7 @@ public class FormatTest extends AbstractJsonTest{
         Person ps = new Person();
         ps.setDateAttr(new Date());
         ps.setName("get");
-        List<Person> list = new ArrayList<>();
+        List<Person> list = newArrayList();
         list.add(ps);
 
         // print: [{"dateAttr":"2009-09-12 07:22:49","name":"get"}]

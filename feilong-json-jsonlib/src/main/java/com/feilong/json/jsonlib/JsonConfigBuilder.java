@@ -79,10 +79,10 @@ final class JsonConfigBuilder{
      *            the json config
      */
     private static void registerJsonValueProcessor(JavaToJsonConfig useJavaToJsonConfig,JsonConfig jsonConfig){
-        Map<String, JsonValueProcessor> propertyNameAndJsonValueProcessorMap = useJavaToJsonConfig
+        Map<String, ? extends JsonValueProcessor> propertyNameAndJsonValueProcessorMap = useJavaToJsonConfig
                         .getPropertyNameAndJsonValueProcessorMap();
         if (isNotNullOrEmpty(propertyNameAndJsonValueProcessorMap)){
-            for (Map.Entry<String, JsonValueProcessor> entry : propertyNameAndJsonValueProcessorMap.entrySet()){
+            for (Map.Entry<String, ? extends JsonValueProcessor> entry : propertyNameAndJsonValueProcessorMap.entrySet()){
                 jsonConfig.registerJsonValueProcessor(entry.getKey(), entry.getValue());
             }
         }

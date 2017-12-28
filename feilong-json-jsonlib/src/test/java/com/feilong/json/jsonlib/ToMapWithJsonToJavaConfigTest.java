@@ -15,6 +15,7 @@
  */
 package com.feilong.json.jsonlib;
 
+import static com.feilong.core.util.MapUtil.newHashMap;
 import static java.util.Collections.emptyMap;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.hasEntry;
@@ -23,7 +24,6 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -86,7 +86,7 @@ public class ToMapWithJsonToJavaConfigTest{
     @Test
     public void toMap3(){
         String json = "{'mybean':{'data':[{'name':'get'}]}}";
-        Map<String, Class<?>> classMap = new HashMap<>();
+        Map<String, Class<?>> classMap = newHashMap();
         classMap.put("data", Person.class);
 
         JsonToJavaConfig jsonToJavaConfig = new JsonToJavaConfig(MyBean.class);

@@ -31,10 +31,10 @@ import net.sf.json.processors.PropertyNameProcessor;
 public class JavaToJsonConfig{
 
     /** 排除属性名称的数组. */
-    private String[]                             excludes;
+    private String[]                                  excludes;
 
     /** 包含属性名称的数组. */
-    private String[]                             includes;
+    private String[]                                  includes;
 
     /**
      * 指定属性名称使用的值修改处理器.
@@ -75,7 +75,7 @@ public class JavaToJsonConfig{
      * @see com.feilong.json.jsonlib.processor.BigDecimalJsonValueProcessor
      * @see com.feilong.json.jsonlib.processor.SensitiveWordsJsonValueProcessor
      */
-    private Map<String, JsonValueProcessor>      propertyNameAndJsonValueProcessorMap;
+    private Map<String, ? extends JsonValueProcessor> propertyNameAndJsonValueProcessorMap;
 
     /**
      * 转成json的时候,对属性名字做特殊处理的控制器对映关系.
@@ -152,7 +152,7 @@ public class JavaToJsonConfig{
      *     crmAddpointCommand.setOpenId("feilong888888ky");
      *     crmAddpointCommand.setOrderCode("fl123456");
      * 
-     *     //****************************************************************************************
+     *         //---------------------------------------------------------------
      * 
      *     JavaToJsonConfig javaToJsonConfig = new JavaToJsonConfig();
      * 
@@ -182,7 +182,7 @@ public class JavaToJsonConfig{
      * @see <a href="https://github.com/venusdrogon/feilong-core/issues/505">json format 需要支持修改key的名字</a>
      * @since 1.9.3
      */
-    private Map<Class<?>, PropertyNameProcessor> jsonTargetClassAndPropertyNameProcessorMap;
+    private Map<Class<?>, PropertyNameProcessor>      jsonTargetClassAndPropertyNameProcessorMap;
 
     //---------------------------------------------------------------
 
@@ -198,7 +198,7 @@ public class JavaToJsonConfig{
      * @param propertyNameAndJsonValueProcessorMap
      *            the property name and json value processor map
      */
-    public JavaToJsonConfig(Map<String, JsonValueProcessor> propertyNameAndJsonValueProcessorMap){
+    public JavaToJsonConfig(Map<String, ? extends JsonValueProcessor> propertyNameAndJsonValueProcessorMap){
         this.propertyNameAndJsonValueProcessorMap = propertyNameAndJsonValueProcessorMap;
     }
 
@@ -297,7 +297,7 @@ public class JavaToJsonConfig{
      * @see com.feilong.json.jsonlib.processor.BigDecimalJsonValueProcessor
      * @see com.feilong.json.jsonlib.processor.SensitiveWordsJsonValueProcessor
      */
-    public Map<String, JsonValueProcessor> getPropertyNameAndJsonValueProcessorMap(){
+    public Map<String, ? extends JsonValueProcessor> getPropertyNameAndJsonValueProcessorMap(){
         return propertyNameAndJsonValueProcessorMap;
     }
 
@@ -342,7 +342,7 @@ public class JavaToJsonConfig{
      * @see com.feilong.json.jsonlib.processor.BigDecimalJsonValueProcessor
      * @see com.feilong.json.jsonlib.processor.SensitiveWordsJsonValueProcessor
      */
-    public void setPropertyNameAndJsonValueProcessorMap(Map<String, JsonValueProcessor> propertyNameAndJsonValueProcessorMap){
+    public void setPropertyNameAndJsonValueProcessorMap(Map<String, ? extends JsonValueProcessor> propertyNameAndJsonValueProcessorMap){
         this.propertyNameAndJsonValueProcessorMap = propertyNameAndJsonValueProcessorMap;
     }
 
@@ -421,7 +421,7 @@ public class JavaToJsonConfig{
      *     crmAddpointCommand.setOpenId("feilong888888ky");
      *     crmAddpointCommand.setOrderCode("fl123456");
      * 
-     *     //****************************************************************************************
+     *         //---------------------------------------------------------------
      * 
      *     JavaToJsonConfig javaToJsonConfig = new JavaToJsonConfig();
      * 
@@ -531,7 +531,7 @@ public class JavaToJsonConfig{
      *     crmAddpointCommand.setOpenId("feilong888888ky");
      *     crmAddpointCommand.setOrderCode("fl123456");
      * 
-     *     //****************************************************************************************
+     *         //---------------------------------------------------------------
      * 
      *     JavaToJsonConfig javaToJsonConfig = new JavaToJsonConfig();
      * 

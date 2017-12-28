@@ -20,10 +20,11 @@ import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
 import static com.feilong.core.DatePattern.COMMON_TIME;
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.Validator.isNullOrEmpty;
+import static com.feilong.core.util.CollectionsUtil.newArrayList;
+import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 import static java.util.Collections.emptyMap;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -929,7 +930,7 @@ public final class JsonUtil{
         //----------------------------------------------------------------------------------
 
         JSONArray jsonArray = JsonHelper.toJSONArray(json, null);
-        List<T> list = new ArrayList<>();
+        List<T> list = newArrayList();
         for (int i = 0, j = jsonArray.size(); i < j; i++){
             list.add(JsonUtil.<T> toBean(jsonArray.getJSONObject(i), jsonToJavaConfig));
         }
@@ -1080,7 +1081,7 @@ public final class JsonUtil{
             return emptyMap();
         }
 
-        Map<String, T> map = new LinkedHashMap<>();
+        Map<String, T> map = newLinkedHashMap();
 
         JSONObject jsonObject = JsonHelper.toJSONObject(json, null);
         Iterator<String> keys = jsonObject.keys();

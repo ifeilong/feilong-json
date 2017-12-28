@@ -1,5 +1,8 @@
 package com.feilong.tools.jackson2.temp;
 
+import static com.feilong.core.util.CollectionsUtil.newArrayList;
+import static com.feilong.core.util.MapUtil.newHashMap;
+
 /*
  * Copyright (C) 2008 feilong
  *
@@ -16,8 +19,6 @@ package com.feilong.tools.jackson2.temp;
  * limitations under the License.
  */
 import java.io.StringWriter;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -105,7 +106,7 @@ public class JacksonUtils{
      */
     public static <T> Map<String, T> json2map(String jsonStr,Class<T> klass) throws Exception{
         Map<String, Map<String, Object>> map = objectMapper.readValue(jsonStr, new TypeReference<Map<String, T>>(){});
-        Map<String, T> result = new HashMap<>();
+        Map<String, T> result = newHashMap();
         for (Entry<String, Map<String, Object>> entry : map.entrySet()){
             result.put(entry.getKey(), map2pojo(entry.getValue(), klass));
         }
@@ -127,7 +128,7 @@ public class JacksonUtils{
      */
     public static <T> List<T> json2list(String jsonArrayStr,Class<T> klass) throws Exception{
         List<Map<String, Object>> list = objectMapper.readValue(jsonArrayStr, new TypeReference<List<T>>(){});
-        List<T> result = new ArrayList<>();
+        List<T> result = newArrayList();
         for (Map<String, Object> map : list){
             result.add(map2pojo(map, klass));
         }

@@ -15,7 +15,8 @@
  */
 package com.feilong.json.jsonlib.processor;
 
-import java.util.HashMap;
+import static com.feilong.core.util.MapUtil.newHashMap;
+
 import java.util.Map;
 
 import org.junit.Test;
@@ -24,7 +25,6 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.json.jsonlib.JavaToJsonConfig;
 import com.feilong.json.jsonlib.JsonUtil;
-import com.feilong.json.jsonlib.processor.SensitiveWordsJsonValueProcessor;
 import com.feilong.store.member.User;
 
 import net.sf.json.processors.JsonValueProcessor;
@@ -50,7 +50,7 @@ public class SensitiveWordsJsonValueProcessorTest{
 
         JsonValueProcessor jsonValueProcessor = new SensitiveWordsJsonValueProcessor();
 
-        Map<String, JsonValueProcessor> propertyNameAndJsonValueProcessorMap = new HashMap<>();
+        Map<String, JsonValueProcessor> propertyNameAndJsonValueProcessorMap = newHashMap();
         propertyNameAndJsonValueProcessorMap.put("password", jsonValueProcessor);
         propertyNameAndJsonValueProcessorMap.put("age", jsonValueProcessor);
 

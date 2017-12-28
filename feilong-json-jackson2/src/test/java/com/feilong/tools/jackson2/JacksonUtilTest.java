@@ -15,6 +15,8 @@
  */
 package com.feilong.tools.jackson2;
 
+import static com.feilong.core.util.MapUtil.newHashMap;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -78,7 +80,7 @@ public class JacksonUtilTest extends AbstractJsonTest{
         //        typeMap.put("firstName", String.class);
         //        typeMap.put("lastName", String.class);
 
-        Map<String, Object> valueMap = new HashMap<>();
+        Map<String, Object> valueMap =newHashMap();
         valueMap.put("address", new HashMap());
         valueMap.put("firstName", "Fred");
         valueMap.put("lastName", "Flintstone");

@@ -15,6 +15,7 @@
  */
 package com.feilong.json.jsonlib;
 
+import static com.feilong.core.util.MapUtil.newHashMap;
 import static com.feilong.json.jsonlib.UncapitalizeJavaIdentifierTransformer.UNCAPITALIZE;
 import static org.hamcrest.CoreMatchers.allOf;
 import static org.hamcrest.Matchers.hasProperty;
@@ -23,7 +24,6 @@ import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -97,7 +97,7 @@ public class ToBeanWithJsonToJavaConfigTest extends AbstractJsonTest{
     @Test
     public void testToBean(){
         String json = "{'data':[{'name':'get'},{'name':'set'}],'id':5}";
-        Map<String, Class<?>> classMap = new HashMap<>();
+        Map<String, Class<?>> classMap = newHashMap();
         classMap.put("data", Person.class);
 
         MyBean myBean = JsonUtil.toBean(json, new JsonToJavaConfig(MyBean.class, classMap));

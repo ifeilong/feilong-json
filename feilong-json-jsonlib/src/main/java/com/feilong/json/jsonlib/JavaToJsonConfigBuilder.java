@@ -16,9 +16,9 @@
 package com.feilong.json.jsonlib;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
+import static com.feilong.core.util.MapUtil.newHashMap;
 
 import java.lang.reflect.Field;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -69,7 +69,7 @@ public final class JavaToJsonConfigBuilder{
         //---------------------------------------------------------------------------------------------------------
 
         //敏感字段
-        Map<String, JsonValueProcessor> propertyNameAndJsonValueProcessorMap = new HashMap<>();
+        Map<String, JsonValueProcessor> propertyNameAndJsonValueProcessorMap = newHashMap();
         for (Field field : fieldsList){
             propertyNameAndJsonValueProcessorMap.put(field.getName(), SensitiveWordsJsonValueProcessor.INSTANCE);
         }

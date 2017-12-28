@@ -15,6 +15,8 @@
  */
 package com.feilong.json.fastjson;
 
+import static com.feilong.core.util.MapUtil.newHashMap;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -45,7 +47,7 @@ public class FastjsonUtilTest{
      */
     @Test
     public void testFastjsonUtilTest(){
-        Map<String, String> map = new HashMap<>();
+        Map<String, String> map = newHashMap();
         map.put(1 + "", 10 + "");
         String jsonStr = JSON.toJSONString(map);
         Map<Long, Integer> map2 = JSON.parseObject(jsonStr, new TypeReference<Map<Long, Integer>>(){});
@@ -66,7 +68,7 @@ public class FastjsonUtilTest{
         //        typeMap.put("firstName", String.class);
         //        typeMap.put("lastName", String.class);
 
-        Map<String, Object> valueMap = new HashMap<>();
+        Map<String, Object> valueMap =newHashMap();
         valueMap.put("address", new HashMap());
         valueMap.put("firstName", "Fred");
         valueMap.put("lastName", "Flintstone");

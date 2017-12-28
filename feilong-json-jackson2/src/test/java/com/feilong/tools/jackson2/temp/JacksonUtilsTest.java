@@ -15,10 +15,11 @@
  */
 package com.feilong.tools.jackson2.temp;
 
+import static com.feilong.core.util.CollectionsUtil.newArrayList;
+import static com.feilong.core.util.MapUtil.newHashMap;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -48,12 +49,12 @@ public class JacksonUtilsTest{
     public void test_pojo2json() throws Exception{
         String json = JacksonUtils.obj2json(new User(1, "张三"));
         assertEquals("{\"id\":1,\"name\":\"张三\"}", json);
-        List<User> list = new ArrayList<>();
+        List<User> list = newArrayList();
         list.add(new User(1, "张三"));
         list.add(new User(2, "李四"));
         String json2 = JacksonUtils.obj2json(list);
         assertEquals("[{\"id\":1,\"name\":\"张三\"},{\"id\":2,\"name\":\"李四\"}]", json2);
-        Map<String, User> map = new HashMap<>();
+        Map<String, User> map = newHashMap();
         map.put("user1", new User(1, "张三"));
         map.put("user2", new User(2, "李四"));
         String json3 = JacksonUtils.obj2json(map);
@@ -130,7 +131,7 @@ public class JacksonUtilsTest{
      */
     @Test
     public void test_map2pojo(){
-        Map<String, Object> map = new HashMap<>();
+        Map<String, Object> map = newHashMap();
         map.put("id", 1);
         map.put("name", "张三");
         User user = JacksonUtils.map2pojo(map, User.class);

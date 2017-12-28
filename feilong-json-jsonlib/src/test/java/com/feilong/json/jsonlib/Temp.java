@@ -15,14 +15,13 @@
  */
 package com.feilong.json.jsonlib;
 
-import java.util.HashMap;
+import static com.feilong.core.util.MapUtil.newHashMap;
+
 import java.util.Map;
 
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.feilong.json.jsonlib.JsonUtil;
 
 /**
  * 
@@ -38,7 +37,7 @@ public class Temp{
      */
     @Test
     public void test3(){
-        Map<String, String> map = new HashMap<>();
+        Map<String, String> map = newHashMap();
         map.put("1", "2");
 
         String format = JsonUtil.format(map);

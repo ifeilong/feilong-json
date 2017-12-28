@@ -15,7 +15,8 @@
  */
 package com.feilong.json.jsonlib.entity;
 
-import java.util.ArrayList;
+import static com.feilong.core.util.CollectionsUtil.newArrayList;
+
 import java.util.List;
 
 /**
@@ -30,7 +31,7 @@ public class MyBean{
     private Long         id;
 
     /** The data. */
-    private List<Object> data = new ArrayList<>();
+    private List<Object> data = newArrayList();
 
     /**
      * 获得 data.
