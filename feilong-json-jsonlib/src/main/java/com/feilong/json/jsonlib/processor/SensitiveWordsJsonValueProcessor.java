@@ -70,11 +70,13 @@ import net.sf.json.processors.JsonValueProcessor;
  */
 public class SensitiveWordsJsonValueProcessor extends AbstractJsonValueProcessor{
 
+    /** The default sensitive words. */
+    private static final String            DEFAULT_SENSITIVE_WORDS = "******";
+
+    //---------------------------------------------------------------
+
     /** Singleton instance. */
     public static final JsonValueProcessor INSTANCE                = new SensitiveWordsJsonValueProcessor();
-
-    /** The default sensitive words. */
-    private static String                  DEFAULT_SENSITIVE_WORDS = "******";
 
     //---------------------------------------------------------------
 
