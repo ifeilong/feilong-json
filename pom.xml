@@ -26,9 +26,9 @@
 
 	<!-- 软件配置管理SCM (Software Configuration Management), 如cvs ,svn ,git -->
 	<scm>
-		<url>https://github.com/venusdrogon/feilong-json.git</url>
-		<connection>scm:git:git@github.com:venusdrogon/feilong-json.git</connection>
-		<developerConnection>scm:git:ssh://git@github.com:venusdrogon/feilong-json.git</developerConnection>
+		<url>https://github.com/venusdrogon/feilong-json</url>
+		<connection>scm:git:https://github.com/venusdrogon/feilong-json</connection>
+		<developerConnection>scm:git:git@github.com:venusdrogon/feilong-json.git</developerConnection>
 	</scm>
 
 	<dependencies>
