@@ -25,7 +25,7 @@ feilong-json jar你可以直接在 [仓库](https://github.com/venusdrogon/feilo
 
 	....
 	<properties>
-		<version.feilong-platform>1.10.6</version.feilong-platform>
+		<version.feilong-platform>1.10.7</version.feilong-platform>
 		....
 	</properties>
 	
