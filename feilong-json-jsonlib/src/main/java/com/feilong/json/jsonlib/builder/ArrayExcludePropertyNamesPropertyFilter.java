@@ -18,13 +18,12 @@ package com.feilong.json.jsonlib.builder;
 import net.sf.json.util.PropertyFilter;
 
 /**
- * java to json 时候的 属性过滤器.
+ * 排除属性过滤器.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 1.2.2
- * @since 1.11.0 change package
+ * @since 1.11.0
  */
-class ArrayContainsPropertyNamesPropertyFilter implements PropertyFilter{
+class ArrayExcludePropertyNamesPropertyFilter implements PropertyFilter{
 
     /** The property names. */
     private final String[] propertyNames;
@@ -37,7 +36,7 @@ class ArrayContainsPropertyNamesPropertyFilter implements PropertyFilter{
      * @param propertyNames
      *            the property names
      */
-    public ArrayContainsPropertyNamesPropertyFilter(String...propertyNames){
+    public ArrayExcludePropertyNamesPropertyFilter(String...propertyNames){
         this.propertyNames = propertyNames;
     }
 
@@ -53,6 +52,6 @@ class ArrayContainsPropertyNamesPropertyFilter implements PropertyFilter{
         // [source] the owner of the property
         // [name] the name of the property
         // [value] the value of the property
-        return !org.apache.commons.lang3.ArrayUtils.contains(propertyNames, name);
+        return org.apache.commons.lang3.ArrayUtils.contains(propertyNames, name);
     }
 }

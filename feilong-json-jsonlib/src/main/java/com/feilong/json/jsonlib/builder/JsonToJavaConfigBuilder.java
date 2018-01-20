@@ -61,9 +61,15 @@ public final class JsonToJavaConfigBuilder{
 
         // Ignore missing properties with Json-Lib
 
-        // 避免出现 Unknown property 'orderIdAndCodeMap' on class 'class
-        // com.baozun.trade.web.controller.payment.result.command.PaymentResultEntity' 异常
+        // 避免出现 Unknown property 'orderIdAndCodeMap' on class 'class com.baozun.trade.web.result.command.PaymentResultEntity' 异常
         jsonConfig.setPropertySetStrategy(new PropertyStrategyWrapper(PropertySetStrategy.DEFAULT));
+
+        //---------------------------------------------------------------
+        //排除
+        String[] excludes = jsonToJavaConfig.getExcludes();
+        if (isNotNullOrEmpty(excludes)){
+            jsonConfig.setJavaPropertyFilter(new ArrayExcludePropertyNamesPropertyFilter(excludes));
+        }
         return jsonConfig;
     }
 }
