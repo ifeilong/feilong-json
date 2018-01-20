@@ -18,7 +18,6 @@ package com.feilong.json.jsonlib;
 import static com.feilong.core.DatePattern.COMMON_DATE;
 import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
 import static com.feilong.core.DatePattern.COMMON_TIME;
-import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.util.CollectionsUtil.newArrayList;
 import static com.feilong.core.util.MapUtil.newLinkedHashMap;
@@ -41,6 +40,9 @@ import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.lang.ArrayUtil;
 import com.feilong.core.lang.reflect.FieldUtil;
 import com.feilong.json.SensitiveWords;
+import com.feilong.json.jsonlib.builder.JavaToJsonConfigBuilder;
+import com.feilong.json.jsonlib.builder.JsonConfigBuilder;
+import com.feilong.json.jsonlib.builder.JsonToJavaConfigBuilder;
 import com.feilong.json.jsonlib.processor.SensitiveWordsJsonValueProcessor;
 
 import net.sf.ezmorph.MorpherRegistry;
@@ -49,8 +51,6 @@ import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import net.sf.json.JsonConfig;
 import net.sf.json.util.JSONUtils;
-import net.sf.json.util.JavaIdentifierTransformer;
-import net.sf.json.util.PropertySetStrategy;
 
 /**
  * json处理工具类.
@@ -127,6 +127,8 @@ public final class JsonUtil{
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
 
+    //---------------------------------------------------------------
+
     /**
      * 设置日期转换格式.
      */
@@ -137,7 +139,10 @@ public final class JsonUtil{
         morpherRegistry.registerMorpher(new DateMorpher(ConvertUtil.toArray(COMMON_DATE_AND_TIME, COMMON_TIME, COMMON_DATE)));
 
     }
-    //***************************format********************************************************
+
+    //---------------------------------------------------------------
+
+    //format
 
     // [start] format
 
@@ -1081,6 +1086,8 @@ public final class JsonUtil{
             return emptyMap();
         }
 
+        //---------------------------------------------------------------
+
         Map<String, T> map = newLinkedHashMap();
 
         JSONObject jsonObject = JsonHelper.toJSONObject(json, null);
@@ -1158,9 +1165,7 @@ public final class JsonUtil{
         }
         Validate.notNull(rootClass, "rootClass can't be null!");
 
-        JsonToJavaConfig jsonToJavaConfig = new JsonToJavaConfig();
-        jsonToJavaConfig.setRootClass(rootClass);
-        return toBean(json, jsonToJavaConfig);
+        return toBean(json, new JsonToJavaConfig(rootClass));
     }
 
     /**
@@ -1250,28 +1255,7 @@ public final class JsonUtil{
 
         JSONObject jsonObject = JSONObject.fromObject(json);
 
-        JsonConfig jsonConfig = new JsonConfig();
-        jsonConfig.setRootClass(rootClass);
-
-        //--------------JavaIdentifierTransformer-------------------------------
-        JavaIdentifierTransformer javaIdentifierTransformer = jsonToJavaConfig.getJavaIdentifierTransformer();
-        if (isNotNullOrEmpty(javaIdentifierTransformer)){
-            jsonConfig.setJavaIdentifierTransformer(javaIdentifierTransformer);
-        }
-
-        //--------------setClassMap-------------------------------
-        //Sets the current attribute/Class Map [JSON -> Java]
-        //classMap a Map of classes, every key identifies a property or a regexp
-        Map<String, Class<?>> classMap = jsonToJavaConfig.getClassMap();
-        if (isNotNullOrEmpty(classMap)){
-            jsonConfig.setClassMap(classMap);
-        }
-
-        // Ignore missing properties with Json-Lib
-
-        // 避免出现 Unknown property 'orderIdAndCodeMap' on class 'class
-        // com.baozun.trade.web.controller.payment.result.command.PaymentResultEntity' 异常
-        jsonConfig.setPropertySetStrategy(new PropertyStrategyWrapper(PropertySetStrategy.DEFAULT));
+        JsonConfig jsonConfig = JsonToJavaConfigBuilder.build(rootClass, jsonToJavaConfig);
         return (T) JSONObject.toBean(jsonObject, jsonConfig);
     }
 

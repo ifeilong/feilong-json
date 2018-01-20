@@ -13,15 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.json.jsonlib;
+package com.feilong.json.jsonlib.builder;
 
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 
+import java.util.Date;
 import java.util.Map;
+
+import com.feilong.core.DatePattern;
+import com.feilong.json.jsonlib.JavaToJsonConfig;
+import com.feilong.json.jsonlib.processor.DateJsonValueProcessor;
 
 import net.sf.json.JsonConfig;
 import net.sf.json.processors.JsonValueProcessor;
 import net.sf.json.processors.PropertyNameProcessor;
+import net.sf.json.util.CycleDetectionStrategy;
 
 /**
  * The Class JsonConfigBuilder.
@@ -29,7 +35,12 @@ import net.sf.json.processors.PropertyNameProcessor;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.10.3
  */
-final class JsonConfigBuilder{
+public final class JsonConfigBuilder{
+
+    /** The Constant DEFAULT_JAVA_TO_JSON_CONFIG. */
+    public static final JsonConfig DEFAULT_JAVA_TO_JSON_CONFIG = buildDefaultJavaToJsonConfig();
+
+    //---------------------------------------------------------------
 
     /** Don't let anyone instantiate this class. */
     private JsonConfigBuilder(){
@@ -49,14 +60,14 @@ final class JsonConfigBuilder{
      *            the java to json config
      * @return the json config
      */
-    static JsonConfig build(@SuppressWarnings("unused") Object obj,JavaToJsonConfig javaToJsonConfig){
+    public static JsonConfig build(@SuppressWarnings("unused") Object obj,JavaToJsonConfig javaToJsonConfig){
         if (null == javaToJsonConfig){
             return null;
         }
 
         //-----------------------------------------------------------------
 
-        JsonConfig jsonConfig = JsonHelper.buildDefaultJavaToJsonConfig();
+        JsonConfig jsonConfig = buildDefaultJavaToJsonConfig();
 
         //---------------------------------------------------------------
 
@@ -114,5 +125,50 @@ final class JsonConfigBuilder{
                 jsonConfig.registerJsonPropertyNameProcessor(entry.getKey(), entry.getValue());
             }
         }
+    }
+
+    //---------------------------------------------------------------
+
+    /**
+     * 默认的java to json JsonConfig.
+     * 
+     * <h3>含有以下的特性:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>{@link CycleDetectionStrategy#LENIENT} 避免循环引用</li>
+     * <li>no IgnoreDefaultExcludes,默认过滤几个key "class", "declaringClass","metaClass"</li>
+     * <li>
+     * {@link DateJsonValueProcessor},如果是日期,自动渲染成 {@link DatePattern#COMMON_DATE_AND_TIME} 格式类型,如有需要可以使用
+     * {@link JavaToJsonConfig#setPropertyNameAndJsonValueProcessorMap(Map)}覆盖此属性
+     * </li>
+     * <li>AllowNonStringKeys,允许非 string类型的key</li>
+     * </ol>
+     * </blockquote>
+     *
+     * @return the default json config
+     * @see see net.sf.json.JsonConfig#DEFAULT_EXCLUDES
+     * @see net.sf.json.util.CycleDetectionStrategy#LENIENT
+     * 
+     * @see <a href="http://feitianbenyue.iteye.com/blog/2046877">通过setAllowNonStringKeys解决java.lang.ClassCastException: JSON keys must be
+     *      strings</a>
+     */
+    static JsonConfig buildDefaultJavaToJsonConfig(){
+        JsonConfig jsonConfig = new JsonConfig();
+
+        //see net.sf.json.JsonConfig#DEFAULT_EXCLUDES
+        //默认会过滤的几个key "class", "declaringClass","metaClass"  
+        jsonConfig.setIgnoreDefaultExcludes(false);
+
+        // java.lang.ClassCastException: JSON keys must be strings
+        // see http://feitianbenyue.iteye.com/blog/2046877
+        jsonConfig.setAllowNonStringKeys(true);
+
+        //排除,避免循环引用 There is a cycle in the hierarchy!
+        //Returns empty array and null object
+        jsonConfig.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);
+
+        // 注册日期处理器
+        jsonConfig.registerJsonValueProcessor(Date.class, DateJsonValueProcessor.DEFAULT_INSTANCE);
+        return jsonConfig;
     }
 }

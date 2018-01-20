@@ -18,7 +18,6 @@ package com.feilong.json.jsonlib;
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
 
-import java.util.Date;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -26,10 +25,9 @@ import org.apache.commons.beanutils.DynaBean;
 import org.apache.commons.collections4.IteratorUtils;
 import org.apache.commons.lang3.ClassUtils;
 
-import com.feilong.core.DatePattern;
 import com.feilong.core.lang.ClassUtil;
 import com.feilong.core.lang.ObjectUtil;
-import com.feilong.json.jsonlib.processor.DateJsonValueProcessor;
+import com.feilong.json.jsonlib.builder.JsonConfigBuilder;
 import com.feilong.json.jsonlib.processor.SensitiveWordsJsonValueProcessor;
 
 import net.sf.json.JSON;
@@ -39,7 +37,6 @@ import net.sf.json.JSONObject;
 import net.sf.json.JSONString;
 import net.sf.json.JsonConfig;
 import net.sf.json.processors.JsonValueProcessor;
-import net.sf.json.util.CycleDetectionStrategy;
 import net.sf.json.util.JSONTokener;
 import net.sf.json.util.JSONUtils;
 
@@ -49,13 +46,10 @@ import net.sf.json.util.JSONUtils;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.9.4
  */
-final class JsonHelper{
+public final class JsonHelper{
 
     /** 单利模式. */
     private static final JsonConfig DEFAULT_JSON_CONFIG_INSTANCE   = new JsonConfig();
-
-    /** The Constant DEFAULT_JAVA_TO_JSON_CONFIG. */
-    private static final JsonConfig DEFAULT_JAVA_TO_JSON_CONFIG    = buildDefaultJavaToJsonConfig();
 
     //---------------------------------------------------------------
 
@@ -140,7 +134,7 @@ final class JsonHelper{
      * @see net.sf.json.JSONSerializer#toJSON(Object)
      */
     static JSON toJSON(Object obj,JsonConfig jsonConfig){
-        JsonConfig useJsonConfig = defaultIfNull(jsonConfig, DEFAULT_JAVA_TO_JSON_CONFIG);
+        JsonConfig useJsonConfig = defaultIfNull(jsonConfig, JsonConfigBuilder.DEFAULT_JAVA_TO_JSON_CONFIG);
         registerDefaultJsonValueProcessor(useJsonConfig);
 
         if (isNeedConvertToJSONArray(obj)){
@@ -149,6 +143,8 @@ final class JsonHelper{
         }
         return toJSONObject(obj, useJsonConfig);
     }
+
+    //---------------------------------------------------------------
 
     /**
      * 是否需要转成 {@link JSONArray}类型.
@@ -242,48 +238,9 @@ final class JsonHelper{
         return noNeedBuild ? null : new JavaToJsonConfig(excludes, includes);
     }
 
-    /**
-     * 默认的java to json JsonConfig.
-     * 
-     * <h3>含有以下的特性:</h3>
-     * <blockquote>
-     * <ol>
-     * <li>{@link CycleDetectionStrategy#LENIENT} 避免循环引用</li>
-     * <li>no IgnoreDefaultExcludes,默认过滤几个key "class", "declaringClass","metaClass"</li>
-     * <li>
-     * {@link DateJsonValueProcessor},如果是日期,自动渲染成 {@link DatePattern#COMMON_DATE_AND_TIME} 格式类型,如有需要可以使用
-     * {@link JavaToJsonConfig#setPropertyNameAndJsonValueProcessorMap(Map)}覆盖此属性
-     * </li>
-     * <li>AllowNonStringKeys,允许非 string类型的key</li>
-     * </ol>
-     * </blockquote>
-     *
-     * @return the default json config
-     * @see see net.sf.json.JsonConfig#DEFAULT_EXCLUDES
-     * @see net.sf.json.util.CycleDetectionStrategy#LENIENT
-     * 
-     * @see <a href="http://feitianbenyue.iteye.com/blog/2046877">通过setAllowNonStringKeys解决java.lang.ClassCastException: JSON keys must be
-     *      strings</a>
-     */
-    static JsonConfig buildDefaultJavaToJsonConfig(){
-        JsonConfig jsonConfig = new JsonConfig();
+    //---------------------------------------------------------------
 
-        //see net.sf.json.JsonConfig#DEFAULT_EXCLUDES
-        //默认会过滤的几个key "class", "declaringClass","metaClass"  
-        jsonConfig.setIgnoreDefaultExcludes(false);
-
-        // java.lang.ClassCastException: JSON keys must be strings
-        // see http://feitianbenyue.iteye.com/blog/2046877
-        jsonConfig.setAllowNonStringKeys(true);
-
-        //排除,避免循环引用 There is a cycle in the hierarchy!
-        //Returns empty array and null object
-        jsonConfig.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);
-
-        // 注册日期处理器
-        jsonConfig.registerJsonValueProcessor(Date.class, DateJsonValueProcessor.DEFAULT_INSTANCE);
-        return jsonConfig;
-    }
+    //---------------------------------------------------------------
 
     /**
      * 是否允许被json format的类型.

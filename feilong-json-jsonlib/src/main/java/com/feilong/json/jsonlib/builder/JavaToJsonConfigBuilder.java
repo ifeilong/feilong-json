@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.json.jsonlib;
+package com.feilong.json.jsonlib.builder;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.util.MapUtil.newHashMap;
@@ -25,6 +25,7 @@ import java.util.Map;
 import org.apache.commons.lang3.reflect.FieldUtils;
 
 import com.feilong.json.SensitiveWords;
+import com.feilong.json.jsonlib.JavaToJsonConfig;
 import com.feilong.json.jsonlib.processor.SensitiveWordsJsonValueProcessor;
 
 import net.sf.json.processors.JsonValueProcessor;
