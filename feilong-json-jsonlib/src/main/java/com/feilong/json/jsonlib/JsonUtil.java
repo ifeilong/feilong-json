@@ -1177,7 +1177,7 @@ public final class JsonUtil{
      *     private Long id;
      * 
      *     private List{@code <Object>} data = new ArrayList{@code <>}();
-     *     //setter /getter 略
+     *     <span style="color:green">//setter /getter 略</span>
      * }
      * </pre>
      * 
@@ -1187,7 +1187,7 @@ public final class JsonUtil{
      *     private String name;
      * 
      *     private Date dateAttr;
-     *     //setter /getter 略
+     *     <span style="color:green">//setter /getter 略</span>
      * }
      * </pre>
      * 
