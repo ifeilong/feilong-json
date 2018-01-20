@@ -33,6 +33,7 @@ import net.sf.json.util.PropertySetStrategy;
  * @see <a href="http://envy2002.iteye.com/blog/1682738">envy2002.iteye.com</a>
  * @see net.sf.json.util.PropertySetStrategy
  * @since 1.0.5
+ * @since 1.11.0 change package
  */
 class PropertyStrategyWrapper extends PropertySetStrategy{
 

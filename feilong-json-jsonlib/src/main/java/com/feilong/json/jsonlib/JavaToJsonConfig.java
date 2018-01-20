@@ -28,10 +28,7 @@ import net.sf.json.processors.PropertyNameProcessor;
  * @since 1.2.2
  * @since 1.9.4 <a href="https://github.com/venusdrogon/feilong-core/issues/511">rename</a>
  */
-public class JavaToJsonConfig{
-
-    /** 排除属性名称的数组. */
-    private String[]                                  excludes;
+public class JavaToJsonConfig extends AbstractConfig{
 
     /** 包含属性名称的数组. */
     private String[]                                  includes;
@@ -216,26 +213,6 @@ public class JavaToJsonConfig{
     }
 
     //---------------------------------------------------------------
-
-    /**
-     * 获得 排除属性名称的数组.
-     *
-     * @return the 排除属性名称的数组
-     */
-    public String[] getExcludes(){
-        return excludes;
-    }
-
-    /**
-     * 设置 排除属性名称的数组.
-     *
-     * @param excludes
-     *            the new 排除属性名称的数组
-     * @since 1.8.5 change to Varargs
-     */
-    public void setExcludes(String...excludes){
-        this.excludes = excludes;
-    }
 
     /**
      * 获得 包含属性名称的数组.

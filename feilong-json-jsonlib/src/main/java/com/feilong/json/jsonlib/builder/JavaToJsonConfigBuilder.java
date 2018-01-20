@@ -35,6 +35,7 @@ import net.sf.json.processors.JsonValueProcessor;
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.10.3
+ * @since 1.11.0 change package
  */
 public final class JavaToJsonConfigBuilder{
 

@@ -31,7 +31,7 @@ import net.sf.json.util.JavaIdentifierTransformer;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.9.4
  */
-public class JsonToJavaConfig{
+public class JsonToJavaConfig extends AbstractConfig{
 
     /**
      * The root class.
