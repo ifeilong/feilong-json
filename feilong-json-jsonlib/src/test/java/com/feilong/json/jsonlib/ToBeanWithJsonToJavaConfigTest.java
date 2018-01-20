@@ -16,7 +16,7 @@
 package com.feilong.json.jsonlib;
 
 import static com.feilong.core.util.MapUtil.newHashMap;
-import static com.feilong.json.jsonlib.UncapitalizeJavaIdentifierTransformer.UNCAPITALIZE;
+import static com.feilong.json.jsonlib.transformer.UncapitalizeJavaIdentifierTransformer.UNCAPITALIZE;
 import static org.hamcrest.CoreMatchers.allOf;
 import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.is;

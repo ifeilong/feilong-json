@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.json.jsonlib;
+package com.feilong.json.jsonlib.transformer;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -52,25 +52,25 @@ import net.sf.json.util.JavaIdentifierTransformer;
  * <pre class="code">
  * public class CrmMemberInfoCommand{
  * 
- *     //** 会员编号
+ *     <span style="color:green">//** 会员编号</span>
  *     private String memberNo;
  * 
- *     //** 姓名/昵称 
+ *     <span style="color:green">//** 姓名/昵称</span>
  *     private String name;
  * 
- *     //** 电话号码 
+ *     <span style="color:green">//** 电话号码</span>
  *     private String phone;
  * 
- *     //** 性别：男；女 
+ *     <span style="color:green">//** 性别：男；女</span>
  *     private String gender;
  * 
- *     //** 生日：Format：yyyy-MM-dd 
+ *     <span style="color:green">//** 生日：Format：yyyy-MM-dd</span>
  *     private String birthday;
  * 
- *     //** 邮箱 
+ *     <span style="color:green">//** 邮箱</span>
  *     private String email;
  * 
- *     // setter getter
+ *     <span style="color:green">// setter getter</span>
  * }
  * </pre>
  * 
@@ -98,6 +98,7 @@ import net.sf.json.util.JavaIdentifierTransformer;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see <a href="https://github.com/venusdrogon/feilong-core/issues/509">issue 509</a>
  * @since 1.9.4
+ * @since 1.11.0 change package
  */
 public class UncapitalizeJavaIdentifierTransformer extends JavaIdentifierTransformer{
 

@@ -20,6 +20,9 @@ import java.util.Map;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
+import com.feilong.json.jsonlib.transformer.CustomJavaIdentifierTransformer;
+import com.feilong.json.jsonlib.transformer.UncapitalizeJavaIdentifierTransformer;
+
 import net.sf.json.util.JavaIdentifierTransformer;
 
 /**
@@ -117,6 +120,11 @@ public class JsonToJavaConfig{
      * <td>首字母小写 transformer 'MemberNo' {@code =>} 'memberNo'.</td>
      * </tr>
      * 
+     * <tr valign="top">
+     * <td>{@link CustomJavaIdentifierTransformer}</td>
+     * <td>自定义转换.</td>
+     * </tr>
+     * 
      * </table>
      * 
      * </blockquote>
@@ -151,7 +159,86 @@ public class JsonToJavaConfig{
      * @param rootClass
      *            the root class
      * @param javaIdentifierTransformer
-     *            the java identifier transformer
+     *            java标识符号转换器.
+     * 
+     *            <p>
+     *            <a href="http://json.org/">JSON 规范</a>指出一个对象的key是个字符串,并且该字符串是零个或多个Unicode字符的集合，用双引号括起来，使用反斜杠转义。<br>
+     *            字符表示为单个字符串。 字符串非常像C或Java字符串。
+     *            </p>
+     * 
+     *            <p>
+     *            这就意味着,当你从json格式转成java的时候,你可能有一个有效的 JSON key ,但是他是个无效的java 标识符.此时你可以设置 {@link JavaIdentifierTransformer}
+     *            </p>
+     * 
+     *            <h3>json-lib自带实现(5种转换):</h3>
+     * 
+     *            <blockquote>
+     *            <table border="1" cellspacing="0" cellpadding="4" summary="">
+     * 
+     *            <tr style="background-color:#ccccff">
+     *            <th align="left">字段</th>
+     *            <th align="left">说明</th>
+     *            </tr>
+     * 
+     *            <tr valign="top">
+     *            <td>{@link JavaIdentifierTransformer#NOOP}</td>
+     *            <td>什么都不转换.<br>
+     *            (Noop transformer '@invalid' {@code =>} '@invalid')</td>
+     *            </tr>
+     * 
+     *            <tr valign="top" style="background-color:#eeeeff">
+     *            <td>{@link JavaIdentifierTransformer#STRICT}</td>
+     *            <td>抛出JSONException if a non JavaIdentifier character is found.<br>
+     *            ('@invalid' {@code =>} JSONException)</td>
+     *            </tr>
+     *            <tr valign="top">
+     *            <td>{@link JavaIdentifierTransformer#CAMEL_CASE}</td>
+     *            <td>将使用非Java标识符和空格字符作为词边界,新单词的第一个字符大写。<br>
+     *            ('camel case' {@code =>} 'camelCase')</td>
+     *            </tr>
+     * 
+     *            <tr valign="top" style="background-color:#eeeeff">
+     *            <td>{@link JavaIdentifierTransformer#WHITESPACE}</td>
+     *            <td>删除所有空格以及不符合java规范的字符.<br>
+     *            ('white space' {@code =>}'whitespace')</td>
+     *            </tr>
+     *            <tr valign="top">
+     *            <td>{@link JavaIdentifierTransformer#UNDERSCORE}</td>
+     *            <td>将所有空格以及不符合java属性规范的字符转成 下划线'_'.<br>
+     *            ('under score' {@code =>} 'under_score')
+     *            </td>
+     *            </tr>
+     *            </table>
+     * 
+     *            </blockquote>
+     * 
+     *            <p>
+     *            你也可以创建或者注册你自己的 JavaIdentifierTransformers,
+     *            </p>
+     * 
+     *            <h3>feilong 自带实现:</h3>
+     * 
+     *            <blockquote>
+     *            <table border="1" cellspacing="0" cellpadding="4" summary="">
+     * 
+     *            <tr style="background-color:#ccccff">
+     *            <th align="left">字段</th>
+     *            <th align="left">说明</th>
+     *            </tr>
+     * 
+     *            <tr valign="top">
+     *            <td>{@link UncapitalizeJavaIdentifierTransformer#UNCAPITALIZE}</td>
+     *            <td>首字母小写 transformer 'MemberNo' {@code =>} 'memberNo'.</td>
+     *            </tr>
+     * 
+     *            <tr valign="top">
+     *            <td>{@link CustomJavaIdentifierTransformer}</td>
+     *            <td>自定义转换.</td>
+     *            </tr>
+     * 
+     *            </table>
+     * 
+     *            </blockquote>
      */
     public JsonToJavaConfig(Class<?> rootClass, JavaIdentifierTransformer javaIdentifierTransformer){
         super();
@@ -248,6 +335,11 @@ public class JsonToJavaConfig{
      * <td>首字母小写 transformer 'MemberNo' {@code =>} 'memberNo'.</td>
      * </tr>
      * 
+     * <tr valign="top">
+     * <td>{@link CustomJavaIdentifierTransformer}</td>
+     * <td>自定义转换.</td>
+     * </tr>
+     * 
      * </table>
      * 
      * </blockquote>
@@ -330,6 +422,11 @@ public class JsonToJavaConfig{
      * <tr valign="top">
      * <td>{@link UncapitalizeJavaIdentifierTransformer#UNCAPITALIZE}</td>
      * <td>首字母小写 transformer 'MemberNo' {@code =>} 'memberNo'.</td>
+     * </tr>
+     * 
+     * <tr valign="top">
+     * <td>{@link CustomJavaIdentifierTransformer}</td>
+     * <td>自定义转换.</td>
      * </tr>
      * 
      * </table>
