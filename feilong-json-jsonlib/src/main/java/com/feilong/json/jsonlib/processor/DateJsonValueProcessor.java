@@ -154,6 +154,9 @@ public class DateJsonValueProcessor extends AbstractJsonValueProcessor{
      */
     @Override
     protected Object processValue(Object value,JsonConfig jsonConfig){
-        return null == value ? null : (value instanceof Date ? DateUtil.toString((Date) value, datePattern) : value.toString());
+        if (null == value){
+            return null;
+        }
+        return value instanceof Date ? DateUtil.toString((Date) value, datePattern) : value.toString();
     }
 }

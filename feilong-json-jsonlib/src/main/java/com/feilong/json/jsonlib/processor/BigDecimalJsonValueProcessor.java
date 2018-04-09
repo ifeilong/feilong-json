@@ -140,6 +140,9 @@ public class BigDecimalJsonValueProcessor extends AbstractJsonValueProcessor{
      */
     @Override
     protected Object processValue(Object value,JsonConfig jsonConfig){
-        return value == null ? EMPTY : (value instanceof BigDecimal ? NumberUtil.toString((Number) value, numberPattern) : value);
+        if (value == null){
+            return EMPTY;
+        }
+        return value instanceof BigDecimal ? NumberUtil.toString((Number) value, numberPattern) : value;
     }
 }
