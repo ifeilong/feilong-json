@@ -70,7 +70,7 @@ public final class JsonToJavaConfigBuilder{
 
         // Ignore missing properties with Json-Lib
 
-        // 避免出现 Unknown property 'orderIdAndCodeMap' on class 'class com.baozun.trade.web.result.command.PaymentResultEntity' 异常
+        // 避免出现 Unknown property 'orderIdAndCodeMap' on class 'class com.trade.web.result.command.PaymentResultEntity' 异常
         jsonConfig.setPropertySetStrategy(new PropertyStrategyWrapper(PropertySetStrategy.DEFAULT));
 
         //---------------------------------------------------------------
