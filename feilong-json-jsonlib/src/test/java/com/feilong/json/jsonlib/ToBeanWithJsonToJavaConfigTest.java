@@ -32,6 +32,7 @@ import org.junit.Test;
 import com.feilong.json.AbstractJsonTest;
 import com.feilong.json.jsonlib.entity.CrmMemberInfoCommand;
 import com.feilong.json.jsonlib.entity.MyBean;
+import com.feilong.json.jsonlib.transformer.SeparatorToCamelCaseJavaIdentifierTransformer;
 import com.feilong.store.member.Person;
 import com.feilong.store.member.User;
 
@@ -44,9 +45,40 @@ import net.sf.json.util.JavaIdentifierTransformer;
  */
 public class ToBeanWithJsonToJavaConfigTest extends AbstractJsonTest{
 
-    /**
-     * Test to bean with uncapitalize java identifier transformer.
-     */
+    @Test
+    public void testToBeanWithUncapitalizeJavaIdentifierTransformer1(){
+        String json = "{'member_no':'11105000009'}";
+
+        CrmMemberInfoCommand crmMemberInfoCommand = JsonUtil.toBean(
+                        json,
+                        new JsonToJavaConfig(CrmMemberInfoCommand.class, SeparatorToCamelCaseJavaIdentifierTransformer.INSTANCE));
+
+        assertThat(
+                        crmMemberInfoCommand,
+                        allOf(//
+                                        hasProperty("memberNo", is("11105000009"))
+                        //        
+                        ));
+    }
+
+    @Test
+    public void testToBeanWithUncapitalizeJavaIdentifierTransformer12(){
+        String json = "{'member@no':'11105000009'}";
+
+        CrmMemberInfoCommand crmMemberInfoCommand = JsonUtil.toBean(
+                        json,
+                        new JsonToJavaConfig(CrmMemberInfoCommand.class, new SeparatorToCamelCaseJavaIdentifierTransformer('@')));
+
+        assertThat(
+                        crmMemberInfoCommand,
+                        allOf(//
+                                        hasProperty("memberNo", is("11105000009"))
+                        //        
+                        ));
+    }
+
+    //---------------------------------------------------------------
+
     @Test
     public void testToBeanWithUncapitalizeJavaIdentifierTransformer(){
         String json = "{'MemberNo':'11105000009','Name':null,'Gender':'','Phone':'15036334567','Email':null,'Birthday':''}";

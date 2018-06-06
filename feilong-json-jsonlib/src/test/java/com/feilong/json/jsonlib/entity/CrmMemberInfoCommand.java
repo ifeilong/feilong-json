@@ -17,7 +17,6 @@ package com.feilong.json.jsonlib.entity;
 
 /**
  * The Class CrmMemberInfoCommand.
- *
  */
 public class CrmMemberInfoCommand{
 
@@ -38,6 +37,8 @@ public class CrmMemberInfoCommand{
 
     /** 邮箱. */
     private String email;
+
+    //---------------------------------------------------------------
 
     /**
      * 获得 会员编号.
