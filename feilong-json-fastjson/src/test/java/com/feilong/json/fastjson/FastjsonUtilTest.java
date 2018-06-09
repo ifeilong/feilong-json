@@ -46,6 +46,7 @@ public class FastjsonUtilTest{
      * TestFastjsonUtilTest.
      */
     @Test
+    @SuppressWarnings("static-method")
     public void testFastjsonUtilTest(){
         Map<String, String> map = newHashMap();
         map.put(1 + "", 10 + "");
@@ -62,13 +63,14 @@ public class FastjsonUtilTest{
     }
 
     @Test
+    @SuppressWarnings("static-method")
     public void testBasicDynaClass(){
         //        Map<String, Class<?>> typeMap = new HashMap<>();
         //        typeMap.put("address", java.util.Map.class);
         //        typeMap.put("firstName", String.class);
         //        typeMap.put("lastName", String.class);
 
-        Map<String, Object> valueMap =newHashMap();
+        Map<String, Object> valueMap = newHashMap();
         valueMap.put("address", new HashMap());
         valueMap.put("firstName", "Fred");
         valueMap.put("lastName", "Flintstone");

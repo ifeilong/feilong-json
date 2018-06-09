@@ -45,6 +45,7 @@ public class BigDecimalJsonValueProcessorTest{
      * Test big decimal json value processor.
      */
     @Test
+    @SuppressWarnings("static-method")
     public void testBigDecimalJsonValueProcessor(){
         User user = new User("feilong1", 24);
         user.setMoney(toBigDecimal("99999999.00"));
@@ -59,6 +60,7 @@ public class BigDecimalJsonValueProcessorTest{
      * Test big decimal json value processor 2.
      */
     @Test
+    @SuppressWarnings("static-method")
     public void testBigDecimalJsonValueProcessor2(){
         User user = new User("feilong1", 24);
         user.setMoney(toBigDecimal("99999999.00"));

@@ -64,6 +64,7 @@ public class FormatTest extends AbstractJsonTest{
      * Test json menu.
      */
     @Test
+    @SuppressWarnings("static-method")
     public void testJsonMenu(){
         Menu menu = new Menu(4L);
         menu.setChildren(toList(new Menu(5L)));
@@ -75,6 +76,7 @@ public class FormatTest extends AbstractJsonTest{
      * Test json string.
      */
     @Test
+    @SuppressWarnings("static-method")
     public void testJsonString(){
         LOGGER.debug("DEFAULT_USER_FOR_JSON_TEST_JSON:{}--->{}", USER_JSON_STRING, JsonUtil.format(USER_JSON_STRING));
     }
@@ -83,6 +85,7 @@ public class FormatTest extends AbstractJsonTest{
      * Test json string 11.
      */
     @Test
+    @SuppressWarnings("static-method")
     public void testJsonString11(){
         Map<String, Object> map = toMap("ID", (Object) 4616189619433466044L);
         LOGGER.debug("{}", JsonUtil.format(map));
@@ -92,6 +95,7 @@ public class FormatTest extends AbstractJsonTest{
      * Test json string2.
      */
     @Test
+    @SuppressWarnings("static-method")
     public void testJsonMap(){
         Map<String, String> nullMap = null;
         LOGGER.debug(JsonUtil.format(nullMap));
@@ -101,6 +105,7 @@ public class FormatTest extends AbstractJsonTest{
      * Test json string2.
      */
     @Test
+    @SuppressWarnings("static-method")
     public void testJsonString2(){
         LOGGER.debug(JsonUtil.format(1L));
         LOGGER.debug(JsonUtil.format(1));
@@ -110,6 +115,7 @@ public class FormatTest extends AbstractJsonTest{
      * Test json string1.
      */
     @Test
+    @SuppressWarnings("static-method")
     public void testJsonString1(){
         LOGGER.debug(JsonUtil.format(toArray(toBigDecimal("99999999.00"))));
     }
@@ -118,6 +124,7 @@ public class FormatTest extends AbstractJsonTest{
      * Name.
      */
     @Test
+    @SuppressWarnings("static-method")
     public void name(){
         String json_test = "{name=\"json\",bool:true,int:1,double:2.2,func:function(a){ return a; },array:[1,2]}";
 
@@ -137,6 +144,7 @@ public class FormatTest extends AbstractJsonTest{
      * Format array 2.
      */
     @Test
+    @SuppressWarnings("static-method")
     public void formatArray2(){
         String json = "[{'name':'get'},{'name':'set'}]";
         LOGGER.debug(JsonUtil.format(json));
@@ -146,6 +154,7 @@ public class FormatTest extends AbstractJsonTest{
      * Format enum.
      */
     @Test
+    @SuppressWarnings("static-method")
     public void formatEnum(){
         LOGGER.debug(JsonUtil.format(HttpMethodTestType.GET));
     }
@@ -154,6 +163,7 @@ public class FormatTest extends AbstractJsonTest{
      * Name1.
      */
     @Test
+    @SuppressWarnings("static-method")
     public void testExcludes(){
         LOGGER.debug(JsonUtil.format(USER, toArray("name", "loves", "attrMap", "userInfo", "userAddresses")));
     }
@@ -162,6 +172,7 @@ public class FormatTest extends AbstractJsonTest{
      * Test excludes 1.
      */
     @Test
+    @SuppressWarnings("static-method")
     public void testExcludes1(){
         LOGGER.debug(JsonUtil.format(USER, toArray("name", "loves", "attrMap", "userInfo", "userAddresses"), 4, 4));
     }
@@ -170,6 +181,7 @@ public class FormatTest extends AbstractJsonTest{
      * TestJsonUtilTest.
      */
     @Test
+    @SuppressWarnings("static-method")
     public void testFormatWithIncludes1(){
         User user1 = new User("feilong1", 24);
         user1.setNickNames(toArray("xin.jin", "shuai.ge"));
@@ -191,6 +203,7 @@ public class FormatTest extends AbstractJsonTest{
      * TestJsonUtilTest.
      */
     @Test
+    @SuppressWarnings("static-method")
     public void testFormatWithIncludes(){
         Object[][] objects = { { "nike shoe", "500", 1 }, { "nike shoe2", "5000", 1 } };
         LOGGER.debug(JsonUtil.formatWithIncludes(objects));
@@ -200,6 +213,7 @@ public class FormatTest extends AbstractJsonTest{
      * Test vector.
      */
     @Test
+    @SuppressWarnings("static-method")
     public void testVector(){
         Vector<Integer> vector = new Vector<>();
         vector.add(1);
@@ -214,6 +228,7 @@ public class FormatTest extends AbstractJsonTest{
      * Test hashtable.
      */
     @Test
+    @SuppressWarnings("static-method")
     public void testHashtable(){
         Hashtable<String, Object> hashtable = new Hashtable<>();
         hashtable.put("a", "a");
@@ -225,6 +240,7 @@ public class FormatTest extends AbstractJsonTest{
      * To bean n ull.
      */
     @Test
+    @SuppressWarnings("static-method")
     public void toBeanNUll(){
         LOGGER.debug(toJSON(null).toString(4, 4));
         LOGGER.debug(new JSONObject().toString(4));
@@ -233,6 +249,7 @@ public class FormatTest extends AbstractJsonTest{
     /**
      * To json.
      */
+    @SuppressWarnings("static-method")
     @Test
     public void toJSON(){
         LOGGER.debug(toJSON(HttpMethodTestType.GET).toString(4, 4));
@@ -241,6 +258,7 @@ public class FormatTest extends AbstractJsonTest{
     /**
      * To bean n ulluser.
      */
+    @SuppressWarnings("static-method")
     @Test
     public void toBeanNUlluser(){
         User user = new User();
@@ -261,6 +279,7 @@ public class FormatTest extends AbstractJsonTest{
     /**
      * Name.
      */
+    @SuppressWarnings("static-method")
     @Test
     public void name1(){
         Map<String, Object> map = newHashMap();
@@ -282,6 +301,7 @@ public class FormatTest extends AbstractJsonTest{
      * 实体Bean转json串 void.
      */
     @Test
+    @SuppressWarnings("static-method")
     public void testgetJsonStr1(){
         Person ps = new Person();
         ps.setDateAttr(new Date());
@@ -299,6 +319,7 @@ public class FormatTest extends AbstractJsonTest{
      * list转json串 void.
      */
     @Test
+    @SuppressWarnings("static-method")
     public void testgetJsonStr4(){
         Person ps = new Person();
         ps.setDateAttr(new Date());

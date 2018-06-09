@@ -36,6 +36,7 @@ public class Temp{
      * Test 3.
      */
     @Test
+    @SuppressWarnings("static-method")
     public void test3(){
         Map<String, String> map = newHashMap();
         map.put("1", "2");
