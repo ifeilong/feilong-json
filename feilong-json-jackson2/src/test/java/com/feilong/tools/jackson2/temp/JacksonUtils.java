@@ -79,8 +79,6 @@ public class JacksonUtils{
     /**
      * json string convert to map.
      *
-     * @param <T>
-     *            the generic type
      * @param jsonStr
      *            the json str
      * @return the map< string, object>
