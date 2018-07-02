@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-/**
- * 自定义属性属性名字以及JsonValue处理器,可用于指定property名字或者类型自定义的转换.
- */
+
+/** 自定义属性属性名字以及JsonValue处理器,可用于指定property名字或者类型自定义的转换. */
 package com.feilong.json.jsonlib.processor;
