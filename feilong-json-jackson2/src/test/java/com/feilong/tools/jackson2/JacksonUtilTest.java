@@ -80,7 +80,7 @@ public class JacksonUtilTest extends AbstractJsonTest{
         //        typeMap.put("firstName", String.class);
         //        typeMap.put("lastName", String.class);
 
-        Map<String, Object> valueMap =newHashMap();
+        Map<String, Object> valueMap = newHashMap();
         valueMap.put("address", new HashMap());
         valueMap.put("firstName", "Fred");
         valueMap.put("lastName", "Flintstone");
@@ -120,7 +120,6 @@ public class JacksonUtilTest extends AbstractJsonTest{
         try{
             return objectMapper.writeValueAsString(value);
         }catch (JsonProcessingException e){
-            LOGGER.error(e.getMessage(), e);
             throw new UncheckedIOException(e);
         }
     }

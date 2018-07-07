@@ -104,7 +104,6 @@ public class JacksonUtil{
         try{
             return OBJECT_MAPPER.writeValueAsString(entity);
         }catch (IOException e){
-            LOGGER.error(e.getMessage(), e);
             throw new UncheckedIOException(e);
         }
     }
@@ -115,7 +114,6 @@ public class JacksonUtil{
         try{
             return OBJECT_MAPPER.readValue(json, klass);
         }catch (IOException e){
-            LOGGER.error(e.getMessage(), e);
             throw new UncheckedIOException(e);
         }
     }
@@ -135,7 +133,6 @@ public class JacksonUtil{
         try{
             return OBJECT_MAPPER.readValue(json, typeReference);
         }catch (IOException e){
-            LOGGER.error(e.getMessage(), e);
             throw new UncheckedIOException(e);
         }
     }
