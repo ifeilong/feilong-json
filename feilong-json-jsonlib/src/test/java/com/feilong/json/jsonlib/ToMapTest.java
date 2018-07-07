@@ -26,8 +26,6 @@ import java.util.Map;
 
 import org.junit.Test;
 
-import com.feilong.json.jsonlib.JsonUtil;
-
 /**
  * The Class JsonUtilToMapTest.
  *
@@ -41,11 +39,13 @@ public class ToMapTest{
     @Test
     public void testToMapOrder(){
         Map<String, String> map = JsonUtil.toMap("{'brandCode':'UA','name':'feilong','age':'18','type':'1'}");
-        assertThat(map, allOf(//
-                        hasEntry("brandCode", "UA"),
-                        hasEntry("name", "feilong"),
-                        hasEntry("age", "18"),
-                        hasEntry("type", "1")));
+        assertThat(
+                        map,
+                        allOf(//
+                                        hasEntry("brandCode", "UA"),
+                                        hasEntry("name", "feilong"),
+                                        hasEntry("age", "18"),
+                                        hasEntry("type", "1")));
 
         assertThat(map.keySet(), contains("brandCode", "name", "age", "type"));
 

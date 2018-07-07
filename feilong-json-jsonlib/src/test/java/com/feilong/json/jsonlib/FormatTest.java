@@ -16,21 +16,17 @@
 package com.feilong.json.jsonlib;
 
 import static com.feilong.core.bean.ConvertUtil.toArray;
-import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
 import static com.feilong.core.bean.ConvertUtil.toList;
-import static com.feilong.core.bean.ConvertUtil.toMap;
 import static com.feilong.core.bean.ConvertUtil.toSet;
 import static com.feilong.core.util.CollectionsUtil.newArrayList;
 import static com.feilong.core.util.MapUtil.newHashMap;
 import static org.junit.Assert.assertEquals;
 
 import java.util.Date;
-import java.util.Hashtable;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.Vector;
 
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -50,11 +46,6 @@ import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import net.sf.json.JsonConfig;
 
-/**
- * The Class JsonlibTest.
- * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- */
 public class FormatTest extends AbstractJsonTest{
 
     /** The Constant LOGGER. */
@@ -78,46 +69,7 @@ public class FormatTest extends AbstractJsonTest{
     @Test
     @SuppressWarnings("static-method")
     public void testJsonString(){
-        LOGGER.debug("DEFAULT_USER_FOR_JSON_TEST_JSON:{}--->{}", USER_JSON_STRING, JsonUtil.format(USER_JSON_STRING));
-    }
-
-    /**
-     * Test json string 11.
-     */
-    @Test
-    @SuppressWarnings("static-method")
-    public void testJsonString11(){
-        Map<String, Object> map = toMap("ID", (Object) 4616189619433466044L);
-        LOGGER.debug("{}", JsonUtil.format(map));
-    }
-
-    /**
-     * Test json string2.
-     */
-    @Test
-    @SuppressWarnings("static-method")
-    public void testJsonMap(){
-        Map<String, String> nullMap = null;
-        LOGGER.debug(JsonUtil.format(nullMap));
-    }
-
-    /**
-     * Test json string2.
-     */
-    @Test
-    @SuppressWarnings("static-method")
-    public void testJsonString2(){
-        LOGGER.debug(JsonUtil.format(1L));
-        LOGGER.debug(JsonUtil.format(1));
-    }
-
-    /**
-     * Test json string1.
-     */
-    @Test
-    @SuppressWarnings("static-method")
-    public void testJsonString1(){
-        LOGGER.debug(JsonUtil.format(toArray(toBigDecimal("99999999.00"))));
+        LOGGER.debug("{}--->{}", USER_JSON_STRING, JsonUtil.format(USER_JSON_STRING));
     }
 
     /**
@@ -138,43 +90,6 @@ public class FormatTest extends AbstractJsonTest{
         assertEquals(jsonObject.get("func"), PropertyUtil.getProperty(bean, "func"));
         List<?> expected = JSONArray.toList(jsonObject.getJSONArray("array"));
         assertEquals(expected, PropertyUtil.getProperty(bean, "array"));
-    }
-
-    /**
-     * Format array 2.
-     */
-    @Test
-    @SuppressWarnings("static-method")
-    public void formatArray2(){
-        String json = "[{'name':'get'},{'name':'set'}]";
-        LOGGER.debug(JsonUtil.format(json));
-    }
-
-    /**
-     * Format enum.
-     */
-    @Test
-    @SuppressWarnings("static-method")
-    public void formatEnum(){
-        LOGGER.debug(JsonUtil.format(HttpMethodTestType.GET));
-    }
-
-    /**
-     * Name1.
-     */
-    @Test
-    @SuppressWarnings("static-method")
-    public void testExcludes(){
-        LOGGER.debug(JsonUtil.format(USER, toArray("name", "loves", "attrMap", "userInfo", "userAddresses")));
-    }
-
-    /**
-     * Test excludes 1.
-     */
-    @Test
-    @SuppressWarnings("static-method")
-    public void testExcludes1(){
-        LOGGER.debug(JsonUtil.format(USER, toArray("name", "loves", "attrMap", "userInfo", "userAddresses"), 4, 4));
     }
 
     /**
@@ -207,33 +122,6 @@ public class FormatTest extends AbstractJsonTest{
     public void testFormatWithIncludes(){
         Object[][] objects = { { "nike shoe", "500", 1 }, { "nike shoe2", "5000", 1 } };
         LOGGER.debug(JsonUtil.formatWithIncludes(objects));
-    }
-
-    /**
-     * Test vector.
-     */
-    @Test
-    @SuppressWarnings("static-method")
-    public void testVector(){
-        Vector<Integer> vector = new Vector<>();
-        vector.add(1);
-        vector.add(2222);
-        vector.add(3333);
-        vector.add(55555);
-        LOGGER.debug("vector:{}", JsonUtil.format(vector));
-        LOGGER.debug("" + vector.get(0));
-    }
-
-    /**
-     * Test hashtable.
-     */
-    @Test
-    @SuppressWarnings("static-method")
-    public void testHashtable(){
-        Hashtable<String, Object> hashtable = new Hashtable<>();
-        hashtable.put("a", "a");
-        // hashtable.put("a", null);
-        LOGGER.debug("hashtable:{}", JsonUtil.format(hashtable));
     }
 
     /**
