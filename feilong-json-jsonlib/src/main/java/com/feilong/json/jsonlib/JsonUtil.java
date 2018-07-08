@@ -287,6 +287,8 @@ public final class JsonUtil{
         if (null == inputMap){
             return EMPTY;
         }
+
+        //---------------------------------------------------------------
         Map<K, Object> simpleMap = new TreeMap<>();
         for (Map.Entry<K, V> entry : inputMap.entrySet()){
             V value = entry.getValue();
@@ -602,6 +604,10 @@ public final class JsonUtil{
      * @since 1.2.2
      */
     public static String format(Object obj,JavaToJsonConfig javaToJsonConfig,int indentFactor,int indent){
+        if (null == obj){
+            return EMPTY;
+        }
+        //---------------------------------------------------------------
         JsonConfig jsonConfig = JsonConfigBuilder.build(obj, javaToJsonConfig);
         return format(obj, jsonConfig, indentFactor, indent);
     }
@@ -770,14 +776,12 @@ public final class JsonUtil{
         }
 
         //---------------------------------------------------------------
-
         Validate.notNull(jsonToJavaConfig, "jsonToJavaConfig can't be null!");
 
         Class<?> rootClass = jsonToJavaConfig.getRootClass();
         Validate.notNull(rootClass, "rootClass can't be null!");
 
         //------------------------------------------------------------------------------
-
         try{
             JSONArray jsonArray = JsonHelper.toJSONArray(json, null);
 
@@ -858,7 +862,6 @@ public final class JsonUtil{
         Validate.notNull(rootClass, "rootClass can't be null!");
 
         //---------------------------------------------------------------
-
         JsonToJavaConfig jsonToJavaConfig = new JsonToJavaConfig(rootClass);
         return toList(json, jsonToJavaConfig);
     }
@@ -944,16 +947,12 @@ public final class JsonUtil{
         if (null == json){
             return null;
         }
-
         //---------------------------------------------------------------
-
         Validate.notNull(jsonToJavaConfig, "jsonToJavaConfig can't be null!");
 
         Class<?> rootClass = jsonToJavaConfig.getRootClass();
         Validate.notNull(rootClass, "rootClass can't be null!");
-
         //----------------------------------------------------------------------------------
-
         try{
             JSONArray jsonArray = JsonHelper.toJSONArray(json, null);
             List<T> list = newArrayList();
@@ -1109,11 +1108,8 @@ public final class JsonUtil{
         if (isNullOrEmpty(json)){
             return emptyMap();
         }
-
         //---------------------------------------------------------------
-
         Map<String, T> map = newLinkedHashMap();
-
         try{
             JSONObject jsonObject = JsonHelper.toJSONObject(json, null);
             Iterator<String> keys = jsonObject.keys();
