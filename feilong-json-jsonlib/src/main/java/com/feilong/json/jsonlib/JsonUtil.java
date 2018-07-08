@@ -413,10 +413,10 @@ public final class JsonUtil{
      *            the indent
      * @return 如果 <code>obj</code> 是null,返回 {@link StringUtils#EMPTY}<br>
      * @see #format(Object, JavaToJsonConfig)
-     * @see JsonHelper#toJavaToJsonConfig(String[], String[])
+     * @see JavaToJsonConfigBuilder#build(String[], String[])
      */
     public static String format(Object obj,String[] excludes,int indentFactor,int indent){
-        return null == obj ? EMPTY : format(obj, JsonHelper.toJavaToJsonConfig(excludes, null), indentFactor, indent);
+        return null == obj ? EMPTY : format(obj, JavaToJsonConfigBuilder.build(excludes, null), indentFactor, indent);
     }
 
     /**
@@ -465,11 +465,11 @@ public final class JsonUtil{
      *            the includes
      * @return 如果 <code>obj</code> 是null,返回 {@link StringUtils#EMPTY}<br>
      * @see #format(Object, JavaToJsonConfig)
-     * @see JsonHelper#toJavaToJsonConfig(String[], String[])
+     * @see JavaToJsonConfigBuilder#build(String[], String[])
      * @since 1.0.8
      */
     public static String formatWithIncludes(Object obj,final String...includes){
-        return null == obj ? EMPTY : format(obj, JsonHelper.toJavaToJsonConfig(null, includes));
+        return null == obj ? EMPTY : format(obj, JavaToJsonConfigBuilder.build(null, includes));
     }
 
     /**

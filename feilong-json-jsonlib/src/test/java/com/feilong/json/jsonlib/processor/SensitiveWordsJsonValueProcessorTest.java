@@ -48,11 +48,9 @@ public class SensitiveWordsJsonValueProcessorTest{
         User user = new User("feilong1", 24);
         user.setPassword("123456");
 
-        JsonValueProcessor jsonValueProcessor = new SensitiveWordsJsonValueProcessor();
-
         Map<String, JsonValueProcessor> propertyNameAndJsonValueProcessorMap = newHashMap();
-        propertyNameAndJsonValueProcessorMap.put("password", jsonValueProcessor);
-        propertyNameAndJsonValueProcessorMap.put("age", jsonValueProcessor);
+        propertyNameAndJsonValueProcessorMap.put("password", SensitiveWordsJsonValueProcessor.INSTANCE);
+        propertyNameAndJsonValueProcessorMap.put("age", SensitiveWordsJsonValueProcessor.INSTANCE);
 
         JavaToJsonConfig jsonFormatConfig = new JavaToJsonConfig();
         jsonFormatConfig.setPropertyNameAndJsonValueProcessorMap(propertyNameAndJsonValueProcessorMap);

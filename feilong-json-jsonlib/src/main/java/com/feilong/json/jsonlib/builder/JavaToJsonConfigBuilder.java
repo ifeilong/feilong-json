@@ -16,6 +16,7 @@
 package com.feilong.json.jsonlib.builder;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
+import static com.feilong.core.lang.ObjectUtil.defaultIfNullOrEmpty;
 import static com.feilong.core.util.MapUtil.newHashMap;
 
 import java.lang.reflect.Field;
@@ -24,6 +25,7 @@ import java.util.Map;
 
 import org.apache.commons.lang3.reflect.FieldUtils;
 
+import com.feilong.core.util.MapUtil;
 import com.feilong.json.SensitiveWords;
 import com.feilong.json.jsonlib.JavaToJsonConfig;
 import com.feilong.json.jsonlib.processor.SensitiveWordsJsonValueProcessor;
@@ -31,7 +33,7 @@ import com.feilong.json.jsonlib.processor.SensitiveWordsJsonValueProcessor;
 import net.sf.json.processors.JsonValueProcessor;
 
 /**
- * The Class JavaToJsonConfigBuilder.
+ * {@link JavaToJsonConfig} 构造器.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.10.3
@@ -49,7 +51,45 @@ public final class JavaToJsonConfigBuilder{
     //---------------------------------------------------------------
 
     /**
-     * Builds the default java to json config.
+     * 构造使用的 {@link JavaToJsonConfig}.
+     * 
+     * <h3>代码流程:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>如果传入的javaToJsonConfig , 那么就是用默认的 defaultJavaToJsonConfig,don't care defaultJavaToJsonConfig 是否是null</li>
+     * <li>如果 默认的 defaultJavaToJsonConfig 是 null, 那么就不合并,直接返回 javaToJsonConfig</li>
+     * <li>否则合并</li>
+     * </ol>
+     * </blockquote>
+     *
+     * @param obj
+     *            the obj
+     * @param javaToJsonConfig
+     *            the java to json config
+     * @return 如果 javaToJsonConfig 是null,且构造的defaultJavaToJsonConfig 也是null 将会返回null
+     * @since 1.11.5
+     */
+    public static JavaToJsonConfig buildUseJavaToJsonConfig(Object obj,JavaToJsonConfig javaToJsonConfig){
+        JavaToJsonConfig defaultJavaToJsonConfig = JavaToJsonConfigBuilder.buildDefaultJavaToJsonConfig(obj);
+
+        //如果传入的javaToJsonConfig , 那么就是用默认的 defaultJavaToJsonConfig,don't care defaultJavaToJsonConfig 是否是null
+        if (isNullOrEmpty(javaToJsonConfig)){
+            return defaultJavaToJsonConfig;
+        }
+
+        //如果 默认的 defaultJavaToJsonConfig 是 null, 那么就不合并,直接返回 javaToJsonConfig
+        if (null == defaultJavaToJsonConfig){
+            return javaToJsonConfig;
+        }
+
+        //否则合并
+        return merge(defaultJavaToJsonConfig, javaToJsonConfig);
+    }
+
+    //---------------------------------------------------------------
+
+    /**
+     * 构造默认的 {@link JavaToJsonConfig}.
      *
      * @param javaBean
      *            the obj
@@ -64,6 +104,22 @@ public final class JavaToJsonConfigBuilder{
     //---------------------------------------------------------------
 
     /**
+     * Builds the java to json config.
+     *
+     * @param excludes
+     *            the excludes
+     * @param includes
+     *            the includes
+     * @return 如果<code>excludes</code>是null或者是empty,并且<code>includes</code>是null或者是empty将返回null
+     * @since 1.11.5 move from JsonHelper and rename
+     */
+    public static JavaToJsonConfig build(String[] excludes,String[] includes){
+        boolean noNeedBuild = isNullOrEmpty(excludes) && isNullOrEmpty(includes);
+        return noNeedBuild ? null : new JavaToJsonConfig(excludes, includes);
+    }
+    //---------------------------------------------------------------
+
+    /**
      * Builds the sensitive words property name and json value processor map.
      *
      * @param javaBean
@@ -71,14 +127,13 @@ public final class JavaToJsonConfigBuilder{
      * @return the map
      * @since 1.10.3
      */
-    public static Map<String, JsonValueProcessor> buildSensitiveWordsPropertyNameAndJsonValueProcessorMap(Object javaBean){
+    private static Map<String, JsonValueProcessor> buildSensitiveWordsPropertyNameAndJsonValueProcessorMap(Object javaBean){
         List<Field> fieldsList = FieldUtils.getFieldsListWithAnnotation(javaBean.getClass(), SensitiveWords.class);
         if (isNullOrEmpty(fieldsList)){
             return null;
         }
 
         //---------------------------------------------------------------------------------------------------------
-
         //敏感字段
         Map<String, JsonValueProcessor> propertyNameAndJsonValueProcessorMap = newHashMap();
         for (Field field : fieldsList){
@@ -87,4 +142,32 @@ public final class JavaToJsonConfigBuilder{
 
         return propertyNameAndJsonValueProcessorMap;
     }
+
+    //---------------------------------------------------------------
+
+    /**
+     * Merge.
+     *
+     * @param defaultJavaToJsonConfig
+     *            the default java to json config
+     * @param javaToJsonConfig
+     *            the java to json config
+     * @return the java to json config
+     * @since 1.11.5
+     */
+    private static JavaToJsonConfig merge(JavaToJsonConfig defaultJavaToJsonConfig,JavaToJsonConfig javaToJsonConfig){
+        //        defaultJavaToJsonConfig.getExcludes();
+        //        defaultJavaToJsonConfig.getIncludes();
+        //        defaultJavaToJsonConfig.getJsonTargetClassAndPropertyNameProcessorMap();
+
+        Map<String, JsonValueProcessor> propertyNameAndJsonValueProcessorMap = defaultIfNullOrEmpty(
+                        javaToJsonConfig.getPropertyNameAndJsonValueProcessorMap(),
+                        MapUtil.<String, JsonValueProcessor> newHashMap());
+
+        MapUtil.putAllIfNotNull(propertyNameAndJsonValueProcessorMap, defaultJavaToJsonConfig.getPropertyNameAndJsonValueProcessorMap());
+
+        javaToJsonConfig.setPropertyNameAndJsonValueProcessorMap(propertyNameAndJsonValueProcessorMap);
+        return javaToJsonConfig;
+    }
+
 }

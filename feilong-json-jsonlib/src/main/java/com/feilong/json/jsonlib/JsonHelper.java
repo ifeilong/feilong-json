@@ -15,7 +15,6 @@
  */
 package com.feilong.json.jsonlib;
 
-import static com.feilong.core.Validator.isNullOrEmpty;
 import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
 
 import java.util.Iterator;
@@ -222,20 +221,6 @@ public final class JsonHelper{
      */
     static JSONObject toJSONObject(Object object,JsonConfig useJsonConfig){
         return JSONObject.fromObject(object, defaultIfNull(useJsonConfig, DEFAULT_JSON_CONFIG_INSTANCE));
-    }
-
-    /**
-     * Builds the java to json config.
-     *
-     * @param excludes
-     *            the excludes
-     * @param includes
-     *            the includes
-     * @return 如果<code>excludes</code>是null或者是empty,并且<code>includes</code>是null或者是empty将返回null
-     */
-    static JavaToJsonConfig toJavaToJsonConfig(String[] excludes,String[] includes){
-        boolean noNeedBuild = isNullOrEmpty(excludes) && isNullOrEmpty(includes);
-        return noNeedBuild ? null : new JavaToJsonConfig(excludes, includes);
     }
 
     //---------------------------------------------------------------

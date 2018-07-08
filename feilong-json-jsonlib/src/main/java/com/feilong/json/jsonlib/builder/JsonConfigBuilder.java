@@ -63,35 +63,37 @@ public final class JsonConfigBuilder{
      *            the java to json config
      * @return the json config
      */
-    public static JsonConfig build(@SuppressWarnings("unused") Object obj,JavaToJsonConfig javaToJsonConfig){
-        if (null == javaToJsonConfig){
+    public static JsonConfig build(Object obj,JavaToJsonConfig javaToJsonConfig){
+        JavaToJsonConfig useJavaToJsonConfig = JavaToJsonConfigBuilder.buildUseJavaToJsonConfig(obj, javaToJsonConfig);
+        if (null == useJavaToJsonConfig){
             return null;
         }
 
         //-----------------------------------------------------------------
-
         JsonConfig jsonConfig = buildDefaultJavaToJsonConfig();
 
         //---------------------------------------------------------------
 
-        registerJsonPropertyNameProcessor(javaToJsonConfig, jsonConfig);
+        registerJsonPropertyNameProcessor(useJavaToJsonConfig, jsonConfig);
 
         //value处理器
-        registerJsonValueProcessor(javaToJsonConfig, jsonConfig);
+        registerJsonValueProcessor(useJavaToJsonConfig, jsonConfig);
 
         //---------------------------------------------------------------
 
         //排除
-        if (isNotNullOrEmpty(javaToJsonConfig.getExcludes())){
-            jsonConfig.setExcludes(javaToJsonConfig.getExcludes());
+        if (isNotNullOrEmpty(useJavaToJsonConfig.getExcludes())){
+            jsonConfig.setExcludes(useJavaToJsonConfig.getExcludes());
         }
 
         //包含
-        if (isNotNullOrEmpty(javaToJsonConfig.getIncludes())){
-            jsonConfig.setJsonPropertyFilter(new ArrayContainsPropertyNamesPropertyFilter(javaToJsonConfig.getIncludes()));
+        if (isNotNullOrEmpty(useJavaToJsonConfig.getIncludes())){
+            jsonConfig.setJsonPropertyFilter(new ArrayContainsPropertyNamesPropertyFilter(useJavaToJsonConfig.getIncludes()));
         }
         return jsonConfig;
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Register json value processor.
