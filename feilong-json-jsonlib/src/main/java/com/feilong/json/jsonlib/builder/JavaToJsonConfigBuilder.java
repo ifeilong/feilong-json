@@ -17,13 +17,8 @@ package com.feilong.json.jsonlib.builder;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.lang.ObjectUtil.defaultIfNullOrEmpty;
-import static com.feilong.core.util.MapUtil.newHashMap;
 
-import java.lang.reflect.Field;
-import java.util.List;
 import java.util.Map;
-
-import org.apache.commons.lang3.reflect.FieldUtils;
 
 import com.feilong.core.util.MapUtil;
 import com.feilong.json.SensitiveWords;
@@ -96,8 +91,8 @@ public final class JavaToJsonConfigBuilder{
      * @return 取到该javabean的Field,解析是否有 {@link SensitiveWords}注解,如果有,那么添加 {@link SensitiveWordsJsonValueProcessor}
      */
     public static JavaToJsonConfig buildDefaultJavaToJsonConfig(Object javaBean){
-        Map<String, JsonValueProcessor> propertyNameAndJsonValueProcessorMap = buildSensitiveWordsPropertyNameAndJsonValueProcessorMap(
-                        javaBean);
+        Map<String, JsonValueProcessor> propertyNameAndJsonValueProcessorMap = SensitiveWordsPropertyNameAndJsonValueProcessorMapBuilder
+                        .build(javaBean);
         return isNullOrEmpty(propertyNameAndJsonValueProcessorMap) ? null : new JavaToJsonConfig(propertyNameAndJsonValueProcessorMap);
     }
 
@@ -117,32 +112,6 @@ public final class JavaToJsonConfigBuilder{
         boolean noNeedBuild = isNullOrEmpty(excludes) && isNullOrEmpty(includes);
         return noNeedBuild ? null : new JavaToJsonConfig(excludes, includes);
     }
-    //---------------------------------------------------------------
-
-    /**
-     * Builds the sensitive words property name and json value processor map.
-     *
-     * @param javaBean
-     *            the java bean
-     * @return the map
-     * @since 1.10.3
-     */
-    private static Map<String, JsonValueProcessor> buildSensitiveWordsPropertyNameAndJsonValueProcessorMap(Object javaBean){
-        List<Field> fieldsList = FieldUtils.getFieldsListWithAnnotation(javaBean.getClass(), SensitiveWords.class);
-        if (isNullOrEmpty(fieldsList)){
-            return null;
-        }
-
-        //---------------------------------------------------------------------------------------------------------
-        //敏感字段
-        Map<String, JsonValueProcessor> propertyNameAndJsonValueProcessorMap = newHashMap();
-        for (Field field : fieldsList){
-            propertyNameAndJsonValueProcessorMap.put(field.getName(), SensitiveWordsJsonValueProcessor.INSTANCE);
-        }
-
-        return propertyNameAndJsonValueProcessorMap;
-    }
-
     //---------------------------------------------------------------
 
     /**

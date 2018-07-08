@@ -30,8 +30,10 @@ public class FormatBeanSensitiveWordsTest{
      * Name1.
      */
     @Test
-    public void testExcludes(){
+    public void test(){
         BeanWithSensitiveWords beanWithSensitiveWords = new BeanWithSensitiveWords("34567889", "sadadad&^%", "567");
+        beanWithSensitiveWords.setCvv2("456");
+
         LOGGER.debug(JsonUtil.format(beanWithSensitiveWords));
     }
 
