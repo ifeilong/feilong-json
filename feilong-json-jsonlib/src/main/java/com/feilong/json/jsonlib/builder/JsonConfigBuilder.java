@@ -21,8 +21,10 @@ import java.util.Date;
 import java.util.Map;
 
 import com.feilong.core.DatePattern;
+import com.feilong.core.bean.ConvertUtil;
 import com.feilong.json.jsonlib.JavaToJsonConfig;
 import com.feilong.json.jsonlib.processor.DateJsonValueProcessor;
+import com.feilong.json.jsonlib.processor.defaultvalue.CommonDefaultValueProcessor;
 
 import net.sf.json.JsonConfig;
 import net.sf.json.processors.JsonValueProcessor;
@@ -30,7 +32,7 @@ import net.sf.json.processors.PropertyNameProcessor;
 import net.sf.json.util.CycleDetectionStrategy;
 
 /**
- * The Class JsonConfigBuilder.
+ * {@link JsonConfig} 构造器.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.10.3
@@ -156,6 +158,8 @@ public final class JsonConfigBuilder{
     static JsonConfig buildDefaultJavaToJsonConfig(){
         JsonConfig jsonConfig = new JsonConfig();
 
+        //---------------------------------------------------------------
+
         //see net.sf.json.JsonConfig#DEFAULT_EXCLUDES
         //默认会过滤的几个key "class", "declaringClass","metaClass"  
         jsonConfig.setIgnoreDefaultExcludes(false);
@@ -168,8 +172,43 @@ public final class JsonConfigBuilder{
         //Returns empty array and null object
         jsonConfig.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);
 
+        //---------------------------------------------------------------
+        //注册 包装类型的数字 默认的值
+        registerDefaultValueProcessor(jsonConfig);
+
         // 注册日期处理器
         jsonConfig.registerJsonValueProcessor(Date.class, DateJsonValueProcessor.DEFAULT_INSTANCE);
         return jsonConfig;
+    }
+
+    //---------------------------------------------------------------
+
+    /**
+     * Register default value processor.
+     *
+     * @param jsonConfig
+     *            the json config
+     * @since 1.11.5
+     */
+    private static void registerDefaultValueProcessor(JsonConfig jsonConfig){
+        registerWrapperNumberDefaultValueProcessor(jsonConfig);
+
+        jsonConfig.registerDefaultValueProcessor(Boolean.class, CommonDefaultValueProcessor.INSTANCE);
+    }
+
+    /**
+     * 注册 包装类型的数字 默认的值.
+     *
+     * @param jsonConfig
+     *            the json config
+     * @since 1.11.5
+     */
+    private static void registerWrapperNumberDefaultValueProcessor(JsonConfig jsonConfig){
+        Class<? extends Number>[] wrapperNumberClasses = ConvertUtil
+                        .toArray(Byte.class, Short.class, Integer.class, Long.class, Float.class, Double.class);
+        //---------------------------------------------------------------
+        for (Class<? extends Number> klass : wrapperNumberClasses){
+            jsonConfig.registerDefaultValueProcessor(klass, CommonDefaultValueProcessor.INSTANCE);
+        }
     }
 }

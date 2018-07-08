@@ -19,6 +19,8 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.json.jsonlib.entity.BeanInt;
+
 public class FormatBeanIntTypeTest{
 
     /** The Constant LOGGER. */
@@ -31,27 +33,14 @@ public class FormatBeanIntTypeTest{
         LOGGER.debug(JsonUtil.format(beanInt));
     }
 
-    //---------------------------------------------------------------
+    @Test
+    public void test12(){
+        BeanInt beanInt = new BeanInt();
+        //{"age": null}
+        String format = JsonUtil.format(beanInt);
 
-    public class BeanInt{
-
-        /** 年龄. */
-        private Integer age;
-
-        /**
-         * @return the age
-         */
-        public Integer getAge(){
-            return age;
-        }
-
-        /**
-         * @param age
-         *            the age to set
-         */
-        public void setAge(Integer age){
-            this.age = age;
-        }
-
+        BeanInt bean = JsonUtil.toBean(format, BeanInt.class);
+        LOGGER.debug("" + bean.getAge());
     }
+
 }
