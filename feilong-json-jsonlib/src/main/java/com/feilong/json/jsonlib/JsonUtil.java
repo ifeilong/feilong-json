@@ -39,11 +39,13 @@ import org.slf4j.LoggerFactory;
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.lang.ArrayUtil;
 import com.feilong.core.lang.reflect.FieldUtil;
+import com.feilong.json.JsonToJavaException;
 import com.feilong.json.SensitiveWords;
 import com.feilong.json.jsonlib.builder.JavaToJsonConfigBuilder;
 import com.feilong.json.jsonlib.builder.JsonConfigBuilder;
 import com.feilong.json.jsonlib.builder.JsonToJavaConfigBuilder;
 import com.feilong.json.jsonlib.processor.SensitiveWordsJsonValueProcessor;
+import com.feilong.tools.slf4j.Slf4jUtil;
 
 import net.sf.ezmorph.MorpherRegistry;
 import net.sf.ezmorph.object.DateMorpher;
@@ -213,6 +215,8 @@ public final class JsonUtil{
         return format(obj, (JavaToJsonConfig) null);
     }
 
+    //---------------------------------------------------------------
+
     /**
      * 有些map 值很复杂,比如带有request信息, 这样的map转成json很可能由于一些级联关系而抛异常.
      * 
@@ -290,6 +294,8 @@ public final class JsonUtil{
         }
         return format(simpleMap);
     }
+
+    //---------------------------------------------------------------
 
     /**
      * 将对象格式化 成json字符串(<b>排除</b>指定名称的属性 <code>excludes</code>),并且 toString(4, 4) 输出.
@@ -600,6 +606,8 @@ public final class JsonUtil{
         return format(obj, jsonConfig, indentFactor, indent);
     }
 
+    //---------------------------------------------------------------
+
     /**
      * 格式化一个对象 <code>obj</code> 里面所有的field 的名字和值.
      * 
@@ -624,6 +632,8 @@ public final class JsonUtil{
         return null == obj ? EMPTY
                         : format(FieldUtil.getAllFieldNameAndValueMap(obj), JavaToJsonConfigBuilder.buildDefaultJavaToJsonConfig(obj));
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Make a prettyprinted JSON text.
@@ -759,6 +769,8 @@ public final class JsonUtil{
             return null;
         }
 
+        //---------------------------------------------------------------
+
         Validate.notNull(jsonToJavaConfig, "jsonToJavaConfig can't be null!");
 
         Class<?> rootClass = jsonToJavaConfig.getRootClass();
@@ -766,15 +778,19 @@ public final class JsonUtil{
 
         //------------------------------------------------------------------------------
 
-        JSONArray jsonArray = JsonHelper.toJSONArray(json, null);
+        try{
+            JSONArray jsonArray = JsonHelper.toJSONArray(json, null);
 
-        int size = jsonArray.size();
-        @SuppressWarnings("unchecked")
-        T[] t = (T[]) ArrayUtil.newArray(rootClass, size);
-        for (int i = 0; i < size; i++){
-            t[i] = toBean(jsonArray.getJSONObject(i), jsonToJavaConfig);
+            int size = jsonArray.size();
+            @SuppressWarnings("unchecked")
+            T[] t = (T[]) ArrayUtil.newArray(rootClass, size);
+            for (int i = 0; i < size; i++){
+                t[i] = toBean(jsonArray.getJSONObject(i), jsonToJavaConfig);
+            }
+            return t;
+        }catch (Exception e){
+            throw new JsonToJavaException(buildJsonToJavaExceptionMessage(json, jsonToJavaConfig), e);
         }
-        return t;
     }
 
     // [end]
@@ -840,6 +856,8 @@ public final class JsonUtil{
             return null;
         }
         Validate.notNull(rootClass, "rootClass can't be null!");
+
+        //---------------------------------------------------------------
 
         JsonToJavaConfig jsonToJavaConfig = new JsonToJavaConfig(rootClass);
         return toList(json, jsonToJavaConfig);
@@ -927,6 +945,8 @@ public final class JsonUtil{
             return null;
         }
 
+        //---------------------------------------------------------------
+
         Validate.notNull(jsonToJavaConfig, "jsonToJavaConfig can't be null!");
 
         Class<?> rootClass = jsonToJavaConfig.getRootClass();
@@ -934,12 +954,16 @@ public final class JsonUtil{
 
         //----------------------------------------------------------------------------------
 
-        JSONArray jsonArray = JsonHelper.toJSONArray(json, null);
-        List<T> list = newArrayList();
-        for (int i = 0, j = jsonArray.size(); i < j; i++){
-            list.add(JsonUtil.<T> toBean(jsonArray.getJSONObject(i), jsonToJavaConfig));
+        try{
+            JSONArray jsonArray = JsonHelper.toJSONArray(json, null);
+            List<T> list = newArrayList();
+            for (int i = 0, j = jsonArray.size(); i < j; i++){
+                list.add(JsonUtil.<T> toBean(jsonArray.getJSONObject(i), jsonToJavaConfig));
+            }
+            return list;
+        }catch (Exception e){
+            throw new JsonToJavaException(buildJsonToJavaExceptionMessage(json, jsonToJavaConfig), e);
         }
-        return list;
     }
 
     // [end]
@@ -1090,16 +1114,20 @@ public final class JsonUtil{
 
         Map<String, T> map = newLinkedHashMap();
 
-        JSONObject jsonObject = JsonHelper.toJSONObject(json, null);
-        Iterator<String> keys = jsonObject.keys();
-        while (keys.hasNext()){
-            String key = keys.next();
-            Object value = jsonObject.get(key);
-            LOGGER.trace("key:[{}],value:[{}],value type is:[{}]", key, value, value.getClass().getName());
+        try{
+            JSONObject jsonObject = JsonHelper.toJSONObject(json, null);
+            Iterator<String> keys = jsonObject.keys();
+            while (keys.hasNext()){
+                String key = keys.next();
+                Object value = jsonObject.get(key);
+                LOGGER.trace("key:[{}],value:[{}],value type is:[{}]", key, value, value.getClass().getName());
 
-            map.put(key, JsonHelper.<T> transformerValue(value, jsonToJavaConfig));
+                map.put(key, JsonHelper.<T> transformerValue(value, jsonToJavaConfig));
+            }
+            return map;
+        }catch (Exception e){
+            throw new JsonToJavaException(buildJsonToJavaExceptionMessage(json, jsonToJavaConfig), e);
         }
-        return map;
     }
 
     // [end]
@@ -1163,8 +1191,9 @@ public final class JsonUtil{
         if (null == json){
             return null;
         }
-        Validate.notNull(rootClass, "rootClass can't be null!");
 
+        //---------------------------------------------------------------
+        Validate.notNull(rootClass, "rootClass can't be null!");
         return toBean(json, new JsonToJavaConfig(rootClass));
     }
 
@@ -1246,17 +1275,37 @@ public final class JsonUtil{
         if (null == json){
             return null;
         }
+
+        //---------------------------------------------------------------
         Validate.notNull(jsonToJavaConfig, "jsonToJavaConfig can't be null!");
 
         Class<?> rootClass = jsonToJavaConfig.getRootClass();
         Validate.notNull(rootClass, "rootClass can't be null!");
 
         //---------------------------------------------------------------
-
-        JSONObject jsonObject = JSONObject.fromObject(json);
-
         JsonConfig jsonConfig = JsonToJavaConfigBuilder.build(rootClass, jsonToJavaConfig);
-        return (T) JSONObject.toBean(jsonObject, jsonConfig);
+        try{
+            JSONObject jsonObject = JSONObject.fromObject(json);
+            return (T) JSONObject.toBean(jsonObject, jsonConfig);
+        }catch (Exception e){
+            throw new JsonToJavaException(buildJsonToJavaExceptionMessage(json, jsonToJavaConfig), e);
+        }
+    }
+
+    //---------------------------------------------------------------
+
+    /**
+     * Builds the json to java exception message.
+     *
+     * @param json
+     *            the json
+     * @param jsonToJavaConfig
+     *            the json to java config
+     * @return the string
+     * @since 1.11.5
+     */
+    private static String buildJsonToJavaExceptionMessage(Object json,JsonToJavaConfig jsonToJavaConfig){
+        return Slf4jUtil.format("input json:[{}],jsonToJavaConfig:[{}]", json, format(jsonToJavaConfig));
     }
 
     // [end]
