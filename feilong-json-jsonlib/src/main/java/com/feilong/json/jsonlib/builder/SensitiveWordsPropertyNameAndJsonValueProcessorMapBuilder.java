@@ -15,15 +15,17 @@
  */
 package com.feilong.json.jsonlib.builder;
 
-import static com.feilong.core.Validator.isNotNullOrEmpty;
+import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.util.CollectionsUtil.addAllIgnoreNull;
 import static com.feilong.core.util.CollectionsUtil.newArrayList;
 import static com.feilong.core.util.MapUtil.newHashMap;
+import static java.util.Collections.emptyList;
 
 import java.beans.PropertyDescriptor;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -31,6 +33,8 @@ import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.apache.commons.lang3.reflect.MethodUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.feilong.json.SensitiveWords;
 import com.feilong.json.jsonlib.processor.SensitiveWordsJsonValueProcessor;
@@ -45,8 +49,14 @@ import net.sf.json.processors.JsonValueProcessor;
  */
 public class SensitiveWordsPropertyNameAndJsonValueProcessorMapBuilder{
 
+    /** The Constant log. */
+    private static final Logger                                   LOGGER = LoggerFactory
+                    .getLogger(SensitiveWordsPropertyNameAndJsonValueProcessorMapBuilder.class);
+
+    //---------------------------------------------------------------
+
     /** The cache. */
-    private static Map<Class<?>, Map<String, JsonValueProcessor>> CACHE = newHashMap();
+    private static Map<Class<?>, Map<String, JsonValueProcessor>> CACHE  = newHashMap();
 
     //---------------------------------------------------------------
 
@@ -150,22 +160,33 @@ public class SensitiveWordsPropertyNameAndJsonValueProcessorMapBuilder{
      *            the klass
      * @param annotationCls
      *            the annotation cls
-     * @return the property names with annotation
+     * @return 如果 <code>klass PropertyDescriptors</code> 是null或者empty,返回 {@link Collections#emptyList()}<br>
      * @since 1.11.5
      */
     private static <A extends Annotation> List<String> getPropertyNamesWithAnnotation(Class<?> klass,Class<A> annotationCls){
-        List<String> list = newArrayList();
-
         PropertyDescriptor[] propertyDescriptors = PropertyUtils.getPropertyDescriptors(klass);
+        if (isNullOrEmpty(propertyDescriptors)){
+            return emptyList();
+        }
 
-        if (isNotNullOrEmpty(propertyDescriptors)){
-            for (PropertyDescriptor propertyDescriptor : propertyDescriptors){
+        //---------------------------------------------------------------
+        List<String> list = newArrayList();
+        for (PropertyDescriptor propertyDescriptor : propertyDescriptors){
+            Method readMethod = propertyDescriptor.getReadMethod();
 
-                Method readMethod = propertyDescriptor.getReadMethod();
-                A sensitiveWords = MethodUtils.getAnnotation(readMethod, annotationCls, true, true);
-                if (null != sensitiveWords){
-                    list.add(propertyDescriptor.getName());
-                }
+            //since 1.12.2
+            if (null == readMethod){
+                LOGGER.warn(
+                                "class:[{}],propertyDescriptor name:[{}],has no ReadMethod!!SKIPPED",
+                                klass.getCanonicalName(),
+                                propertyDescriptor.getDisplayName());
+                continue;
+            }
+
+            //---------------------------------------------------------------
+            A sensitiveWords = MethodUtils.getAnnotation(readMethod, annotationCls, true, true);
+            if (null != sensitiveWords){
+                list.add(propertyDescriptor.getName());
             }
         }
         return list;

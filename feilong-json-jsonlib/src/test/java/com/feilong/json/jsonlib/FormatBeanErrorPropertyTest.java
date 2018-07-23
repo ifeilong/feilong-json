@@ -15,33 +15,30 @@
  */
 package com.feilong.json.jsonlib;
 
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
-import org.junit.runners.Suite.SuiteClasses;
+import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.feilong.json.AbstractJsonTest;
+import com.feilong.json.jsonlib.entity.StoreLocatorErrorProperty;
 
 /**
- * The Class FeiLongJsonUtilSuiteTests.
+ * The Class FormatBeanErrorPropertyTest.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @see https://github.com/venusdrogon/feilong-json/issues/20
+ * @since 1.12.0
  */
-@RunWith(Suite.class)
-@SuiteClasses({ //
+public class FormatBeanErrorPropertyTest extends AbstractJsonTest{
 
-                FormatBeanErrorPropertyTest.class,
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(FormatBeanErrorPropertyTest.class);
 
-                ToArrayWithJsonToJavaConfigTest.class,
+    @Test
+    public void test(){
+        StoreLocatorErrorProperty storeLocator = new StoreLocatorErrorProperty();
+        LOGGER.debug(JsonUtil.format(storeLocator));
 
-                ToListTest.class,
-                ToListWithJsonToJavaConfigTest.class,
-
-                ToBeanTest.class,
-                ToBeanWithJsonToJavaConfigTest.class,
-
-                ToMapTest.class,
-                ToMapWithJsonToJavaConfigTest.class,
-
-        //
-})
-public class FeiLongJsonUtilSuiteTests{
+    }
 
 }
