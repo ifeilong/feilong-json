@@ -18,6 +18,9 @@ package com.feilong.json.jsonlib.builder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.core.lang.ClassUtil;
+
+import net.sf.json.JSONException;
 import net.sf.json.util.PropertySetStrategy;
 
 /**
@@ -66,6 +69,14 @@ class PropertyStrategyWrapper extends PropertySetStrategy{
     public void setProperty(Object bean,String key,Object value){
         try{
             propertySetStrategy.setProperty(bean, key, value);
+        }catch (JSONException e){
+            Throwable cause = e.getCause();
+            //since 1.12.5
+            if (ClassUtil.isInstance(cause, NoSuchMethodException.class)){
+                LOGGER.warn("in class:[{}],can't find property:[{}],now ignore~~", bean.getClass().getName(), key);
+            }else{
+                LOGGER.warn(e.getMessage(), e);
+            }
         }catch (Exception e){
             LOGGER.warn(e.getMessage(), e);
         }
