@@ -15,6 +15,7 @@
  */
 package com.feilong.json.jsonlib;
 
+import static com.feilong.json.jsonlib.builder.JsonConfigBuilder.DEFAULT_JAVA_TO_JSON_CONFIG;
 import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
 
 import java.util.Iterator;
@@ -26,8 +27,6 @@ import org.apache.commons.lang3.ClassUtils;
 
 import com.feilong.core.lang.ClassUtil;
 import com.feilong.core.lang.ObjectUtil;
-import com.feilong.json.jsonlib.builder.JsonConfigBuilder;
-import com.feilong.json.jsonlib.processor.SensitiveWordsJsonValueProcessor;
 
 import net.sf.json.JSON;
 import net.sf.json.JSONArray;
@@ -48,12 +47,7 @@ import net.sf.json.util.JSONUtils;
 public final class JsonHelper{
 
     /** 单利模式. */
-    private static final JsonConfig DEFAULT_JSON_CONFIG_INSTANCE   = new JsonConfig();
-
-    //---------------------------------------------------------------
-
-    /** The Constant SENSITIVE_WORDS_PROPERTY_NAMES. */
-    private static final String[]   SENSITIVE_WORDS_PROPERTY_NAMES = { "password", "key" };
+    private static final JsonConfig DEFAULT_JSON_CONFIG_INSTANCE = new JsonConfig();
 
     //---------------------------------------------------------------
 
@@ -122,7 +116,7 @@ public final class JsonHelper{
      *            可以是数组,字符串,枚举,集合,map,Java bean,Iterator等类型,内部自动识别转成{@link JSONArray}还是{@link JSONObject}
      * @param jsonConfig
      *            the json config
-     * @return the jSON
+     * @return the json
      * @see net.sf.json.JSONArray#fromObject(Object, JsonConfig)
      * @see net.sf.json.JSONObject#fromObject(Object, JsonConfig)
      * @see net.sf.json.util.JSONUtils#isArray(Object)
@@ -133,8 +127,7 @@ public final class JsonHelper{
      * @see net.sf.json.JSONSerializer#toJSON(Object)
      */
     static JSON toJSON(Object obj,JsonConfig jsonConfig){
-        JsonConfig useJsonConfig = defaultIfNull(jsonConfig, JsonConfigBuilder.DEFAULT_JAVA_TO_JSON_CONFIG);
-        registerDefaultJsonValueProcessor(useJsonConfig);
+        JsonConfig useJsonConfig = defaultIfNull(jsonConfig, DEFAULT_JAVA_TO_JSON_CONFIG);
 
         if (isNeedConvertToJSONArray(obj)){
             Object arrayJsonObject = obj instanceof Iterator ? IteratorUtils.toList((Iterator<?>) obj) : obj;
@@ -177,17 +170,6 @@ public final class JsonHelper{
                         obj instanceof Iterator;
     }
 
-    /**
-     * 默认的处理器.
-     *
-     * @param jsonConfig
-     *            the json config
-     */
-    private static void registerDefaultJsonValueProcessor(JsonConfig jsonConfig){
-        for (String propertyName : SENSITIVE_WORDS_PROPERTY_NAMES){
-            jsonConfig.registerJsonValueProcessor(propertyName, SensitiveWordsJsonValueProcessor.INSTANCE);
-        }
-    }
     // [end]
 
     //---------------------------------------------------------------
@@ -206,7 +188,8 @@ public final class JsonHelper{
         return JSONArray.fromObject(obj, defaultIfNull(useJsonConfig, DEFAULT_JSON_CONFIG_INSTANCE));
     }
 
-    //**************toJSONObject********************
+    //---------------------------------------------------------------
+    //toJSONObject
 
     /**
      * 将 <code>object</code>转成 {@link JSONObject}.
@@ -250,6 +233,8 @@ public final class JsonHelper{
         if (null == value){//null 是可以 format的
             return true;
         }
+
+        //---------------------------------------------------------------
         Class<?> klassClass = value.getClass();
         return ClassUtils.isPrimitiveOrWrapper(klassClass) //
                         || String.class == klassClass //

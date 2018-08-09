@@ -67,7 +67,7 @@ public final class JavaToJsonConfigBuilder{
     public static JavaToJsonConfig buildUseJavaToJsonConfig(Object obj,JavaToJsonConfig javaToJsonConfig){
         JavaToJsonConfig defaultJavaToJsonConfig = JavaToJsonConfigBuilder.buildDefaultJavaToJsonConfig(obj);
 
-        //如果传入的javaToJsonConfig , 那么就是用默认的 defaultJavaToJsonConfig,don't care defaultJavaToJsonConfig 是否是null
+        //如果传入的javaToJsonConfig 是 null, 那么就是用默认的 defaultJavaToJsonConfig,don't care defaultJavaToJsonConfig 是否是null
         if (isNullOrEmpty(javaToJsonConfig)){
             return defaultJavaToJsonConfig;
         }

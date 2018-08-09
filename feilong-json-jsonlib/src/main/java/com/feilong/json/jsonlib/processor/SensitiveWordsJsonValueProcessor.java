@@ -16,6 +16,7 @@
 package com.feilong.json.jsonlib.processor;
 
 import com.feilong.json.jsonlib.JsonUtil;
+import com.feilong.json.jsonlib.builder.JsonConfigBuilder;
 
 import net.sf.json.JsonConfig;
 import net.sf.json.processors.JsonValueProcessor;
@@ -62,7 +63,7 @@ import net.sf.json.processors.JsonValueProcessor;
  * 
  * <blockquote>
  * 目前 {@link JsonUtil} 内置对<b>"password"</b>, <b>"key"</b> 两个字眼的属性名字,默认是显示成******,参见
- * JsonHelper#SENSITIVE_WORDS_PROPERTY_NAMES 以及 JsonHelper#registerDefaultJsonValueProcessor(JsonConfig)
+ * {@link JsonConfigBuilder#SENSITIVE_WORDS_PROPERTY_NAMES} 以及 {@link JsonConfigBuilder#registerDefaultJsonValueProcessor(JsonConfig)}
  * </blockquote>
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>

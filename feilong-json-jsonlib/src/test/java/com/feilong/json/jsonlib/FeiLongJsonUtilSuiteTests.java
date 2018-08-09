@@ -41,6 +41,9 @@ import org.junit.runners.Suite.SuiteClasses;
                 ToMapTest.class,
                 ToMapWithJsonToJavaConfigTest.class,
 
+                FormatBeanSensitiveWordsTest.class,
+                FormatBeanSensitiveWordsNoTest.class,
+
         //
 })
 public class FeiLongJsonUtilSuiteTests{

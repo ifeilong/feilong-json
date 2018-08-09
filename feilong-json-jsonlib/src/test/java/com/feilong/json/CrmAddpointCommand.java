@@ -21,6 +21,8 @@ public class CrmAddpointCommand implements Serializable{
     /** 电商订单编号 */
     private String            orderCode;
 
+    //---------------------------------------------------------------
+
     /**
      * @return the openId
      */

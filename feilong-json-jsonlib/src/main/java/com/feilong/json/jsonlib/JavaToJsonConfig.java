@@ -17,6 +17,8 @@ package com.feilong.json.jsonlib;
 
 import java.util.Map;
 
+import com.feilong.json.jsonlib.builder.JsonConfigBuilder;
+
 import net.sf.json.processors.JsonValueProcessor;
 import net.sf.json.processors.PropertyNameProcessor;
 
@@ -29,6 +31,21 @@ import net.sf.json.processors.PropertyNameProcessor;
  * @since 1.9.4 <a href="https://github.com/venusdrogon/feilong-core/issues/511">rename</a>
  */
 public class JavaToJsonConfig extends AbstractConfig{
+
+    /**
+     * 是否 mask 默认的敏感字符.
+     * 
+     * <p>
+     * 默认是 true, 表示会将默认的敏感字符({@link JsonConfigBuilder#SENSITIVE_WORDS_PROPERTY_NAMES}),格式化的时候,输出成 *******代替
+     * </p>
+     *
+     * @see com.feilong.json.jsonlib.processor.SensitiveWordsJsonValueProcessor
+     * @see JsonConfigBuilder#SENSITIVE_WORDS_PROPERTY_NAMES
+     * @since 1.12.6
+     */
+    private boolean                              isMaskDefaultSensitiveWords = true;
+
+    //---------------------------------------------------------------
 
     /** 包含属性名称的数组. */
     private String[]                             includes;
@@ -236,6 +253,8 @@ public class JavaToJsonConfig extends AbstractConfig{
         this.includes = includes;
     }
 
+    //---------------------------------------------------------------
+
     /**
      * 指定属性名称使用的值修改处理器.
      * 
@@ -326,6 +345,8 @@ public class JavaToJsonConfig extends AbstractConfig{
     public void setPropertyNameAndJsonValueProcessorMap(Map<String, JsonValueProcessor> propertyNameAndJsonValueProcessorMap){
         this.propertyNameAndJsonValueProcessorMap = propertyNameAndJsonValueProcessorMap;
     }
+
+    //---------------------------------------------------------------
 
     /**
      * 转成json的时候,对属性名字做特殊处理的控制器对映关系.
@@ -547,6 +568,41 @@ public class JavaToJsonConfig extends AbstractConfig{
     public void setJsonTargetClassAndPropertyNameProcessorMap(
                     Map<Class<?>, PropertyNameProcessor> jsonTargetClassAndPropertyNameProcessorMap){
         this.jsonTargetClassAndPropertyNameProcessorMap = jsonTargetClassAndPropertyNameProcessorMap;
+    }
+
+    //---------------------------------------------------------------
+
+    /**
+     * 是否 mask 默认的敏感字符.
+     * 
+     * <p>
+     * 默认是 true, 表示会将默认的敏感字符({@link JsonConfigBuilder#SENSITIVE_WORDS_PROPERTY_NAMES}),格式化的时候,输出成 *******代替
+     * </p>
+     *
+     * @return the isMaskDefaultSensitiveWords
+     * @see com.feilong.json.jsonlib.processor.SensitiveWordsJsonValueProcessor
+     * @see JsonConfigBuilder#SENSITIVE_WORDS_PROPERTY_NAMES
+     * @since 1.12.6
+     */
+    public boolean getIsMaskDefaultSensitiveWords(){
+        return isMaskDefaultSensitiveWords;
+    }
+
+    /**
+     * 是否 mask 默认的敏感字符.
+     * 
+     * <p>
+     * 默认是 true, 表示会将默认的敏感字符({@link JsonConfigBuilder#SENSITIVE_WORDS_PROPERTY_NAMES}),格式化的时候,输出成 *******代替
+     * </p>
+     *
+     * @param isMaskDefaultSensitiveWords
+     *            the new 是否 mask 默认的敏感字符
+     * @see com.feilong.json.jsonlib.processor.SensitiveWordsJsonValueProcessor
+     * @see JsonConfigBuilder#SENSITIVE_WORDS_PROPERTY_NAMES
+     * @since 1.12.6
+     */
+    public void setIsMaskDefaultSensitiveWords(boolean isMaskDefaultSensitiveWords){
+        this.isMaskDefaultSensitiveWords = isMaskDefaultSensitiveWords;
     }
 
 }

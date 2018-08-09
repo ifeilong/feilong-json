@@ -24,6 +24,7 @@ import com.feilong.core.DatePattern;
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.json.jsonlib.JavaToJsonConfig;
 import com.feilong.json.jsonlib.processor.DateJsonValueProcessor;
+import com.feilong.json.jsonlib.processor.SensitiveWordsJsonValueProcessor;
 import com.feilong.json.jsonlib.processor.defaultvalue.CommonDefaultValueProcessor;
 
 import net.sf.json.JsonConfig;
@@ -40,8 +41,15 @@ import net.sf.json.util.CycleDetectionStrategy;
  */
 public final class JsonConfigBuilder{
 
+    /**
+     * The Constant SENSITIVE_WORDS_PROPERTY_NAMES.
+     * 
+     * @since 1.12.6 move from JsonHelper
+     */
+    private static final String[]  SENSITIVE_WORDS_PROPERTY_NAMES = { "password", "key" };
+
     /** The Constant DEFAULT_JAVA_TO_JSON_CONFIG. */
-    public static final JsonConfig DEFAULT_JAVA_TO_JSON_CONFIG = buildDefaultJavaToJsonConfig();
+    public static final JsonConfig DEFAULT_JAVA_TO_JSON_CONFIG    = buildDefaultJavaToJsonConfig();
 
     //---------------------------------------------------------------
 
@@ -61,19 +69,21 @@ public final class JsonConfigBuilder{
      *            the obj
      * @param javaToJsonConfig
      *            the java to json config
-     * @return the json config
+     * @return 如果 <code>javaToJsonConfig</code> 是null,返回 {@link #DEFAULT_JAVA_TO_JSON_CONFIG}<br>
      */
     public static JsonConfig build(Object obj,JavaToJsonConfig javaToJsonConfig){
         JavaToJsonConfig useJavaToJsonConfig = JavaToJsonConfigBuilder.buildUseJavaToJsonConfig(obj, javaToJsonConfig);
+
+        //since 1.12.6
         if (null == useJavaToJsonConfig){
-            return null;
+            return DEFAULT_JAVA_TO_JSON_CONFIG;
         }
 
         //-----------------------------------------------------------------
         JsonConfig jsonConfig = buildDefaultJavaToJsonConfig();
 
         //---------------------------------------------------------------
-
+        //property name处理器.
         registerJsonPropertyNameProcessor(useJavaToJsonConfig, jsonConfig);
 
         //value处理器
@@ -86,14 +96,36 @@ public final class JsonConfigBuilder{
             jsonConfig.setExcludes(useJavaToJsonConfig.getExcludes());
         }
 
+        //---------------------------------------------------------------
+
         //包含
         if (isNotNullOrEmpty(useJavaToJsonConfig.getIncludes())){
             jsonConfig.setJsonPropertyFilter(new ArrayContainsPropertyNamesPropertyFilter(useJavaToJsonConfig.getIncludes()));
         }
+
+        //---------------------------------------------------------------
+        //since 1.12.6
+        if (useJavaToJsonConfig.getIsMaskDefaultSensitiveWords()){
+            registerDefaultJsonValueProcessor(jsonConfig);
+        }
+
         return jsonConfig;
     }
 
     //---------------------------------------------------------------
+
+    /**
+     * 默认的处理器.
+     *
+     * @param jsonConfig
+     *            the json config
+     * @since 1.12.6 move from JsonHelper
+     */
+    private static void registerDefaultJsonValueProcessor(JsonConfig jsonConfig){
+        for (String propertyName : SENSITIVE_WORDS_PROPERTY_NAMES){
+            jsonConfig.registerJsonValueProcessor(propertyName, SensitiveWordsJsonValueProcessor.INSTANCE);
+        }
+    }
 
     /**
      * Register json value processor.

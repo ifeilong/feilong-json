@@ -18,15 +18,10 @@ package com.feilong.json.jsonlib;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.json.jsonlib.entity.BeanWithSensitiveWords;
 
-public class FormatBeanSensitiveWordsTest{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(FormatBeanSensitiveWordsTest.class);
+public class FormatBeanSensitiveWordsNoTest{
 
     /**
      * Name1.
@@ -36,11 +31,12 @@ public class FormatBeanSensitiveWordsTest{
         BeanWithSensitiveWords beanWithSensitiveWords = new BeanWithSensitiveWords("34567889", "sadadad&^%", "567");
         beanWithSensitiveWords.setCvv2("456");
 
-        LOGGER.debug(JsonUtil.format(beanWithSensitiveWords));
+        JavaToJsonConfig javaToJsonConfig = new JavaToJsonConfig();
+        javaToJsonConfig.setIsMaskDefaultSensitiveWords(false);
 
         assertEquals(
-                        "{\"pattern\":\"34567889\",\"cvv\":\"******\",\"cvv2\":\"******\",\"key\":\"******\"}",
-                        JsonUtil.format(beanWithSensitiveWords, 0, 0));
+                        "{\"pattern\":\"34567889\",\"cvv\":\"******\",\"cvv2\":\"******\",\"key\":\"sadadad&^%\"}",
+                        JsonUtil.format(beanWithSensitiveWords, javaToJsonConfig, 0, 0));
     }
 
 }

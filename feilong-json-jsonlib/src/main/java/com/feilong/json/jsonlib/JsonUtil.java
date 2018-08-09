@@ -49,6 +49,7 @@ import com.feilong.tools.slf4j.Slf4jUtil;
 
 import net.sf.ezmorph.MorpherRegistry;
 import net.sf.ezmorph.object.DateMorpher;
+import net.sf.json.JSON;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import net.sf.json.JsonConfig;
@@ -201,8 +202,7 @@ public final class JsonUtil{
      * </p>
      * 
      * <p>
-     * 如果不需要 <code>indent</code>缩进,你可以调用 {@link #format(Object, int, int)}或者 {@link #format(Object, JsonConfig, int, int)}或者
-     * {@link #format(Object, JavaToJsonConfig, int, int)}
+     * 如果不需要 <code>indent</code>缩进,你可以调用 {@link #format(Object, int, int)}或者 {@link #format(Object, JavaToJsonConfig, int, int)}
      * </p>
      * </blockquote>
      * 
@@ -526,7 +526,7 @@ public final class JsonUtil{
      * @since 1.2.2
      */
     public static String format(Object obj,int indentFactor,int indent){
-        return format(obj, (JsonConfig) null, indentFactor, indent);
+        return format(obj, (JavaToJsonConfig) null, indentFactor, indent);
     }
 
     /**
@@ -601,6 +601,8 @@ public final class JsonUtil{
      * @param indent
      *            the indent
      * @return 如果 <code>obj</code> 是null,返回 {@link StringUtils#EMPTY}<br>
+     *         如果 <code>javaToJsonConfig</code> 是null,将使用默认的,参见
+     *         {@link JavaToJsonConfigBuilder#buildUseJavaToJsonConfig(Object, JavaToJsonConfig)} <br>
      * @since 1.2.2
      */
     public static String format(Object obj,JavaToJsonConfig javaToJsonConfig,int indentFactor,int indent){
@@ -608,8 +610,12 @@ public final class JsonUtil{
             return EMPTY;
         }
         //---------------------------------------------------------------
-        JsonConfig jsonConfig = JsonConfigBuilder.build(obj, javaToJsonConfig);
-        return format(obj, jsonConfig, indentFactor, indent);
+        JavaToJsonConfig useJavaToJsonConfig = JavaToJsonConfigBuilder.buildUseJavaToJsonConfig(obj, javaToJsonConfig);
+        JsonConfig jsonConfig = JsonConfigBuilder.build(obj, useJavaToJsonConfig);
+
+        //---------------------------------------------------------------
+        JSON json = JsonHelper.toJSON(obj, jsonConfig);
+        return json.toString(indentFactor, indent);
     }
 
     //---------------------------------------------------------------
@@ -637,32 +643,6 @@ public final class JsonUtil{
     public static String formatObjectFieldsNameAndValueMap(Object obj){
         return null == obj ? EMPTY
                         : format(FieldUtil.getAllFieldNameAndValueMap(obj), JavaToJsonConfigBuilder.buildDefaultJavaToJsonConfig(obj));
-    }
-
-    //---------------------------------------------------------------
-
-    /**
-     * Make a prettyprinted JSON text.
-     * 
-     * <p>
-     * Warning: This method assumes that the data structure is acyclical.
-     * </p>
-     *
-     * @param obj
-     *            可以是数组,字符串,枚举,集合,map,Java bean,Iterator等类型,内部自动识别转成{@link JSONArray}还是{@link JSONObject}
-     * @param jsonConfig
-     *            the json config
-     * @param indentFactor
-     *            The number of spaces to add to each level of indentation.
-     * @param indent
-     *            The indentation of the top level.
-     * @return 如果 <code>obj</code> 是null,返回 {@link StringUtils#EMPTY}<br>
-     *         a printable,displayable,transmittable representation of the object,<br>
-     *         beginning with{ (left brace) and ending with }(right brace).
-     * @since 1.0.8
-     */
-    private static String format(Object obj,JsonConfig jsonConfig,int indentFactor,int indent){
-        return null == obj ? EMPTY : JsonHelper.toJSON(obj, jsonConfig).toString(indentFactor, indent);
     }
 
     // [end]
