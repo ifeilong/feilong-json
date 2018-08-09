@@ -15,7 +15,7 @@
  */
 package com.feilong.json.jsonlib;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -38,9 +38,16 @@ public class FormatBeanSensitiveWordsTest{
 
         LOGGER.debug(JsonUtil.format(beanWithSensitiveWords));
 
-        assertEquals(
-                        "{\"pattern\":\"34567889\",\"cvv\":\"******\",\"cvv2\":\"******\",\"key\":\"******\"}",
-                        JsonUtil.format(beanWithSensitiveWords, 0, 0));
+        //maven install , 顺序会有问题
+        //        assertEquals(
+        //                        "{\"pattern\":\"34567889\",\"cvv\":\"******\",\"cvv2\":\"******\",\"key\":\"******\"}",
+        //                        JsonUtil.format(beanWithSensitiveWords, 0, 0));
+
+        String result = JsonUtil.format(beanWithSensitiveWords, 0, 0);
+
+        assertTrue(result.contains("\"key\":\"******\""));
+        assertTrue(result.contains("\"cvv\":\"******\""));
+        assertTrue(result.contains("\"cvv2\":\"******\""));
     }
 
 }
