@@ -30,23 +30,14 @@ import com.feilong.store.member.User;
 
 import net.sf.json.processors.JsonValueProcessor;
 
-/**
- * The Class BigDecimalJsonValueProcessorTest.
- *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 1.8.5
- */
 public class BigDecimalJsonValueProcessorTest{
 
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(BigDecimalJsonValueProcessorTest.class);
 
-    /**
-     * Test big decimal json value processor.
-     */
     @Test
     @SuppressWarnings("static-method")
-    public void testBigDecimalJsonValueProcessor(){
+    public void test(){
         User user = new User("feilong1", 24);
         user.setMoney(toBigDecimal("99999999.00"));
 
@@ -56,14 +47,43 @@ public class BigDecimalJsonValueProcessorTest{
         LOGGER.debug(JsonUtil.format(user, jsonFormatConfig));
     }
 
-    /**
-     * Test big decimal json value processor 2.
-     */
     @Test
     @SuppressWarnings("static-method")
-    public void testBigDecimalJsonValueProcessor2(){
+    public void test2(){
         User user = new User("feilong1", 24);
         user.setMoney(toBigDecimal("99999999.00"));
+
+        Map<String, JsonValueProcessor> propertyNameAndJsonValueProcessorMap = newHashMap();
+        propertyNameAndJsonValueProcessorMap.put("money", BigDecimalJsonValueProcessor.DEFAULT_INSTANCE);
+
+        JavaToJsonConfig jsonFormatConfig = new JavaToJsonConfig();
+        jsonFormatConfig.setPropertyNameAndJsonValueProcessorMap(propertyNameAndJsonValueProcessorMap);
+        jsonFormatConfig.setIncludes("name", "age", "money");
+
+        LOGGER.debug(JsonUtil.format(user, jsonFormatConfig));
+    }
+
+    @Test
+    @SuppressWarnings("static-method")
+    public void test3(){
+        User user = new User("feilong1", 24);
+        user.setMoney(toBigDecimal("99999999.10"));
+
+        Map<String, JsonValueProcessor> propertyNameAndJsonValueProcessorMap = newHashMap();
+        propertyNameAndJsonValueProcessorMap.put("money", BigDecimalJsonValueProcessor.DEFAULT_INSTANCE);
+
+        JavaToJsonConfig jsonFormatConfig = new JavaToJsonConfig();
+        jsonFormatConfig.setPropertyNameAndJsonValueProcessorMap(propertyNameAndJsonValueProcessorMap);
+        jsonFormatConfig.setIncludes("name", "age", "money");
+
+        LOGGER.debug(JsonUtil.format(user, jsonFormatConfig));
+    }
+
+    @Test
+    @SuppressWarnings("static-method")
+    public void test5(){
+        User user = new User("feilong1", 24);
+        user.setMoney(toBigDecimal("99999999.109"));
 
         Map<String, JsonValueProcessor> propertyNameAndJsonValueProcessorMap = newHashMap();
         propertyNameAndJsonValueProcessorMap.put("money", BigDecimalJsonValueProcessor.DEFAULT_INSTANCE);
