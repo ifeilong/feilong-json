@@ -36,7 +36,6 @@ public class BigDecimalJsonValueProcessorTest{
     private static final Logger LOGGER = LoggerFactory.getLogger(BigDecimalJsonValueProcessorTest.class);
 
     @Test
-    @SuppressWarnings("static-method")
     public void test(){
         User user = new User("feilong1", 24);
         user.setMoney(toBigDecimal("99999999.00"));
@@ -48,7 +47,6 @@ public class BigDecimalJsonValueProcessorTest{
     }
 
     @Test
-    @SuppressWarnings("static-method")
     public void test2(){
         User user = new User("feilong1", 24);
         user.setMoney(toBigDecimal("99999999.00"));
