@@ -17,6 +17,7 @@ package com.feilong.json.jsonlib.builder;
 
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 
+import java.io.File;
 import java.util.Date;
 import java.util.Map;
 
@@ -25,6 +26,7 @@ import com.feilong.core.bean.ConvertUtil;
 import com.feilong.json.jsonlib.JavaToJsonConfig;
 import com.feilong.json.jsonlib.processor.DateJsonValueProcessor;
 import com.feilong.json.jsonlib.processor.SensitiveWordsJsonValueProcessor;
+import com.feilong.json.jsonlib.processor.ToStringJsonValueProcessor;
 import com.feilong.json.jsonlib.processor.defaultvalue.CommonDefaultValueProcessor;
 
 import net.sf.json.JsonConfig;
@@ -212,6 +214,9 @@ public final class JsonConfigBuilder{
 
         // 注册日期处理器
         jsonConfig.registerJsonValueProcessor(Date.class, DateJsonValueProcessor.DEFAULT_INSTANCE);
+
+        //since 1.13.0
+        jsonConfig.registerJsonValueProcessor(File.class, ToStringJsonValueProcessor.DEFAULT_INSTANCE);
         return jsonConfig;
     }
 

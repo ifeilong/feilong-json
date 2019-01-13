@@ -15,24 +15,29 @@
  */
 package com.feilong.json.jsonlib;
 
+import java.io.File;
+
 import org.junit.Test;
 
 import com.feilong.json.AbstractJsonTest;
-import com.feilong.json.jsonlib.entity.StoreLocatorErrorProperty;
+import com.feilong.json.jsonlib.entity.BeanWithFile;
 
-/**
- * The Class FormatBeanErrorPropertyTest.
- *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @see https://github.com/venusdrogon/feilong-json/issues/20
- * @since 1.12.0
- */
-public class FormatBeanErrorPropertyTest extends AbstractJsonTest{
+public class FormatBeanFileTest extends AbstractJsonTest{
 
     @Test
     public void test(){
-        StoreLocatorErrorProperty storeLocator = new StoreLocatorErrorProperty();
-        LOGGER.debug(JsonUtil.format(storeLocator));
+        File file = new File("/Users/feilong/work/eclipse feilong.sh");
+        //---------------------------------------------------------------
+
+        LOGGER.debug(file.toString());
+
+        //---------------------------------------------------------------
+
+        BeanWithFile beanWithFile = new BeanWithFile();
+        beanWithFile.setName("jim");
+        beanWithFile.setFile(file);
+
+        LOGGER.debug(JsonUtil.format(beanWithFile));
     }
 
 }

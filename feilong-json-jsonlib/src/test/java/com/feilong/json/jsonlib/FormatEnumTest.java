@@ -16,19 +16,12 @@
 package com.feilong.json.jsonlib;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.json.AbstractJsonTest;
 import com.feilong.json.HttpMethodTestType;
 
 public class FormatEnumTest extends AbstractJsonTest{
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(FormatEnumTest.class);
-
-    /**
-     * Format enum.
-     */
     @Test
     @SuppressWarnings("static-method")
     public void formatEnum(){

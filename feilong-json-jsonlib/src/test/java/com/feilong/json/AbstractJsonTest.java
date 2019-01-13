@@ -15,16 +15,19 @@
  */
 package com.feilong.json;
 
+import static com.feilong.core.bean.ConvertUtil.toArray;
+import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
+import static com.feilong.core.bean.ConvertUtil.toList;
+
 import java.util.Date;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.feilong.json.jsonlib.JsonUtil;
 import com.feilong.store.member.User;
 import com.feilong.store.member.UserAddress;
 import com.feilong.store.member.UserInfo;
-
-import static com.feilong.core.bean.ConvertUtil.toArray;
-import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
-import static com.feilong.core.bean.ConvertUtil.toList;
 
 /**
  * The Class BaseJsonTest.
@@ -33,6 +36,9 @@ import static com.feilong.core.bean.ConvertUtil.toList;
  * @since 1.2.2
  */
 public abstract class AbstractJsonTest{
+
+    /** The Constant LOGGER. */
+    protected static final Logger LOGGER           = LoggerFactory.getLogger(AbstractJsonTest.class);
 
     /** The Constant USER. */
     protected static final User   USER             = getUserForJsonTest();
