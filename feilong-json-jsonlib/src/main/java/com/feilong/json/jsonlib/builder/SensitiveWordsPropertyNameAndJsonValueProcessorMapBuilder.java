@@ -36,6 +36,8 @@ import org.apache.commons.lang3.reflect.MethodUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.core.lang.ClassUtil;
+import com.feilong.core.util.MapUtil;
 import com.feilong.json.SensitiveWords;
 import com.feilong.json.jsonlib.processor.SensitiveWordsJsonValueProcessor;
 
@@ -72,7 +74,65 @@ public class SensitiveWordsPropertyNameAndJsonValueProcessorMapBuilder{
         Validate.notNull(javaBean, "javaBean can't be null!");
 
         //---------------------------------------------------------------
+        if (ClassUtil.isInstance(javaBean, Map.class)){
+            return parseMap(javaBean);
+        }
 
+        if (ClassUtil.isInstance(javaBean, Iterable.class)){
+            return parseList(javaBean);
+        }
+
+        return parseBean(javaBean);
+    }
+
+    //---------------------------------------------------------------
+
+    /**
+     * @param inputMap
+     * @since 1.13.0
+     */
+    private static Map<String, JsonValueProcessor> parseList(Object inputMap){
+        Map<String, JsonValueProcessor> propertyNameAndJsonValueProcessorMap = newHashMap();
+
+        //---------------------------------------------------------------
+        Iterable<?> list = (Iterable<?>) inputMap;
+        for (Object bean : list){
+            if (null != bean){
+                MapUtil.putAllIfNotNull(propertyNameAndJsonValueProcessorMap, parseBean(bean));
+            }
+        }
+        //---------------------------------------------------------------
+        return propertyNameAndJsonValueProcessorMap;
+    }
+    //---------------------------------------------------------------
+
+    /**
+     * @param inputMap
+     * @since 1.13.0
+     */
+    private static Map<String, JsonValueProcessor> parseMap(Object inputMap){
+        Map<String, JsonValueProcessor> propertyNameAndJsonValueProcessorMap = newHashMap();
+
+        //---------------------------------------------------------------
+        Map<?, ?> map = (Map<?, ?>) inputMap;
+        for (Map.Entry<?, ?> entry : map.entrySet()){
+            Object bean = entry.getValue();
+            if (null != bean){
+                MapUtil.putAllIfNotNull(propertyNameAndJsonValueProcessorMap, parseBean(bean));
+            }
+        }
+        //---------------------------------------------------------------
+        return propertyNameAndJsonValueProcessorMap;
+    }
+
+    //---------------------------------------------------------------
+
+    /**
+     * @param javaBean
+     * @return
+     * @since 1.13.0
+     */
+    private static Map<String, JsonValueProcessor> parseBean(Object javaBean){
         Class<?> klass = javaBean.getClass();
         if (CACHE.containsKey(klass)){
             return CACHE.get(klass);
