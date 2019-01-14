@@ -16,39 +16,34 @@
 package com.feilong.json.jsonlib;
 
 import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.json.jsonlib.entity.MyBigDecimalBean;
 
 public class FormatBeanBigDecimalTest{
 
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(FormatBeanBigDecimalTest.class);
-
-    //---------------------------------------------------------------
-
     @Test
     public void test(){
         MyBigDecimalBean myBigDecimalBean = new MyBigDecimalBean();
         myBigDecimalBean.setMoney(toBigDecimal("99999999.00"));
-        LOGGER.debug(JsonUtil.format(myBigDecimalBean));
+
+        assertTrue(JsonUtil.format(myBigDecimalBean, 0, 0).contains("\"money\":\"99999999.00\""));
     }
 
     @Test
     public void test1(){
         MyBigDecimalBean myBigDecimalBean = new MyBigDecimalBean();
         myBigDecimalBean.setMoney(toBigDecimal("99999999.0000"));
-        LOGGER.debug(JsonUtil.format(myBigDecimalBean));
+        assertTrue(JsonUtil.format(myBigDecimalBean, 0, 0).contains("\"money\":\"99999999.0000\""));
     }
 
     @Test
     public void test12(){
         MyBigDecimalBean myBigDecimalBean = new MyBigDecimalBean();
         myBigDecimalBean.setMoney(toBigDecimal("99999999.0"));
-        LOGGER.debug(JsonUtil.format(myBigDecimalBean));
+        assertTrue(JsonUtil.format(myBigDecimalBean, 0, 0).contains("\"money\":\"99999999.0\""));
     }
 
 }

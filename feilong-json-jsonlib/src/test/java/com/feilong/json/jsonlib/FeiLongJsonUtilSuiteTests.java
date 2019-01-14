@@ -44,6 +44,8 @@ import org.junit.runners.Suite.SuiteClasses;
                 FormatBeanSensitiveWordsTest.class,
                 FormatBeanSensitiveWordsNoTest.class,
 
+                FormatBeanBigDecimalTest.class,
+
         //
 })
 public class FeiLongJsonUtilSuiteTests{
