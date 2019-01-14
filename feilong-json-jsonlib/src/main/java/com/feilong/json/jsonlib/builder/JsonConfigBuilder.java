@@ -18,6 +18,7 @@ package com.feilong.json.jsonlib.builder;
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 
 import java.io.File;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Map;
 
@@ -217,6 +218,10 @@ public final class JsonConfigBuilder{
 
         //since 1.13.0
         jsonConfig.registerJsonValueProcessor(File.class, ToStringJsonValueProcessor.DEFAULT_INSTANCE);
+
+        //since 1.13.0
+        //see https://github.com/venusdrogon/feilong-json/issues/24
+        jsonConfig.registerJsonValueProcessor(BigDecimal.class, ToStringJsonValueProcessor.DEFAULT_INSTANCE);
         return jsonConfig;
     }
 

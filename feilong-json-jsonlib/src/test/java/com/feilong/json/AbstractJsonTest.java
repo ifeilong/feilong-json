@@ -40,11 +40,15 @@ public abstract class AbstractJsonTest{
     /** The Constant LOGGER. */
     protected static final Logger LOGGER           = LoggerFactory.getLogger(AbstractJsonTest.class);
 
+    //---------------------------------------------------------------
+
     /** The Constant USER. */
     protected static final User   USER             = getUserForJsonTest();
 
     /** The Constant DEFAULT_USER_FOR_JSON_TEST_JSON. */
     protected static final String USER_JSON_STRING = JsonUtil.format(USER, 0, 0);
+
+    //---------------------------------------------------------------
 
     /**
      * Gets the json string.

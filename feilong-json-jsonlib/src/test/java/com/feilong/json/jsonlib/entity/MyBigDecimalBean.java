@@ -13,26 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.json.jsonlib;
+package com.feilong.json.jsonlib.entity;
 
-import static com.feilong.core.bean.ConvertUtil.toArray;
+import java.math.BigDecimal;
 
-import org.junit.Test;
+public class MyBigDecimalBean{
 
-import com.feilong.json.AbstractJsonTest;
+    private BigDecimal money;
 
-public class FormatBeanTest extends AbstractJsonTest{
-
-    @Test
-    @SuppressWarnings("static-method")
-    public void testExcludes(){
-        LOGGER.debug(JsonUtil.format(USER, toArray("name", "loves", "attrMap", "userInfo", "userAddresses")));
+    /**
+     * @return the money
+     */
+    public BigDecimal getMoney(){
+        return money;
     }
 
-    @Test
-    @SuppressWarnings("static-method")
-    public void testExcludes1(){
-        LOGGER.debug(JsonUtil.format(USER, toArray("name", "loves", "attrMap", "userInfo", "userAddresses"), 4, 4));
+    /**
+     * @param money
+     *            the money to set
+     */
+    public void setMoney(BigDecimal money){
+        this.money = money;
     }
-
 }

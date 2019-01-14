@@ -98,6 +98,7 @@ import net.sf.json.processors.JsonValueProcessor;
  * </blockquote>
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @see net.sf.json.util.JSONUtils#numberToString(Number)
  * @since 1.2.2
  */
 public class BigDecimalJsonValueProcessor extends AbstractJsonValueProcessor{
@@ -109,6 +110,7 @@ public class BigDecimalJsonValueProcessor extends AbstractJsonValueProcessor{
      */
     public static final JsonValueProcessor DEFAULT_INSTANCE = new BigDecimalJsonValueProcessor(TWO_DECIMAL_POINTS);
 
+    //---------------------------------------------------------------
     /**
      * The number pattern(默认两位小数点).
      * 
@@ -132,6 +134,8 @@ public class BigDecimalJsonValueProcessor extends AbstractJsonValueProcessor{
     public BigDecimalJsonValueProcessor(String numberPattern){
         this.numberPattern = numberPattern;
     }
+
+    //---------------------------------------------------------------
 
     /*
      * (non-Javadoc)
