@@ -31,8 +31,6 @@ public class FormatBeanFileTest extends AbstractJsonTest{
 
         LOGGER.debug(file.toString());
 
-        //---------------------------------------------------------------
-
         BeanWithFile beanWithFile = new BeanWithFile();
         beanWithFile.setName("jim");
         beanWithFile.setFile(file);

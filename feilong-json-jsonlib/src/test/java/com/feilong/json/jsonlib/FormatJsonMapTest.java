@@ -20,14 +20,10 @@ import static com.feilong.core.bean.ConvertUtil.toMap;
 import java.util.Map;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.json.AbstractJsonTest;
 
 public class FormatJsonMapTest extends AbstractJsonTest{
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(FormatJsonMapTest.class);
 
     /**
      * Test json string 11.

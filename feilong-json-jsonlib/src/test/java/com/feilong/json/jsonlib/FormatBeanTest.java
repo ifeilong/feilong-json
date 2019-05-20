@@ -24,13 +24,11 @@ import com.feilong.json.AbstractJsonTest;
 public class FormatBeanTest extends AbstractJsonTest{
 
     @Test
-    @SuppressWarnings("static-method")
     public void testExcludes(){
         LOGGER.debug(JsonUtil.format(USER, toArray("name", "loves", "attrMap", "userInfo", "userAddresses")));
     }
 
     @Test
-    @SuppressWarnings("static-method")
     public void testExcludes1(){
         LOGGER.debug(JsonUtil.format(USER, toArray("name", "loves", "attrMap", "userInfo", "userAddresses"), 4, 4));
     }

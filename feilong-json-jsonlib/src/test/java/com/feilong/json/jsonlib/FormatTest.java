@@ -18,8 +18,6 @@ package com.feilong.json.jsonlib;
 import static com.feilong.core.bean.ConvertUtil.toList;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.json.AbstractJsonTest;
 import com.feilong.store.system.Menu;
@@ -30,8 +28,6 @@ import com.feilong.store.system.Menu;
  * @since 1.12.6
  */
 public class FormatTest extends AbstractJsonTest{
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(FormatTest.class);
 
     /**
      * Test json menu.

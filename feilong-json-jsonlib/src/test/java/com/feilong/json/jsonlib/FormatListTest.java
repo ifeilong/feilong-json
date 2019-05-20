@@ -18,19 +18,11 @@ package com.feilong.json.jsonlib;
 import java.util.Vector;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.json.AbstractJsonTest;
 
 public class FormatListTest extends AbstractJsonTest{
 
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(FormatListTest.class);
-
-    /**
-     * Test vector.
-     */
     @Test
     @SuppressWarnings("static-method")
     public void testVector(){

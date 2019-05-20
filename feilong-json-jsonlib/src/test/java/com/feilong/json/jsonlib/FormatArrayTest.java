@@ -19,19 +19,11 @@ import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.json.AbstractJsonTest;
 
 public class FormatArrayTest extends AbstractJsonTest{
 
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(FormatArrayTest.class);
-
-    /**
-     * Test json string1.
-     */
     @Test
     @SuppressWarnings("static-method")
     public void testJsonString1(){

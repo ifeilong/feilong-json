@@ -21,8 +21,6 @@ import static com.feilong.core.bean.ConvertUtil.toList;
 import java.util.List;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.json.AbstractJsonTest;
 import com.feilong.store.member.User;
@@ -34,11 +32,6 @@ import com.feilong.store.member.User;
  */
 public class FormatWithIncludesTest extends AbstractJsonTest{
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(FormatWithIncludesTest.class);
-
-    /**
-     * TestJsonUtilTest.
-     */
     @Test
     @SuppressWarnings("static-method")
     public void testFormatWithIncludes1(){

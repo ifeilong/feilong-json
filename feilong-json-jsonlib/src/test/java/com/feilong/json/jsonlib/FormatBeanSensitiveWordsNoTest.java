@@ -43,7 +43,5 @@ public class FormatBeanSensitiveWordsNoTest{
         assertTrue(result.contains("\"key\":\"sadadad&^%\""));
         assertTrue(result.contains("\"cvv\":\"******\""));
         assertTrue(result.contains("\"cvv2\":\"******\""));
-
     }
-
 }

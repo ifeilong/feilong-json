@@ -16,15 +16,10 @@
 package com.feilong.json.jsonlib;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.json.AbstractJsonTest;
 
 public class FormatNumberTest extends AbstractJsonTest{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(FormatNumberTest.class);
 
     /**
      * Test json string2.

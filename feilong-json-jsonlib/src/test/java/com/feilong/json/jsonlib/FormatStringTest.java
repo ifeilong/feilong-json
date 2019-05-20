@@ -15,24 +15,35 @@
  */
 package com.feilong.json.jsonlib;
 
+import static org.apache.commons.lang3.StringUtils.EMPTY;
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.json.AbstractJsonTest;
 
 public class FormatStringTest extends AbstractJsonTest{
 
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(FormatStringTest.class);
-
-    /**
-     * Format array 2.
-     */
     @Test
-    @SuppressWarnings("static-method")
     public void formatArray2(){
         String json = "[{'name':'get'},{'name':'set'}]";
         LOGGER.debug(JsonUtil.format(json));
+    }
+
+    @Test
+    public void formatCommonString(){
+        String json = "feilong";
+        assertEquals("feilong", JsonUtil.format(json));
+    }
+
+    @Test
+    public void formatEmpty(){
+        assertEquals(EMPTY, JsonUtil.format(""));
+        assertEquals(" ", JsonUtil.format(" "));
+    }
+
+    @Test
+    public void formatNull(){
+        assertEquals(EMPTY, JsonUtil.format(null));
     }
 }
