@@ -170,6 +170,43 @@ public final class JsonHelper{
                         obj instanceof Iterator;
     }
 
+    //---------------------------------------------------------------
+
+    /**
+     * 是否是普通的字符串.
+     * 
+     * <blockquote>
+     * <ol>
+     * <li>如果不是字符串,返回 false</li>
+     * 
+     * <li>如果是字符串,以"["符号开头,"]"符号结尾的时候,返回 false</li>
+     * <li>如果是字符串,以"{"符号开头,"}"符号结尾的时候,返回 false</li>
+     * 
+     * <li>其他, 返回 true</li>
+     * </ol>
+     * </blockquote>.
+     *
+     * @param obj
+     *            the obj
+     * @return true, if is common string
+     * @since 1.13.3
+     */
+    public static boolean isCommonString(Object obj){
+        if (!ClassUtil.isInstance(obj, String.class)){
+            return false;
+        }
+
+        //---------------------------------------------------------------
+        String str = (String) obj;
+        if (str.startsWith("[") && str.endsWith("]")){// [] 格式的字符串 
+            return false;
+        }
+        if (str.startsWith("{") && str.endsWith("}")){// [] 格式的字符串 
+            return false;
+        }
+        return true;
+    }
+
     // [end]
 
     //---------------------------------------------------------------

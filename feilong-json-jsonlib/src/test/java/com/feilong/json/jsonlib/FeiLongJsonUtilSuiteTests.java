@@ -46,6 +46,10 @@ import org.junit.runners.Suite.SuiteClasses;
 
                 FormatBeanBigDecimalTest.class,
 
+                FormatStringTest.class,
+
+                JsonHelperTest.class,
+
         //
 })
 public class FeiLongJsonUtilSuiteTests{

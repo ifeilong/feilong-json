@@ -27,8 +27,6 @@ import java.util.Map;
 import java.util.Set;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.core.bean.PropertyUtil;
 import com.feilong.json.AbstractJsonTest;
@@ -46,8 +44,19 @@ import net.sf.json.JsonConfig;
 
 public class JsonHelperTest extends AbstractJsonTest{
 
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(JsonHelperTest.class);
+    @Test
+    public void isCommonStringTest(){
+        String json_test = "{name=\"json\",bool:true,int:1,double:2.2,func:function(a){ return a; },array:[1,2]}";
+        assertEquals(false, JsonHelper.isCommonString(json_test));
+    }
+
+    @Test
+    public void isCommonStringTest1(){
+        String json_test = "[name=\"json\",bool:true,int:1,double:2.2,func:function(a){ return a; },array:[1,2]]";
+        assertEquals(false, JsonHelper.isCommonString(json_test));
+    }
+
+    //---------------------------------------------------------------
 
     @Test
     @SuppressWarnings("static-method")
