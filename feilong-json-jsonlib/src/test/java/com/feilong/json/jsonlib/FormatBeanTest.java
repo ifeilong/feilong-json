@@ -27,6 +27,12 @@ public class FormatBeanTest extends AbstractJsonTest{
     public void testExcludes(){
         LOGGER.debug(JsonUtil.format(USER, toArray("name", "loves", "attrMap", "userInfo", "userAddresses")));
     }
+    //
+    //    @Test
+    //    public void testExclude111s(){
+    //        USER.setUserInfo(null);
+    //        LOGGER.debug(JsonUtil.format(USER));
+    //    }
 
     @Test
     public void testExcludes1(){

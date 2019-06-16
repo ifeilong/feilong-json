@@ -201,7 +201,7 @@ public final class JsonHelper{
         if (str.startsWith("[") && str.endsWith("]")){// [] 格式的字符串 
             return false;
         }
-        if (str.startsWith("{") && str.endsWith("}")){// [] 格式的字符串 
+        if (str.startsWith("{") && str.endsWith("}")){// {} 格式的字符串 
             return false;
         }
         return true;
