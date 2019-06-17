@@ -19,9 +19,6 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.TimeZone;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -60,9 +57,6 @@ import com.feilong.core.UncheckedIOException;
  * @since 1.2.2
  */
 public class JacksonUtil{
-
-    /** The Constant LOGGER. */
-    private static final Logger       LOGGER = LoggerFactory.getLogger(JacksonUtil.class);
 
     /** The Constant objectMapper. */
     private static final ObjectMapper OBJECT_MAPPER;
