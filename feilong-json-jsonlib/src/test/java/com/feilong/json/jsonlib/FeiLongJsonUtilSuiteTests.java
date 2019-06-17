@@ -46,6 +46,9 @@ import org.junit.runners.Suite.SuiteClasses;
 
                 FormatBeanBigDecimalTest.class,
 
+                FormatBeanFileTest.class,
+                FormatBeanXMLGregorianCalendarTest.class,
+
                 FormatStringTest.class,
 
                 JsonHelperTest.class,
