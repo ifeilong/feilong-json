@@ -12,7 +12,7 @@
 	<description>feilong-json-jackson2</description>
 
 	<properties>
-		<version.jackson2>2.9.0</version.jackson2>
+		<version.jackson2>2.9.9</version.jackson2>
 	</properties>
 
 	<dependencies>
