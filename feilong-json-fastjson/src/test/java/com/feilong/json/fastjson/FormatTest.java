@@ -19,8 +19,8 @@ import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
 import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.core.bean.ConvertUtil.toMap;
+import static com.feilong.core.date.DateUtil.now;
 
-import java.util.Date;
 import java.util.Map;
 
 import org.junit.Test;
@@ -83,7 +83,7 @@ public class FormatTest{
         user.setPassword("123456");
         user.setId(8L);
         user.setName("feilong");
-        user.setDate(new Date());
+        user.setDate(now());
         user.setMoney(toBigDecimal(null));
 
         user.setLoves(toArray("桔子", "香蕉"));

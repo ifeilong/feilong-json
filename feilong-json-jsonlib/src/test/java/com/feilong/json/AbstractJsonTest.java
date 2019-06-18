@@ -18,8 +18,7 @@ package com.feilong.json;
 import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
 import static com.feilong.core.bean.ConvertUtil.toList;
-
-import java.util.Date;
+import static com.feilong.core.date.DateUtil.now;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -61,7 +60,7 @@ public abstract class AbstractJsonTest{
         user.setPassword("123456");
         user.setId(8L);
         user.setName("feilong");
-        user.setDate(new Date());
+        user.setDate(now());
         user.setMoney(toBigDecimal("99999999.00"));
 
         user.setLoves(toArray("桔子", "香蕉"));

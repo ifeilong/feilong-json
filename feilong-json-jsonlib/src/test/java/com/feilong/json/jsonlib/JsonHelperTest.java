@@ -16,11 +16,11 @@
 package com.feilong.json.jsonlib;
 
 import static com.feilong.core.bean.ConvertUtil.toSet;
+import static com.feilong.core.date.DateUtil.now;
 import static com.feilong.core.util.CollectionsUtil.newArrayList;
 import static com.feilong.core.util.MapUtil.newHashMap;
 import static org.junit.Assert.assertEquals;
 
-import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -143,7 +143,7 @@ public class JsonHelperTest extends AbstractJsonTest{
     @SuppressWarnings("static-method")
     public void testgetJsonStr1(){
         Person ps = new Person();
-        ps.setDateAttr(new Date());
+        ps.setDateAttr(now());
         ps.setName("get");
         MyBean myBean = new MyBean();
         List<Object> list = newArrayList();
@@ -161,7 +161,7 @@ public class JsonHelperTest extends AbstractJsonTest{
     @SuppressWarnings("static-method")
     public void testgetJsonStr4(){
         Person ps = new Person();
-        ps.setDateAttr(new Date());
+        ps.setDateAttr(now());
         ps.setName("get");
         List<Person> list = newArrayList();
         list.add(ps);

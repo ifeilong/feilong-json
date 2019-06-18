@@ -16,10 +16,10 @@
 package com.feilong.json;
 
 import static com.feilong.core.bean.ConvertUtil.toSet;
+import static com.feilong.core.date.DateUtil.now;
 import static com.feilong.core.util.MapUtil.newHashMap;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -47,7 +47,7 @@ public class JsonlibXmlUtilTemp{
     @Test
     public void testGetXMLFromObj4(){
         Person ps = new Person();
-        ps.setDateAttr(new Date());
+        ps.setDateAttr(now());
         ps.setName("get");
         List list = new ArrayList();
         list.add(ps);
@@ -65,7 +65,7 @@ public class JsonlibXmlUtilTemp{
     @Test
     public void testGetXMLFromObj5(){
         Person person = new Person();
-        person.setDateAttr(new Date());
+        person.setDateAttr(now());
         person.setName("get");
         Set<Person> set = toSet(person);
 
@@ -82,7 +82,7 @@ public class JsonlibXmlUtilTemp{
     @Test
     public void testGetXMLFromObj6(){
         Person ps = new Person();
-        ps.setDateAttr(new Date());
+        ps.setDateAttr(now());
         ps.setName("get");
         Map map = newHashMap();
         map.put("person1", ps);
@@ -100,7 +100,7 @@ public class JsonlibXmlUtilTemp{
     @Test
     public void objectToXML7(){
         Person ps = new Person();
-        ps.setDateAttr(new Date());
+        ps.setDateAttr(now());
         ps.setName("get");
         LOGGER.debug(JsonlibXmlUtil.objectToXML(ps));
         /*
@@ -158,7 +158,7 @@ public class JsonlibXmlUtilTemp{
     @Test
     public void testGetXMLFromObj3(){
         Person ps = new Person();
-        ps.setDateAttr(new Date());
+        ps.setDateAttr(now());
         ps.setName("get");
         Person[] personArr = new Person[2];
         personArr[0] = ps;
