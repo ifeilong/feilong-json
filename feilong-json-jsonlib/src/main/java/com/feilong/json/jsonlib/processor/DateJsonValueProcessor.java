@@ -90,7 +90,8 @@ import net.sf.json.processors.JsonValueProcessor;
  * </blockquote>
  * 
  * <p>
- * 为了简化操作,JsonHelper#buildDefaultJavaToJsonConfig() 内置了 <code>new DateJsonValueProcessor(COMMON_DATE_AND_TIME)</code>
+ * 为了简化操作,{@link com.feilong.json.jsonlib.builder.JsonConfigBuilder#buildDefaultJavaToJsonConfig()} 内置了
+ * <code>new DateJsonValueProcessor(COMMON_DATE_AND_TIME)</code>
  * ,如果你想输出成其他的日期格式,也可以使用这个类来提前渲染
  * </p>
  * 

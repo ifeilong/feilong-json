@@ -25,6 +25,7 @@ import java.util.Map;
 import com.feilong.core.DatePattern;
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.json.jsonlib.JavaToJsonConfig;
+import com.feilong.json.jsonlib.processor.CalendarJsonValueProcessor;
 import com.feilong.json.jsonlib.processor.DateJsonValueProcessor;
 import com.feilong.json.jsonlib.processor.SensitiveWordsJsonValueProcessor;
 import com.feilong.json.jsonlib.processor.ToStringJsonValueProcessor;
@@ -227,6 +228,10 @@ public final class JsonConfigBuilder{
         //@see https://github.com/venusdrogon/feilong-json/issues/29 json format 支持 javax.xml.datatype.XMLGregorianCalendar
         //@see com.fasterxml.jackson.databind.ext.CoreXMLSerializers.XMLGregorianCalendarSerializer
         jsonConfig.registerJsonValueProcessor(javax.xml.datatype.XMLGregorianCalendar.class, ToStringJsonValueProcessor.DEFAULT_INSTANCE);
+
+        //since 1.13.3 
+        //https://github.com/venusdrogon/feilong-json/issues/32 优化对 Calendar 的 format #32
+        jsonConfig.registerJsonValueProcessor(java.util.Calendar.class, CalendarJsonValueProcessor.DEFAULT_INSTANCE);
         return jsonConfig;
     }
 
