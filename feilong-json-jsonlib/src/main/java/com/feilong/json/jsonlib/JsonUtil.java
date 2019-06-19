@@ -610,7 +610,7 @@ public final class JsonUtil{
             return EMPTY;
         }
 
-        //since 1.13.3
+        //since 1.14.0
         if (JsonHelper.isCommonString(obj)){
             return (String) obj;
         }

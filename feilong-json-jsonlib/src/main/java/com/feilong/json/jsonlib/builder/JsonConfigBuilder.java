@@ -224,12 +224,12 @@ public final class JsonConfigBuilder{
         //see https://github.com/venusdrogon/feilong-json/issues/24
         jsonConfig.registerJsonValueProcessor(BigDecimal.class, ToStringJsonValueProcessor.DEFAULT_INSTANCE);
 
-        //since 1.13.3 
+        //since 1.14.0 
         //@see https://github.com/venusdrogon/feilong-json/issues/29 json format 支持 javax.xml.datatype.XMLGregorianCalendar
         //@see com.fasterxml.jackson.databind.ext.CoreXMLSerializers.XMLGregorianCalendarSerializer
         jsonConfig.registerJsonValueProcessor(javax.xml.datatype.XMLGregorianCalendar.class, ToStringJsonValueProcessor.DEFAULT_INSTANCE);
 
-        //since 1.13.3 
+        //since 1.14.0 
         //https://github.com/venusdrogon/feilong-json/issues/32 优化对 Calendar 的 format #32
         jsonConfig.registerJsonValueProcessor(java.util.Calendar.class, CalendarJsonValueProcessor.DEFAULT_INSTANCE);
         return jsonConfig;

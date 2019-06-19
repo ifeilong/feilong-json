@@ -189,7 +189,7 @@ public final class JsonHelper{
      * @param obj
      *            the obj
      * @return true, if is common string
-     * @since 1.13.3
+     * @since 1.14.0
      */
     public static boolean isCommonString(Object obj){
         if (!ClassUtil.isInstance(obj, String.class)){

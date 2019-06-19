@@ -25,7 +25,7 @@ import com.feilong.store.member.Address;
  * test https://github.com/venusdrogon/feilong-json/issues/30
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 1.13.3
+ * @since 1.14.0
  */
 public class FormatBeanSortBeanPropertyTest{
 
