@@ -18,7 +18,6 @@ package com.feilong.json.jsonlib;
 import static com.feilong.core.util.MapUtil.newHashMap;
 
 import java.util.Map;
-import java.util.UUID;
 
 import org.junit.Test;
 
@@ -46,14 +45,5 @@ public class ToMapTypeErrorTest{
             String key = entry.getKey();
             Integer value = entry.getValue();
         }
-    }
-
-    /**
-     * TestToMapTypeErrorTest.
-     */
-    @Test
-    public void testToMapTypeErrorTest(){
-
-        System.out.println(UUID.randomUUID().getMostSignificantBits());//TODO:remove
     }
 }
