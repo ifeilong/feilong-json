@@ -17,12 +17,7 @@
 	<modules>
 		<module>feilong-json-api</module>
 		<module>feilong-json-jsonlib</module>
-		<module>feilong-json-fastjson</module>
-		<module>feilong-json-jackson2</module>
-		<module>feilong-json-gson</module>
-		<module>feilong-json-orgjson</module>
 	</modules>
-
 
 	<!-- 软件配置管理SCM (Software Configuration Management), 如cvs ,svn ,git -->
 	<scm>
