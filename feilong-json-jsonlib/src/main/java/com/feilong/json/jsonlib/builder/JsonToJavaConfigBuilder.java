@@ -23,6 +23,7 @@ import com.feilong.json.jsonlib.JsonToJavaConfig;
 
 import net.sf.json.JsonConfig;
 import net.sf.json.util.JavaIdentifierTransformer;
+import net.sf.json.util.PropertyFilter;
 import net.sf.json.util.PropertySetStrategy;
 
 /**
@@ -74,11 +75,26 @@ public final class JsonToJavaConfigBuilder{
         jsonConfig.setPropertySetStrategy(new PropertyStrategyWrapper(PropertySetStrategy.DEFAULT));
 
         //---------------------------------------------------------------
+        //since 2.0.0
+        PropertyFilter propertyFilter = build(jsonToJavaConfig);
+        if (null != propertyFilter){
+            jsonConfig.setJavaPropertyFilter(propertyFilter);
+        }
+        return jsonConfig;
+    }
+
+    //---------------------------------------------------------------
+
+    /**
+     * @param jsonToJavaConfig
+     * @since 2.0.0
+     */
+    private static PropertyFilter build(JsonToJavaConfig jsonToJavaConfig){
         //排除
         String[] excludes = jsonToJavaConfig.getExcludes();
         if (isNotNullOrEmpty(excludes)){
-            jsonConfig.setJavaPropertyFilter(new ArrayExcludePropertyNamesPropertyFilter(excludes));
+            return new ArrayExcludePropertyNamesPropertyFilter(excludes);
         }
-        return jsonConfig;
+        return null;
     }
 }

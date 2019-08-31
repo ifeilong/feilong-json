@@ -18,11 +18,11 @@ package com.feilong.json.jsonlib.builder;
 import net.sf.json.util.PropertyFilter;
 
 /**
- * 排除属性过滤器.
+ * 排除属性过滤器, {@code json ---> java} 的时候,想排除某个属性.
  * 
- * json 转java 的时候,想排除某个属性
- * 
+ * <p>
  * 比如 taobao 接口返回的数据, 有老的废弃属性 county (可能早期由于单词写错了. 为了兼容老代码)
+ * </p>
  * 
  * <pre>
  * {@code

@@ -27,6 +27,8 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({ //
 
+                FormatBeanIgnoreNullTest.class,
+
                 FormatBeanErrorPropertyTest.class,
 
                 ToArrayWithJsonToJavaConfigTest.class,

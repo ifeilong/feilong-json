@@ -45,6 +45,78 @@ public class JavaToJsonConfig extends AbstractConfig{
      */
     private boolean                              isMaskDefaultSensitiveWords = true;
 
+    /**
+     * 是否忽略 null value 元素,默认 false,表示不忽略.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * 假设有bean 只有 2 个元素
+     * 
+     * <pre class="code">
+     * 
+     * public class BeanIntIgnoreNull{
+     * 
+     *     private Integer age;
+     * 
+     *     private String name;
+     * 
+     *     //省略 setter getter
+     * }
+     * 
+     * LOGGER.debug(JsonUtil.format(new BeanIntIgnoreNull(16, null)));
+     * 
+     * </pre>
+     * 
+     * <b>输出:</b>
+     * 
+     * <pre class="code">
+     * {
+        "name": "",
+        "age": 16
+    }
+     * </pre>
+     * 
+     * 如果需求不想要输出 null value 的元素,可以如此这般
+     * 
+     * <pre class="code">
+     * 
+     * JavaToJsonConfig javaToJsonConfig = new JavaToJsonConfig();
+     * javaToJsonConfig.setIsIgnoreNullValueElement(true);
+     * LOGGER.debug(JsonUtil.format(new BeanIntIgnoreNull(16, null), javaToJsonConfig));
+     * 
+     * </pre>
+     * 
+     * <b>输出:</b>
+     * 
+     * <pre class="code">
+     * {"age": 16}
+     * </pre>
+     * 
+     * 并且如果两个元素都是 null 值
+     * 
+     * <pre class="code">
+     * 
+     * JavaToJsonConfig javaToJsonConfig = new JavaToJsonConfig();
+     * javaToJsonConfig.setIsIgnoreNullValueElement(true);
+     * 
+     * LOGGER.debug(JsonUtil.format(new BeanIntIgnoreNull(null, null), javaToJsonConfig));
+     * 
+     * </pre>
+     * 
+     * <b>输出:</b>
+     * 
+     * <pre class="code">
+     * {}
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * @since 2.0.0
+     */
+    private boolean                              isIgnoreNullValueElement    = false;
+
     //---------------------------------------------------------------
 
     /** 包含属性名称的数组. */
@@ -205,6 +277,17 @@ public class JavaToJsonConfig extends AbstractConfig{
      * The Constructor.
      */
     public JavaToJsonConfig(){
+    }
+
+    /**
+     * Instantiates a new java to json config.
+     *
+     * @param isIgnoreNullValueElement
+     *            the is ignore null value element
+     */
+    public JavaToJsonConfig(boolean isIgnoreNullValueElement){
+        super();
+        this.isIgnoreNullValueElement = isIgnoreNullValueElement;
     }
 
     /**
@@ -603,6 +686,159 @@ public class JavaToJsonConfig extends AbstractConfig{
      */
     public void setIsMaskDefaultSensitiveWords(boolean isMaskDefaultSensitiveWords){
         this.isMaskDefaultSensitiveWords = isMaskDefaultSensitiveWords;
+    }
+
+    //---------------------------------------------------------------
+
+    /**
+     * 是否忽略 null value 元素,默认 false,表示不忽略.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * 假设有bean 只有 2 个元素
+     * 
+     * <pre class="code">
+     * 
+     * public class BeanIntIgnoreNull{
+     * 
+     *     private Integer age;
+     * 
+     *     private String name;
+     * 
+     *     //省略 setter getter
+     * }
+     * 
+     * LOGGER.debug(JsonUtil.format(new BeanIntIgnoreNull(16, null)));
+     * 
+     * </pre>
+     * 
+     * <b>输出:</b>
+     * 
+     * <pre class="code">
+     * {
+        "name": "",
+        "age": 16
+    }
+     * </pre>
+     * 
+     * 如果需求不想要输出 null value 的元素,可以如此这般
+     * 
+     * <pre class="code">
+     * 
+     * JavaToJsonConfig javaToJsonConfig = new JavaToJsonConfig();
+     * javaToJsonConfig.setIsIgnoreNullValueElement(true);
+     * LOGGER.debug(JsonUtil.format(new BeanIntIgnoreNull(16, null), javaToJsonConfig));
+     * 
+     * </pre>
+     * 
+     * <b>输出:</b>
+     * 
+     * <pre class="code">
+     * {"age": 16}
+     * </pre>
+     * 
+     * 并且如果两个元素都是 null 值
+     * 
+     * <pre class="code">
+     * 
+     * JavaToJsonConfig javaToJsonConfig = new JavaToJsonConfig();
+     * javaToJsonConfig.setIsIgnoreNullValueElement(true);
+     * 
+     * LOGGER.debug(JsonUtil.format(new BeanIntIgnoreNull(null, null), javaToJsonConfig));
+     * 
+     * </pre>
+     * 
+     * <b>输出:</b>
+     * 
+     * <pre class="code">
+     * {}
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @return the isIgnoreNullValueElement
+     * @since 2.0.0
+     */
+    public boolean getIsIgnoreNullValueElement(){
+        return isIgnoreNullValueElement;
+    }
+
+    /**
+     * 是否忽略 null value 元素,默认 false,表示不忽略.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * 假设有bean 只有 2 个元素
+     * 
+     * <pre class="code">
+     * 
+     * public class BeanIntIgnoreNull{
+     * 
+     *     private Integer age;
+     * 
+     *     private String name;
+     * 
+     *     //省略 setter getter
+     * }
+     * 
+     * LOGGER.debug(JsonUtil.format(new BeanIntIgnoreNull(16, null)));
+     * 
+     * </pre>
+     * 
+     * <b>输出:</b>
+     * 
+     * <pre class="code">
+     * {
+        "name": "",
+        "age": 16
+    }
+     * </pre>
+     * 
+     * 如果需求不想要输出 null value 的元素,可以如此这般
+     * 
+     * <pre class="code">
+     * 
+     * JavaToJsonConfig javaToJsonConfig = new JavaToJsonConfig();
+     * javaToJsonConfig.setIsIgnoreNullValueElement(true);
+     * LOGGER.debug(JsonUtil.format(new BeanIntIgnoreNull(16, null), javaToJsonConfig));
+     * 
+     * </pre>
+     * 
+     * <b>输出:</b>
+     * 
+     * <pre class="code">
+     * {"age": 16}
+     * </pre>
+     * 
+     * 并且如果两个元素都是 null 值
+     * 
+     * <pre class="code">
+     * 
+     * JavaToJsonConfig javaToJsonConfig = new JavaToJsonConfig();
+     * javaToJsonConfig.setIsIgnoreNullValueElement(true);
+     * 
+     * LOGGER.debug(JsonUtil.format(new BeanIntIgnoreNull(null, null), javaToJsonConfig));
+     * 
+     * </pre>
+     * 
+     * <b>输出:</b>
+     * 
+     * <pre class="code">
+     * {}
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param isIgnoreNullValueElement
+     *            the isIgnoreNullValueElement to set
+     * @since 2.0.0
+     */
+    public void setIsIgnoreNullValueElement(boolean isIgnoreNullValueElement){
+        this.isIgnoreNullValueElement = isIgnoreNullValueElement;
     }
 
 }

@@ -18,28 +18,16 @@ package com.feilong.json.jsonlib.builder;
 import net.sf.json.util.PropertyFilter;
 
 /**
- * {@code java --> json} 时候的, 属性过滤器.
+ * {@code java --> json} 忽略 null value 属性过滤器.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 1.2.2
- * @since 1.11.0 change package
+ * @since 2.0.0
  */
-class ArrayContainsPropertyNamesPropertyFilter implements PropertyFilter{
+class IgnoreNullValueElementPropertyFilter implements PropertyFilter{
 
-    /** The property names. */
-    private final String[] propertyNames;
-
-    //---------------------------------------------------------------
-
-    /**
-     * The Constructor.
-     *
-     * @param propertyNames
-     *            the property names
-     */
-    public ArrayContainsPropertyNamesPropertyFilter(String...propertyNames){
-        this.propertyNames = propertyNames;
-    }
+    /** Static instance. */
+    // the static instance works for all types
+    public static final PropertyFilter INSTANCE = new IgnoreNullValueElementPropertyFilter();
 
     //---------------------------------------------------------------
 
@@ -50,9 +38,7 @@ class ArrayContainsPropertyNamesPropertyFilter implements PropertyFilter{
      */
     @Override
     public boolean apply(Object source,String name,Object value){
-        // [source] the owner of the property
-        // [name] the name of the property
-        // [value] the value of the property
-        return !org.apache.commons.lang3.ArrayUtils.contains(propertyNames, name);
+        //返回 true 表示过滤 
+        return null == value;
     }
 }

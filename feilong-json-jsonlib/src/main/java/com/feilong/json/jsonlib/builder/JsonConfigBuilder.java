@@ -35,6 +35,7 @@ import net.sf.json.JsonConfig;
 import net.sf.json.processors.JsonValueProcessor;
 import net.sf.json.processors.PropertyNameProcessor;
 import net.sf.json.util.CycleDetectionStrategy;
+import net.sf.json.util.PropertyFilter;
 
 /**
  * {@link JsonConfig} 构造器.
@@ -101,10 +102,10 @@ public final class JsonConfigBuilder{
         }
 
         //---------------------------------------------------------------
-
-        //包含
-        if (isNotNullOrEmpty(useJavaToJsonConfig.getIncludes())){
-            jsonConfig.setJsonPropertyFilter(new ArrayContainsPropertyNamesPropertyFilter(useJavaToJsonConfig.getIncludes()));
+        //since 2.0.0
+        PropertyFilter propertyFilter = JsonPropertyFilterBuilder.build(useJavaToJsonConfig);
+        if (null != propertyFilter){
+            jsonConfig.setJsonPropertyFilter(propertyFilter);
         }
 
         //---------------------------------------------------------------
