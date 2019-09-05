@@ -15,22 +15,28 @@
  */
 package com.feilong.json.jsonlib;
 
-import static com.feilong.core.bean.ConvertUtil.toArray;
+import static org.apache.commons.lang3.StringUtils.EMPTY;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
 import com.feilong.json.AbstractJsonTest;
 
-public class FormatBeanTest extends AbstractJsonTest{
+public class FormatBeanIgnoreNullWithIsIgnoreNullValueElementTest extends AbstractJsonTest{
 
     @Test
-    public void testExcludes(){
-        LOGGER.debug(JsonUtil.format(USER, toArray("name", "loves", "attrMap", "userInfo", "userAddresses")));
+    public void test0(){
+        LOGGER.debug(JsonUtil.format(USER, true));
     }
 
     @Test
-    public void testExcludes1(){
-        LOGGER.debug(JsonUtil.format(USER, toArray("name", "loves", "attrMap", "userInfo", "userAddresses"), 4, 4));
+    public void test01(){
+        assertEquals(EMPTY, JsonUtil.format(null, true));
+    }
+
+    @Test
+    public void test012(){
+        assertEquals(EMPTY, JsonUtil.format(null, false));
     }
 
 }

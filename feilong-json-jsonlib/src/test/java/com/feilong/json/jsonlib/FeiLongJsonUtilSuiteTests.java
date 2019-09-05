@@ -43,6 +43,8 @@ import org.junit.runners.Suite.SuiteClasses;
                 ToMapTest.class,
                 ToMapWithJsonToJavaConfigTest.class,
 
+                FormatBeanIgnoreNullWithIsIgnoreNullValueElementTest.class,
+
                 FormatBeanSensitiveWordsTest.class,
                 FormatBeanSensitiveWordsNoTest.class,
 

@@ -26,7 +26,9 @@ import com.feilong.store.member.Address;
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.14.0
+ * @deprecated json format bean 支持排序输出 放弃吧,
  */
+@Deprecated
 public class FormatBeanSortBeanPropertyTest{
 
     /** The Constant log. */
@@ -36,7 +38,7 @@ public class FormatBeanSortBeanPropertyTest{
 
     @Test
     public void test(){
-        //放弃吧,
+        //json format bean 支持排序输出 放弃吧,
         //参见 https://github.com/venusdrogon/feilong-json/issues/30
         Address user = new Address("china", "shanghai", "216000", "wenshui wanrong.lu 888");
         LOGGER.debug(JsonUtil.format(user));

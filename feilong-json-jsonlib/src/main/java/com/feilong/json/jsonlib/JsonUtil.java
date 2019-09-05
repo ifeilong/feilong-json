@@ -215,6 +215,95 @@ public final class JsonUtil{
         return format(obj, (JavaToJsonConfig) null);
     }
 
+    /**
+     * 将对象 <code>obj</code> 格式化成json字符串,支持 <code>isIgnoreNullValueElement</code> 参数控制是否输出 null 值元素.
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre class="code">
+     *     {"userAddresseList":[{"address":"上海市闸北区万荣路1188号H座109-118室"},{"address":"上海市闸北区阳城路280弄25号802室(阳城贵都)"}],"userAddresses":[{"address":"上海市闸北区万荣路1188号H座109-118室"},{"address":"上海市闸北区阳城路280弄25号802室(阳城贵都)"}],"date":"2016-06-09 17:40:28","password":"******","id":8,"nickName":[],"age":0,"name":"feilong","money":99999999,"attrMap":null,"userInfo":{"age":10},"loves":["桔子","香蕉"]}
+     * </pre>
+     * 
+     * <p>
+     * 如果 com.feilong.json.jsonlib.JsonUtil.format(Object, false) ,不过滤 null 值
+     * </p>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+     *     {
+     *             "userAddresseList":         [
+     *                 {"address": "上海市闸北区万荣路1188号H座109-118室"},
+     *                 {"address": "上海市闸北区阳城路280弄25号802室(阳城贵都)"}
+     *             ],
+     *             "userAddresses":         [
+     *                 {"address": "上海市闸北区万荣路1188号H座109-118室"},
+     *                 {"address": "上海市闸北区阳城路280弄25号802室(阳城贵都)"}
+     *             ],
+     *             "date": "2016-06-09 17:40:28",
+     *             "password": "******",
+     *             "id": 8,
+     *             "nickName": [],
+     *             "age": 0,
+     *             "name": "feilong",
+     *             "money": 99999999,
+     *             <span style="color:red">"attrMap": null,</span>
+     *             "userInfo": {"age": 10},
+     *             "loves":         [
+     *                 "桔子",
+     *                 "香蕉"
+     *             ]
+     *         }
+     * 
+     * </pre>
+     * 
+     * <p>
+     * 如果 com.feilong.json.jsonlib.JsonUtil.format(Object, true),过滤 null 值元素
+     * </p>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+    {
+        "userAddresseList":         [
+            {"address": "上海市闸北区万荣路1188号H座109-118室"},
+            {"address": "上海市闸北区阳城路280弄25号802室(阳城贵都)"}
+        ],
+        "userAddresses":         [
+            {"address": "上海市闸北区万荣路1188号H座109-118室"},
+            {"address": "上海市闸北区阳城路280弄25号802室(阳城贵都)"}
+        ],
+        "date": "2019-09-05 18:59:26",
+        "password": "******",
+        "id": 8,
+        "name": "feilong",
+        "money": "99999999.00",
+        "userInfo": {"age": 10},
+        "ageInt": 0,
+        "loves":         [
+            "桔子",
+            "香蕉"
+        ]
+    }
+     * 
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param obj
+     *            可以是数组,字符串,枚举,集合,map,Java bean,Iterator等类型,内部自动识别转成{@link JSONArray}还是{@link JSONObject}
+     * @param isIgnoreNullValueElement
+     *            是否忽略 null value 元素,true 表示忽略
+     * @return 如果 <code>obj</code> 是null,返回 {@link StringUtils#EMPTY}<br>
+     * @see #format(Object, JavaToJsonConfig)
+     * @see com.feilong.json.jsonlib.JavaToJsonConfig#JavaToJsonConfig(boolean)
+     * @since 2.0.0
+     */
+    public static String format(Object obj,boolean isIgnoreNullValueElement){
+        return format(obj, new JavaToJsonConfig(isIgnoreNullValueElement));
+    }
+
     //---------------------------------------------------------------
 
     /**
