@@ -17,14 +17,14 @@ package com.feilong.json.jsonlib.processor;
 
 import static com.feilong.core.DatePattern.COMMON_DATE;
 import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
+import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND;
 import static com.feilong.core.date.DateUtil.toDate;
 import static com.feilong.core.util.MapUtil.newHashMap;
+import static org.junit.Assert.assertEquals;
 
 import java.util.Map;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.json.jsonlib.JavaToJsonConfig;
 import com.feilong.json.jsonlib.JsonUtil;
@@ -40,9 +40,6 @@ import net.sf.json.processors.JsonValueProcessor;
  */
 public class DateJsonValueProcessorTest{
 
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(DateJsonValueProcessorTest.class);
-
     /**
      * Test date json value processor.
      */
@@ -54,7 +51,7 @@ public class DateJsonValueProcessorTest{
         JavaToJsonConfig jsonFormatConfig = new JavaToJsonConfig();
         jsonFormatConfig.setIncludes("date");
 
-        LOGGER.debug(JsonUtil.format(user, jsonFormatConfig));
+        assertEquals("{\"date\": \"2016-08-15 13:30:00\"}", JsonUtil.format(user, jsonFormatConfig));
     }
 
     /**
@@ -72,7 +69,7 @@ public class DateJsonValueProcessorTest{
         jsonFormatConfig.setPropertyNameAndJsonValueProcessorMap(propertyNameAndJsonValueProcessorMap);
         jsonFormatConfig.setIncludes("date");
 
-        LOGGER.debug(JsonUtil.format(user, jsonFormatConfig));
+        assertEquals("{\"date\": \"2016-08-15 13:30:00\"}", JsonUtil.format(user, jsonFormatConfig));
     }
 
     /**
@@ -84,12 +81,12 @@ public class DateJsonValueProcessorTest{
         user.setDate(toDate("2016-08-15", COMMON_DATE));
 
         Map<String, JsonValueProcessor> propertyNameAndJsonValueProcessorMap = newHashMap();
-        propertyNameAndJsonValueProcessorMap.put("date", DateJsonValueProcessor.DEFAULT_INSTANCE);
+        propertyNameAndJsonValueProcessorMap.put("date", new DateJsonValueProcessor(COMMON_DATE_AND_TIME_WITH_MILLISECOND));
 
         JavaToJsonConfig jsonFormatConfig = new JavaToJsonConfig();
         jsonFormatConfig.setPropertyNameAndJsonValueProcessorMap(propertyNameAndJsonValueProcessorMap);
         jsonFormatConfig.setIncludes("date");
 
-        LOGGER.debug(JsonUtil.format(user, jsonFormatConfig));
+        assertEquals("{\"date\": \"2016-08-15 00:00:00.000\"}", JsonUtil.format(user, jsonFormatConfig));
     }
 }

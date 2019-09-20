@@ -19,6 +19,8 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
+import com.feilong.json.jsonlib.processor.DateJsonValueProcessorTest;
+
 /**
  * The Class FeiLongJsonUtilSuiteTests.
  *
@@ -26,6 +28,8 @@ import org.junit.runners.Suite.SuiteClasses;
  */
 @RunWith(Suite.class)
 @SuiteClasses({ //
+
+                DateJsonValueProcessorTest.class,
 
                 FormatBeanIgnoreNullTest.class,
 

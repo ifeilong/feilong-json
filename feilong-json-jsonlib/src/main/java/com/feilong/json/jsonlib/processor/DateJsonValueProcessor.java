@@ -27,7 +27,9 @@ import net.sf.json.processors.JsonValueProcessor;
 /**
  * 时间转换日期值处理器实现.
  * 
+ * <p>
  * {@link Date}日期json value处理器.
+ * </p>
  * 
  * <p>
  * 如果不使用这个处理器,对于 Date格式输出成json,在date to json的时候,会解析Date 的每个字段属性,比如month,year,day等:
@@ -90,21 +92,25 @@ import net.sf.json.processors.JsonValueProcessor;
  * </blockquote>
  * 
  * <p>
- * 为了简化操作,{@link com.feilong.json.jsonlib.builder.JsonConfigBuilder#buildDefaultJavaToJsonConfig()} 内置了
- * <code>new DateJsonValueProcessor(COMMON_DATE_AND_TIME)</code>
- * ,如果你想输出成其他的日期格式,也可以使用这个类来提前渲染
+ * 为了简化操作,{@link com.feilong.json.jsonlib.builder.JsonConfigBuilder#buildDefaultJavaToJsonConfig() feilong json} 内置了
+ * <code>yyyy-MM-dd HH:mm:ss</code>,如果你想输出成其他的日期格式,也可以使用这个类来提前渲染:
  * </p>
  * 
  * <h3>示例:</h3>
  * 
  * <blockquote>
  * 
+ * <p>
+ * 比如想转成 <code>yyyy-MM-dd HH:mm:ss.SSS</code> 格式:
+ * </p>
+ * 
  * <pre class="code">
  * User user = new User("feilong1", 24);
  * user.setDate(toDate("2016-08-15", COMMON_DATE));
  * 
  * Map{@code <String, JsonValueProcessor>} propertyNameAndJsonValueProcessorMap = new HashMap{@code <>}();
- * propertyNameAndJsonValueProcessorMap.put("date", <span style="color:red">DateJsonValueProcessor.DEFAULT_INSTANCE</span>);
+ * propertyNameAndJsonValueProcessorMap.put("date", <span style=
+"color:red">new DateJsonValueProcessor(COMMON_DATE_AND_TIME_WITH_MILLISECOND)</span>);
  * 
  * JavaToJsonConfig javaToJsonConfig = new JavaToJsonConfig();
  * javaToJsonConfig.setPropertyNameAndJsonValueProcessorMap(propertyNameAndJsonValueProcessorMap);
@@ -116,7 +122,7 @@ import net.sf.json.processors.JsonValueProcessor;
  * <b>返回:</b>
  * 
  * <pre class="code">
- * {"date": "2016-08-15"}
+ * {"date": "2016-08-15 00:00:00.000"}
  * </pre>
  * 
  * </blockquote>
