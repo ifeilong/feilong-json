@@ -25,7 +25,7 @@ import com.feilong.core.lang.StringUtil;
 import net.sf.json.JsonConfig;
 
 /**
- * The Class StringOverLengthJsonValueProcessor.
+ * 如果字符串格式jsonvalue的值超过指定的长度 <code>maxLength</code> ,将省略显示 <code>overLengthMaskString</code>,以控制输出的字符串长度.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.10.7
