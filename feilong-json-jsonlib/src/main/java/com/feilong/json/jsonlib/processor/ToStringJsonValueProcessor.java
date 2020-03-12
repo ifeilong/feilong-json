@@ -19,7 +19,7 @@ import net.sf.json.JsonConfig;
 import net.sf.json.processors.JsonValueProcessor;
 
 /**
- * 通用的 将 类型 直接 toString 的 处理器实现.
+ * 通用的将类型直接 toString 的处理器实现.
  * 
  * <p>
  * 如果不使用这个处理器,对于 File 格式输出成json,在File to json的时候,会输出很多不关心的信息
