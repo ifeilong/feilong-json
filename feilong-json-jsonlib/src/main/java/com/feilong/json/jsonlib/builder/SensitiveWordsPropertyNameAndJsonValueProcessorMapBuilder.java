@@ -62,6 +62,15 @@ public class SensitiveWordsPropertyNameAndJsonValueProcessorMapBuilder{
 
     //---------------------------------------------------------------
 
+    /** Don't let anyone instantiate this class. */
+    private SensitiveWordsPropertyNameAndJsonValueProcessorMapBuilder(){
+        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
+        //see 《Effective Java》 2nd
+        throw new AssertionError("No " + getClass().getName() + " instances for you!");
+    }
+
+    //---------------------------------------------------------------
+
     /**
      * Builds the sensitive words property name and json value processor map.
      *
@@ -88,7 +97,11 @@ public class SensitiveWordsPropertyNameAndJsonValueProcessorMapBuilder{
     //---------------------------------------------------------------
 
     /**
+     * Parses the list.
+     *
      * @param inputMap
+     *            the input map
+     * @return the map
      * @since 1.13.0
      */
     private static Map<String, JsonValueProcessor> parseList(Object inputMap){
@@ -107,7 +120,11 @@ public class SensitiveWordsPropertyNameAndJsonValueProcessorMapBuilder{
     //---------------------------------------------------------------
 
     /**
+     * Parses the map.
+     *
      * @param inputMap
+     *            the input map
+     * @return the map
      * @since 1.13.0
      */
     private static Map<String, JsonValueProcessor> parseMap(Object inputMap){
@@ -128,8 +145,11 @@ public class SensitiveWordsPropertyNameAndJsonValueProcessorMapBuilder{
     //---------------------------------------------------------------
 
     /**
+     * Parses the bean.
+     *
      * @param javaBean
-     * @return
+     *            the java bean
+     * @return the map
      * @since 1.13.0
      */
     private static Map<String, JsonValueProcessor> parseBean(Object javaBean){
